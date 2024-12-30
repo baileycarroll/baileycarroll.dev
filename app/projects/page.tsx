@@ -31,11 +31,6 @@ const projects = [
       label: "GitHub Repo",
     },
     icon: FaGithub,
-    link2: {
-      href: "https://acolyte-v4.baileycarroll.dev",
-      label: "Acolyte v4 Demo",
-    },
-    icon2: FaDesktop,
     logo: Acolyte,
   },
   {
@@ -44,8 +39,8 @@ const projects = [
     description:
       "This is the newest version of Acolyte, while I do keep the source code private I am willing to expose some of the design as a demo so you can see the progress and the stark difference in design and experience. I've grown alot in the past three years and this new version of Acolyte will help showcase that beautifully. Written in Laravel, Vue, and TailwindCSS.",
     link: {
-      href: "https://acolyte-v5.baileycarroll.dev",
-      label: "Acolyte v5 Demo",
+      href: "#",
+      label: "No Demo Just Yet",
     },
     icon: FaDesktop,
     logo: Acolyte,
@@ -135,16 +130,6 @@ export default function Projects() {
                     <project.icon />
                     <span className="ml-2">{project.link.label}</span>
                   </Link>
-                  {project.link2 ? (
-                    <Link
-                      href={project.link2.href}
-                      target={"_blank"}
-                      className={"flex items-center hover:text-cyan-500"}
-                    >
-                      <project.icon2 />
-                      <span className={"ml-2"}>{project.link2.label}</span>{" "}
-                    </Link>
-                  ) : null}
                 </Paragraph>
               </li>
             ))}
