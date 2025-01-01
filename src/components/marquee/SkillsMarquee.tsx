@@ -20,7 +20,7 @@ import {
   SiRubyonrails,
 } from "react-icons/si";
 import { RiNextjsLine } from "react-icons/ri";
-import Heading from "../typography/Headings";
+import Heading from "@/components/typography/Headings";
 
 const SkillsList = [
   {
