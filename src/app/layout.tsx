@@ -4,6 +4,9 @@ import "@/styles/globals.css";
 import Image from "next/image";
 import Rose from "@/assets/rose_shield.svg";
 import Header from "@/components/layout/header";
+import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +33,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Vercel Analytics */}
+        <Analytics />
+        {/* Google Analytics */}
+        <GoogleAnalytics gaId="G-1TGMX650JG" />
+        <SpeedInsights />
         <div id="background-container" className="h-[100dvh] w-[100dvw]">
           <Header />
           <Image
