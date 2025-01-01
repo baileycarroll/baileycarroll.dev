@@ -5,6 +5,8 @@
   --color-foreground: var(--foreground);
 }
 
+@plugin "@tailwindcss/typography";
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -23,7 +25,7 @@
   }
 }
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -33,7 +35,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);

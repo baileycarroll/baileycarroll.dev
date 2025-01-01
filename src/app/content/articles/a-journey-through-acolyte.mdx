@@ -1,0 +1,57 @@
+---
+title: 'A Journey Through Acolyte: From a Napkin to a Fully Featured LMS'
+description: 'Delving deeper into Acolyte, where it came from, where its going, and the lessons I learned.'
+author: 'Bailey Carroll'
+date: '10-01-2024'
+slug: 'a-journey-through-acolyte'
+---
+# Overview
+Acolyte is by and large my biggest and most ambitious project, arguably what would be my life's work at this point. Being a self-taught developer has many pitfalls and benefits to it. There are a lot of things all of the squirrels in my brain could say about it. So while this is an exercise in herding cats, let's talk about where it came from, where it's going, and what lessons I learned along the way.
+
+## Where did I get the idea?
+Acolyte did not have a name when I first started working on it. A dear friend of mine had approached me while at sushi and requested help building an online platform where they could store recorded videos of a class they taught, track attendance, homework, and even give quizzes. They did not want all of the complexity of an existing Learning Management System (LMS) or Content Management System (CMS). They wanted something simple, easy to use, that just... worked. Much like The Elder Scrolls V: Skyrim...
+
+We came up with the initial concept while at lunch on, you guessed it: a napkin. (Shout out to [Hinoki](https://hinoki-sushi.restaurants-world.com/#google_vignette) in Reno, Nevada). While we no longer have the napkin, the spirit of Acolyte has persisted through the years. Since then I have been iterating on the design and concept and now it has grown into something I am extremely proud of. Over time, Acolyte has evolved beyond its original capabilities, and that dear friend has been key in the continuing development of the application. Functioning as a beta tester and a key advisor we stick to the original goals, easy for the end user (the Students being number 1), and simple. It does what it set out to do and does it well.
+
+There have been several versions of the platform as my own skillset has evolved and I use it to show off my capabilities, and the above mentioned friend used it to teach their class for over 4 years before taking a hiatus from teaching. Reaching 10 - 50 concurrent users a month, this was quite the achievement for what we consider to be a Minimum Viable Product (MVP).
+
+## Where do I want Acolyte to be?
+In the next couple of years, I want Acolyte to be a product in the eLearning industry that can contend with the current heavy weights. As I have mentioned there are several versions of the product; [Version 4](https://github.com/baileycarroll/Acolyte-v4) being available to the general public under the GPL-3.0 license, there are more "versions" within the platform designed for specific audiences. Each one of these enables different features and setups within the platform, in short they are: 
+
++ Home Schooling / Small Business
++ Business Training & Development
++ Higher Education. 
+
+Version 4 was written in Laravel 9 using MDBoostrap as the UI Kit. While I am not ashamed of Version 4, especially since it supported in app payment processing via a Stripe Integration, and the ability to use S3 Object Storage for storing content remotely, it needed a facelift. The UI Design does the things it was designed to do, however it is clunky and bloated. 
+
+Version 5 which I am currently working on uses Laravel 11, Vue, and TailwindCSS with Headless UI for some components to give the platform a much needed makeover, as well as being completely re-written from the ground up. Refocusing on the user experience, and content delivery while maintaining the functionality needed, improving look and feel, load times, and a simplified interface. Along with providing full SCORM 1.2 and 2004 3rd & 4th edition, with eXperience API support to the platform. Making Acolyte finally able to take the title of LMS, and providing a Learning Record Store for the instructors and administrators. This new version will be addressing the pain points and user feed back I got about version 4 such as:
+
++ UI is a little out dated and bloated
++ It doesn't provide feedback on where it's at on uploads.
++ Viewing content works, but the screen is a little busy
++ The application is slow, like occasionally it takes a full minute for the page to load.
+
+When we look at those three options, you may be thinking "Wait, those are very different industries, which have very different needs..." and while this may be true, the core system was built to support expansion. Each version builds upon the previous one, with feature toggles allowing customization based on specific user needs, that allows the product to be easily configured for whatever they use case may be. "Do one thing, do it well."
+
+That one thing is this: Deliver eLearning content to the end-user. For each additional expansion the features are designed and implemented with that mentality in mind. Completely modular, and more importantly extensible. Acolyte Version 5 will be a definitive version of the platform, and when it is ready for production I would ultimately like for it to become the standard for eLearning. The current market is full of wonderful products but I have yet to see one focus on the most important aspect, users consuming content and learning.
+
+## What lessons have I learned?
+Well that question by itself would take me far longer than this simple article to answer fully. Being a self taught developer there is so much to consider when creating an application. Being a one-person team further expands that, from UI/UX design, System Architecture, Language and Framework choice there are so many things to consider. However there are some key lessons that I will share.
+
+### Do One Thing, Do It Well
+Okay this is the last time (maybe) I will reference this but it really is an important lesson to actually absorb into your being. Each aspect of anything I build should have a clear and defined goal, and should reach that goal, every time, the same way. It forces me to think about potential deviations from the standard and either prevent them, or adopt them into the standard so the product just works. No random errors when submitting an assignment, quiz, etc. No random lockouts of the application when the users are trying to meet a deadline, none of that. 
+
+### Know Your ACTUAL End User
+The one dig I will make on the current heavy weights in the industry is they spent way too much time focusing on the instructor and administrative side of the applications they made, they forgot the largest user base of their applications. The Students. Knowing who my actual end users are allows me to design and develop the application in a way that not only the instructors benefit from. It's key to have these users in mind and develop even administrative features around it. "How might this impact the students?" is a question I ask whenever I make a Support, Admin, or Instructor action within the system. 
+
+I implemented a new service architecture that maintains the user's current session and ensures a smooth transition to new updates without disrupting ongoing tasks. This prevents missed network requests and random interruptions. As well as simplifying the design for the students allows them to focus on the most important thing: consuming the content and learning.
+
+Taking the students back into account with Version 5, there were a few key changes made to the platform. By adding a Dashboard, streamlining navigation, and removing the excess elements when viewing content, we get back to the basics of what the application was meant to do. Hiding elements when they are not needed, streamlining the submission process, and the use of queues, removes some of the complexity and likelihood of failure that some of the current heavy weights often deal with.
+
+### Fail Fast, Fail Hard, Fail Often
+This is something that is heard quite frequently within the Tech Startup world, and it's correct. By doing this you are able to learn from your mistakes, experiment freely, and move forward because you tried. You will never know if something is actually a good idea unless you try it. Like Acolyte Version 3 - it is remembered, I learned from it, have a spot for it in the repository, and all the code is safely locked away never to be seen again. In Version 3, I tried to implement too many features at once—like in-app payment processing, S3 object storage, SCORM support, and API functionality—which led to a garbled codebase and malfunctioning features. I fail, a lot when trying to develop and iterate on projects, but with each failure I get closer and closer to my goal and am able to redirect and push past faster than if I spent all the time trying not to fail.
+
+## Conclusion
+Acolyte has been a journey through and through, and that journey is not yet completed. I've learned so much while working on this product and cannot wait to see what else I will learn and experience through it. Feel free to reach out with any feedback or collaboration ideas—whether you're interested in testing new features, contributing code, or just sharing thoughts. Whether you're an educator, developer, student, or another interested party, I'd love to hear your thoughts and ideas. You can reach me via email at [baileyrcarroll@gmail.com](mailto:baileyrcarroll@gmail.com) Of course you can always check back on the articles page and see if I have written anything more about Acolyte too. 
+
+Until next time, be well, do good - Bailey.
