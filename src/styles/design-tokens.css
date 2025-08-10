@@ -1,0 +1,125 @@
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Elder Scrolls Soul Gem Colors */
+  --color-soul-gem-50: #f0f4ff; /* Lightest soul energy */
+  --color-soul-gem-100: #e0e7ff; /* Soul mist */
+  --color-soul-gem-200: #c7d2fe; /* Faint glow */
+  --color-soul-gem-300: #a5b4fc; /* Soft magic */
+  --color-soul-gem-400: #818cf8; /* Active magic */
+  --color-soul-gem-500: #6366f1; /* Core soul gem */
+  --color-soul-gem-600: #4f46e5; /* Deep magic */
+  --color-soul-gem-700: #4338ca; /* Powerful spell */
+  --color-soul-gem-800: #3730a3; /* Ancient magic */
+  --color-soul-gem-900: #1e1b4b; /* Void energy */
+  --color-soul-gem-950: #0f0c2e; /* Deepest night */
+
+  /* Septim Gold Accents */
+  --color-septim-50: #fffbeb; /* Gold leaf shimmer */
+  --color-septim-100: #fef3c7; /* Coin gleam */
+  --color-septim-200: #fde68a; /* Treasure glow */
+  --color-septim-300: #fcd34d; /* Rich gold */
+  --color-septim-400: #fbbf24; /* Septim standard */
+  --color-septim-500: #f59e0b; /* Deep gold */
+  --color-septim-600: #d97706; /* Burnished gold */
+  --color-septim-700: #b45309; /* Antique gold */
+  --color-septim-800: #92400e; /* Dark treasure */
+  --color-septim-900: #78350f; /* Ancient hoard */
+
+  /* Dragon Fire Crimson */
+  --color-dragon-50: #fef2f2; /* Ember spark */
+  --color-dragon-100: #fee2e2; /* Flame dance */
+  --color-dragon-200: #fecaca; /* Fire glow */
+  --color-dragon-300: #fca5a5; /* Dragon breath */
+  --color-dragon-400: #f87171; /* Living flame */
+  --color-dragon-500: #dc2626; /* Dragon fire */
+  --color-dragon-600: #b91c1c; /* Inferno */
+  --color-dragon-700: #991b1b; /* Deep fire */
+  --color-dragon-800: #7f1d1d; /* Molten core */
+  --color-dragon-900: #450a0a; /* Ash and ember */
+
+  /* Nature Magic Greens */
+  --color-nature-50: #ecfdf5; /* Spring leaf */
+  --color-nature-100: #d1fae5; /* New growth */
+  --color-nature-200: #a7f3d0; /* Forest light */
+  --color-nature-300: #6ee7b7; /* Magic moss */
+  --color-nature-400: #34d399; /* Life energy */
+  --color-nature-500: #059669; /* Forest magic */
+  --color-nature-600: #047857; /* Deep woods */
+  --color-nature-700: #065f46; /* Ancient tree */
+  --color-nature-800: #064e3b; /* Primordial */
+  --color-nature-900: #022c22; /* Shadow grove */
+
+  /* Frost Magic Blues */
+  --color-frost-50: #f0f9ff; /* Ice crystal */
+  --color-frost-100: #e0f2fe; /* Winter breath */
+  --color-frost-200: #bae6fd; /* Frozen lake */
+  --color-frost-300: #7dd3fc; /* Ice magic */
+  --color-frost-400: #38bdf8; /* Glacier glow */
+  --color-frost-500: #06b6d4; /* Frost spell */
+  --color-frost-600: #0891b2; /* Deep ice */
+  --color-frost-700: #0e7490; /* Frozen depths */
+  --color-frost-800: #155e75; /* Polar night */
+  --color-frost-900: #0c4a6e; /* Eternal ice */
+
+  /* Typography Scale */
+  --font-family-cinzel: "Cinzel", "Times New Roman", serif;
+  --font-family-inter: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-family-jetbrains: "JetBrains Mono Variable", "JetBrains Mono",
+    "Fira Code", monospace;
+
+  /* Fantasy Font Sizes */
+  --font-size-legendary: 4rem; /* 64px - Main titles */
+  --font-size-epic: 3rem; /* 48px - Section headers */
+  --font-size-rare: 2.25rem; /* 36px - Page titles */
+  --font-size-uncommon: 1.875rem; /* 30px - Subsections */
+  --font-size-common: 1.5rem; /* 24px - Card titles */
+  --font-size-basic: 1.125rem; /* 18px - Body text */
+  --font-size-small: 0.875rem; /* 14px - Captions */
+  --font-size-tiny: 0.75rem; /* 12px - Meta text */
+
+  /* Gaming-optimized breakpoints */
+  --breakpoint-mobile: 375px; /* Phone */
+  --breakpoint-tablet: 768px; /* Tablet */
+  --breakpoint-desktop: 1024px; /* Desktop */
+  --breakpoint-gaming: 1440px; /* Gaming monitor */
+  --breakpoint-ultrawide: 1920px; /* Ultrawide */
+
+  /* Gaming UI spacing */
+  --spacing-guild-gap: 1.5rem;
+  --spacing-skill-gap: 1rem;
+  --spacing-journal-padding: 2rem;
+  --spacing-quest-margin: 3rem;
+
+  /* Leather texture colors */
+  --color-leather-50: #faf8f5; /* Lightest leather */
+  --color-leather-100: #f5f1eb; /* Soft leather */
+  --color-leather-200: #ebe2d3; /* Aged leather */
+  --color-leather-300: #d4c4a8; /* Worn leather */
+  --color-leather-400: #b8a17a; /* Rich leather */
+  --color-leather-500: #a0855c; /* Dark leather */
+  --color-leather-600: #8a6f4a; /* Deep leather */
+  --color-leather-700: #6f573c; /* Old leather */
+  --color-leather-800: #5a4632; /* Ancient leather */
+  --color-leather-900: #4a3a2a; /* Aged leather */
+  --color-leather-950: #2a1f17; /* Darkest leather */
+
+  /* Journal-specific spacing */
+  --spacing-journal-padding: 1.5rem;
+  --spacing-tab-gap: 0.75rem;
+  --spacing-journal-border: 0.25rem;
+
+  /* Gaming animations */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Gaming animation classes - outside @theme block */
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}

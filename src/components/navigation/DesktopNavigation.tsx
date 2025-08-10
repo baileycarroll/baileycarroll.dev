@@ -27,7 +27,7 @@ function NavItem({
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/40 to-cyan-500/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-cyan-500/0 via-cyan-500/40 to-cyan-500/0" />
         )}
       </Link>
     </li>
@@ -61,7 +61,7 @@ export default function DesktopNavigation(
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute left-0 top-8 mt-2 w-36 rounded-xl shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute left-0 top-8 mt-2 w-36 rounded-xl shadow-lg bg-slate-800 ring-1 ring-black/5 focus:outline-none">
                   <div className="py-1">
                     <Menu.Item>
                       <NavItem href={"/books"}>Books</NavItem>

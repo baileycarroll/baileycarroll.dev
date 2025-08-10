@@ -108,17 +108,17 @@ export function TimelineFull() {
               alt="Rose & Shield Logo"
               className="mb-1 max-w-[5dvw] lg:max-w-[2dvw]"
             />
-            <span className="border-2 border-cyan-800 bg-cyan-800 rounded-t-full rounded-b-full w-1 h-full"></span>
+            <span className="border-2 border-septim-800 bg-septim-800 rounded-t-full rounded-b-full w-1 h-full"></span>
           </div>
           <div className="flex flex-col px-4">
-            <h3 className="text-slate-400 text-md">{event.dates}</h3>
-            <h4 className="text-slate-300 text-md lg:text-md font-semibold flex flex-row align-top">
+            <h3 className="text-leather-400 text-md">{event.dates}</h3>
+            <h4 className="text-leather-300 text-md lg:text-md font-semibold flex flex-row align-top">
               {event.title} |{" "}
               {event.link !== "" ? (
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-septim-400 ml-1"
                 >
                   {event.employer}
                 </Link>
@@ -130,7 +130,7 @@ export function TimelineFull() {
             <ul className="flex flex-row flex-wrap gap-x-4 gap-y-2 mt-2">
               {event.skills.map((skill, index) => (
                 <li
-                  className="bg-cyan-400/20 text-cyan-200 border border-cyan-800 shadow shadow-cyan-800 px-2 rounded-full"
+                  className="bg-septim-400/20 text-septim-200 border border-septim-800 shadow shadow-septim-800 px-2 rounded-full"
                   key={index}
                 >
                   {skill}
@@ -157,14 +157,14 @@ export function TimelineHome() {
             />
           </div>
           <div className="flex flex-col px-4">
-            <h3 className="text-slate-400 text-md">{event.dates}</h3>
-            <h4 className="text-slate-300 text-md lg:text-md font-semibold flex flex-row align-top">
+            <h3 className="text-leather-400 text-md">{event.dates}</h3>
+            <h4 className="text-leather-300 text-md lg:text-md font-semibold flex flex-row align-top">
               {event.title} |{" "}
               {event.link !== "" ? (
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-septim-400 ml-1"
                 >
                   {event.employer}
                 </Link>

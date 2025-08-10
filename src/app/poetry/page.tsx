@@ -37,7 +37,7 @@ export default async function Poetry() {
           decided to post here for all to read and enjoy.
         </Heading>
         <hr className="my-2" />
-        <div className="flex flex-row flex-wrap my-2 pt-2 w-full overflow-ellipsis overflow-hidden gap-4 justify-center h-full">
+        <div className="flex flex-row flex-wrap my-2 pt-2 w-full text-ellipsis overflow-hidden gap-4 justify-center h-full">
           {poems.map((poem) => (
             <div key={poem.title}>
               <Card className="p-2 rounded-lg w-prose flex flex-col">

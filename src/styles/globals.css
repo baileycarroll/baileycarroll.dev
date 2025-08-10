@@ -1,44 +1,167 @@
 @import "tailwindcss";
+@import "./design-tokens.css";
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }
 
-@plugin "@tailwindcss/typography";
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+/* Custom animations for guild contracts */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
   }
 }
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+/* Line clamp utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Guild contract hover effects */
+.guild-contract {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.guild-contract:hover {
+  transform: translateY(-2px);
+}
+
+/* Gem animations */
+.gem {
+  transition: all 0.3s ease;
+}
+
+.gem:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Tech orb hover effects */
+.tech-orb {
+  transition: all 0.2s ease;
+}
+
+.tech-orb:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Difficulty tooltip animations */
+.difficulty-tooltip {
+  transition: opacity 0.2s ease;
+}
+
+/* Contract value enhancements */
+.contract-value {
+  transition: all 0.3s ease;
+}
+
+.contract-value:hover {
+  transform: scale(1.02);
+}
+
+/* Status badge animations */
+.status-badge {
+  transition: all 0.2s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Background patterns */
+.bg-pattern-legendary {
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(251, 191, 36, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(251, 191, 36, 0.05) 0%,
+      transparent 50%
+    );
+  background-size: 100px 100px, 150px 150px;
+}
+
+.bg-pattern-master {
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(239, 68, 68, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(239, 68, 68, 0.05) 0%,
+      transparent 50%
+    );
+  background-size: 100px 100px, 150px 150px;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .guild-contract {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Loading states */
+.contract-loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Filter panel animations */
+.filter-panel-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.filter-panel-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.filter-panel-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.filter-panel-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms, transform 200ms;
 }
