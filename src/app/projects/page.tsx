@@ -75,7 +75,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="p-5 flex flex-col items-end mix-blend-normal mt-6"
+      className="p-6 flex flex-col items-end mix-blend-normal mt-6"
     >
       <Card>
         <div className="max-w-7xl">
@@ -92,14 +92,14 @@ export default function Projects() {
           <ul
             role={"list"}
             className={
-              "grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 p-5"
+              "grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 p-6"
             }
           >
             {projects.map((project) => (
               <li
                 key={project.name}
                 className={
-                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-neutral-800/40 hover:border hover:border-primary/50"
+                  "group relative flex flex-col items-start rounded-2xl p-6 transition ease-in hover:bg-neutral-800/40 hover:border hover:border-primary/50"
                 }
               >
                                   <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-secondary border border-primary/20">

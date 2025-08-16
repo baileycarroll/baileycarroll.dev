@@ -10,7 +10,7 @@ const Button: React.FC<BaseProps> = ({ children, className, style }) => {
     "button",
     {
       className: clsx(
-        "bg-neutral-800/30 border border-primary/40 rounded-full px-3 py-1 hover:bg-neutral-800/50",
+        "bg-neutral-800/30 border border-primary/40 rounded-full px-4 py-2 hover:bg-neutral-800/50",
         className
       ),
       style,

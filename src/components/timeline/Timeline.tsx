@@ -96,7 +96,7 @@ const events = [
 
 export function TimelineFull() {
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-6">
       {events.map((event, index) => (
         <div
           key={index}
@@ -146,7 +146,7 @@ export function TimelineFull() {
 // Smaller more condensed timeline for the home page, better sizing.
 export function TimelineHome() {
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-6">
       {events.slice(0, 3).map((event, index) => (
         <div key={index} className="flex flex-row mt-4">
           <div className="flex flex-col justify-center items-center">

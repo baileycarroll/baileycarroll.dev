@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <section
       id="Home"
-      className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-5 gap-4 p-5 mt-6"
+      className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-5 gap-6 p-6 mt-6"
     >
       <Card className="rounded-lg lg:row-span-4 col-span-4 lg:col-span-1 flex flex-col justify-center items-start">
         <Image
@@ -53,7 +53,7 @@ export default function Home() {
       <Card className="rounded-lg col-span-4 lg:col-span-2 lg:row-span-2 flex flex-col justify-center items-start overflow-hidden]">
         <Heading Level={6}>Recent Experience</Heading>
         <TimelineHome />
-        <div className="flex flex-row gap-4 self-end mix-blend-normal">
+        <div className="flex flex-row gap-4 self-end mix-blend-normal mt-4">
           <Link
             href={"/resume"}
             className="self-end text-primary font-semibold mt-auto mix-blend-normal"
@@ -71,7 +71,7 @@ export default function Home() {
       </Card>
       <Card className="rounded-lg col-span-4 lg:row-span-2 lg:col-span-2 lg:col-start-2 lg:row-start-3 flex flex-col justify-evenly">
         <Heading Level={6}>Recent Projects</Heading>
-        <div className="grid grid-cols-2 gap-2 mt-2">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           <Card className="col-span-2 md:col-span-1 flex flex-col items-start">
             <Heading Level={6}>Corpus Vitae</Heading>
             <Paragraph className="leading-tight">

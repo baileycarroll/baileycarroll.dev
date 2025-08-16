@@ -42,10 +42,10 @@ function SocialLink({
 
 export default function About() {
   return (
-    <section id="about" className="p-5 flex flex-col items-center mt-6">
+    <section id="about" className="p-6 flex flex-col items-center mt-6">
       <Card
         className={
-          "grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-2"
+          "grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-4"
         }
       >
         <div className="flex flex-col lg:order-first lg:row-span-2">

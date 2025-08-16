@@ -29,7 +29,7 @@ async function getPoems() {
 export default async function Poetry() {
   const poems = await getPoems();
   return (
-    <section id="Books" className="p-5 flex flex-row items-center mt-6">
+    <section id="Books" className="p-6 flex flex-row items-center mt-6">
       <Card className="w-full overflow-scroll">
         <Heading Level={4}>My Poetry</Heading>
         <Heading Level={6} className="my-4 text-md">
@@ -37,7 +37,7 @@ export default async function Poetry() {
           decided to post here for all to read and enjoy.
         </Heading>
         <hr className="my-2" />
-        <div className="flex flex-row flex-wrap my-2 pt-2 w-full overflow-ellipsis overflow-hidden gap-4 justify-center h-full">
+        <div className="flex flex-row flex-wrap my-4 pt-4 w-full overflow-ellipsis overflow-hidden gap-6 justify-center h-full">
           {poems.map((poem) => (
             <div key={poem.title}>
               <Card className="p-2 rounded-lg w-prose flex flex-col">

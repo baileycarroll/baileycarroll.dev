@@ -72,7 +72,7 @@ export default async function ArticlesPage() {
   const articles = await getSortedArticlesData();
 
   return (
-    <section className="p-5 mt-6">
+    <section className="p-6 mt-6">
       <Card>
         <div className="max-w-5xl">
           <Heading Level={3}>
@@ -89,7 +89,7 @@ export default async function ArticlesPage() {
         </div>
                     <div className="my-4 border-t border-primary/20 h-px" />
         <div className="">
-          <div className="flex flex-col max-w-3xl space-y-12">
+          <div className="flex flex-col max-w-3xl space-y-16">
             {articles.length > 0 ? (
               articles.map((article) => (
                 <Article article={article} key={article.slug} />

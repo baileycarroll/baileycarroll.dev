@@ -21,7 +21,7 @@ function NavItem({
       <Link
         href={href}
         className={clsx(
-          "relative block px-3 py-2 transition",
+          "relative block px-4 py-2 transition",
           isActive ? "text-primary" : "hover:text-primary"
         )}
       >
@@ -39,7 +39,7 @@ export default function DesktopNavigation(
 ) {
   return (
     <nav {...props}>
-              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/40 px-3 text-md font-medium border border-primary/20">
+              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/40 px-4 text-md font-medium border border-primary/20">
         <NavItem href={"/"}>Home</NavItem>
         <NavItem href={"/about"}>About</NavItem>
         <NavItem href={"/resume"}>Resume</NavItem>

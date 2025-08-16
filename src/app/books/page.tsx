@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function Books() {
   return (
-    <section id="Books" className="p-5 flex flex-col items-center mt-6">
-      <Card className="grid grid-cols-1 gap-y-16 xl:grid-cols-2 xl:grid-rows-[auto_1fr] xl:gap-y-2">
+    <section id="Books" className="p-6 flex flex-col items-center mt-6">
+      <Card className="grid grid-cols-1 gap-y-16 xl:grid-cols-2 xl:grid-rows-[auto_1fr] xl:gap-y-4">
         <div className="flex flex-col lg:order-first lg:row-span-2">
           <Heading Level={3}>My Books</Heading>
           <Heading Level={6} className="my-4">

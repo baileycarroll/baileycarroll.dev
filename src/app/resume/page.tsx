@@ -7,8 +7,8 @@ import Button from "@/components/buttons/Button";
 import Link from "next/link";
 export default function Resume() {
   return (
-    <section id="resume" className="p-5 flex flex-col items-center mt-6">
-      <div className="grid grid-cols-3 gap-4">
+    <section id="resume" className="p-6 flex flex-col items-center mt-6">
+      <div className="grid grid-cols-3 gap-6">
         <Card className="col-span-3 lg:col-span-2">
           <Heading Level={4}>Resume</Heading>
           <Heading

@@ -23,7 +23,7 @@ function MobileNavItem({
       <PopoverButton
         as={Link}
         href={href}
-                    className={"block py-2 hover:bg-neutral-600/40 rounded-lg px-5"}
+                    className={"block py-3 hover:bg-neutral-600/40 rounded-lg px-6"}
       >
         {children}
       </PopoverButton>
@@ -47,7 +47,7 @@ export default function MobileNavigation(
       <PopoverPanel
         focus
         transition
-                  className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-neutral-950 p-8 border border-primary/20 duration-150 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
+                  className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-neutral-950 p-6 border border-primary/20 duration-150 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
       >
         <div className="flex flex-row-reverse items-center justify-between">
           <PopoverButton aria-label="Close Navigation" className="-m-1 p-1">
