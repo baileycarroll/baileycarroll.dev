@@ -7,7 +7,7 @@ import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
 import Link from "next/link";
 import Button from "@/components/buttons/Button";
-import { FaArrowCircleLeft } from "react-icons/fa";
+import { FaArrowLeft, FaCalendar, FaUser } from "react-icons/fa";
 import { formatDate } from "@/lib/formatDate";
 import * as React from "react";
 
@@ -26,6 +26,7 @@ async function getArticleData(slug: string) {
     title: data.title,
     description: data.description,
     date: data.date,
+    author: data.author || "Bailey Carroll",
     compiledSource: compiledContent,
   };
 }
@@ -49,22 +50,65 @@ export default async function ArticlePage(props: {
   const articleData = await getArticleData(slug);
 
   return (
-    <Card className="max-w-7xl mx-auto mt-12">
-      <Link href={"/articles"}>
-        <Button className="mb-4 flex flex-row items-center gap-5 cursor-p">
-          <FaArrowCircleLeft />
-          Back to Articles
-        </Button>
-      </Link>
-      <Heading Level={3}>{articleData.title}</Heading>
-                  <Heading Level={5} className="text-primary">
-        {articleData.description}
-      </Heading>
-      <Paragraph className="my-2">{formatDate(articleData.date)}</Paragraph>
-                  <div className="my-2 border-t border-primary/20 h-px" />
-              <div className="max-w-none prose prose-headings:text-slate-50 prose-p:text-slate-50 prose-lg prose-ul:text-slate-50 prose-li:text-slate-50 prose-a:text-primary">
-        {articleData.compiledSource}
-      </div>
-    </Card>
+    <div className="max-w-[1400px] mx-auto px-6">
+      {/* Back Navigation */}
+      <section className="py-8">
+        <Link href="/articles">
+          <Button variant="outline" className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300">
+            <FaArrowLeft className="w-4 h-4" />
+            Back to Articles
+          </Button>
+        </Link>
+      </section>
+
+      {/* Article Header */}
+      <section className="py-8">
+        <Card variant="elevated" className="p-8">
+          <div className="max-w-4xl mx-auto">
+            <Heading Level={2} className="mb-6 text-center">
+              {articleData.title}
+            </Heading>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 text-neutral-400">
+              <div className="flex items-center gap-2">
+                <FaUser className="w-4 h-4" />
+                <span className="text-sm font-medium">{articleData.author}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCalendar className="w-4 h-4" />
+                <time dateTime={formatDate(articleData.date)} className="text-sm font-medium">
+                  {formatDate(articleData.date)}
+                </time>
+              </div>
+            </div>
+            
+            <Paragraph size="lg" className="text-center text-neutral-300 leading-relaxed max-w-3xl mx-auto">
+              {articleData.description}
+            </Paragraph>
+          </div>
+        </Card>
+      </section>
+
+      {/* Article Content */}
+      <section className="py-8">
+        <Card variant="elevated" className="p-8">
+          <div className="max-w-4xl mx-auto prose prose-lg prose-invert prose-headings:text-white prose-h1:text-primary prose-h2:text-primary prose-h3:text-primary prose-h4:text-primary prose-p:text-neutral-200 prose-strong:text-white prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary prose-blockquote:text-neutral-300 prose-code:text-primary prose-code:bg-neutral-800 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-primary/20">
+            {articleData.compiledSource}
+          </div>
+        </Card>
+      </section>
+
+      {/* Back to Articles Footer */}
+      <section className="py-8">
+        <div className="text-center">
+          <Link href="/articles">
+            <Button variant="outline" className="flex items-center gap-2 mx-auto hover:bg-primary/10 hover:border-primary/50 transition-all duration-300">
+              <FaArrowLeft className="w-4 h-4" />
+              Back to Articles
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
