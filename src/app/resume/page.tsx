@@ -8,6 +8,50 @@ import Link from "next/link";
 // Resume Google Drive Link
 const ResumeUrl = "https://drive.google.com/file/d/1JHdcZUil-WpfKiG0dedAUAr1fenhkP3Z/view?usp=sharing";
 
+// Skills data
+const skillsData = {
+  frontend: [
+    { name: "React", level: 90 },
+    { name: "TypeScript", level: 85 },
+    { name: "Next.js", level: 80 },
+    { name: "Tailwind CSS", level: 85 },
+    { name: "HTML/CSS", level: 95 }
+  ],
+  backend: [
+    { name: "Node.js", level: 80 },
+    { name: "Python", level: 75 },
+    { name: "PHP/Laravel", level: 70 },
+    { name: "MySQL", level: 85 },
+    { name: "PostgreSQL", level: 80 }
+  ],
+  mobile: [
+    { name: "Flutter", level: 75 },
+    { name: "React Native", level: 70 },
+    { name: "Mobile UI/UX", level: 80 }
+  ],
+  tools: [
+    { name: "Git", level: 90 },
+    { name: "Docker", level: 70 },
+    { name: "AWS", level: 65 },
+    { name: "Linux", level: 85 },
+    { name: "CI/CD", level: 75 }
+  ]
+};
+
+function SkillBar({ name, level }: { name: string; level: number }) {
+  return (
+    <div className="flex justify-between items-center mb-3">
+      <span className="text-neutral-300 text-sm font-medium">{name}</span>
+      <div className="w-24 bg-neutral-800 rounded-full h-2">
+        <div 
+          className="bg-primary h-2 rounded-full transition-all duration-1000 ease-out" 
+          style={{width: `${level}%`}}
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function Resume() {
   return (
     <div className="max-w-[1400px] mx-auto px-6">
@@ -25,6 +69,47 @@ export default function Resume() {
             <Link href="/about">
               <Button size="lg" variant="outline">Learn More About Me</Button>
             </Link>
+          </div>
+        </Card>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-16">
+        <Card variant="elevated" className="p-8">
+          <Heading Level={3} className="mb-8 text-center">Technical Skills</Heading>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <Heading Level={4} className="mb-6 text-primary">Frontend</Heading>
+              <div className="space-y-2">
+                {skillsData.frontend.map(skill => (
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Heading Level={4} className="mb-6 text-primary">Backend</Heading>
+              <div className="space-y-2">
+                {skillsData.backend.map(skill => (
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Heading Level={4} className="mb-6 text-primary">Mobile</Heading>
+              <div className="space-y-2">
+                {skillsData.mobile.map(skill => (
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Heading Level={4} className="mb-6 text-primary">Tools & DevOps</Heading>
+              <div className="space-y-2">
+                {skillsData.tools.map(skill => (
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} />
+                ))}
+              </div>
+            </div>
           </div>
         </Card>
       </section>
