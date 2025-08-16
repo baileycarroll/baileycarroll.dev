@@ -1,43 +1,29 @@
-import fs from "fs";
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
-import { compileMDX } from "next-mdx-remote/rsc";
-import path from "path";
 import Link from "next/link";
 import Button from "@/components/buttons/Button";
 import { FaArrowLeft, FaFeather } from "react-icons/fa";
-
-const POEMS_DIRECTORY = path.join(process.cwd(), "src/app/content/poems");
-
-async function getPoem(slug: string) {
-  const fullPath = path.join(POEMS_DIRECTORY, `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  let title = slug.replace(/\.mdx$/, "");
-  const { content } = await compileMDX({ source: fileContents });
-  title = title.replace(/-/g, " ");
-  title = title.replace(/\b\w/g, (c) => c.toUpperCase());
-  return {
-    title: title,
-    content: content,
-  };
-}
-
-export async function generateStaticParams() {
-  const fileNames = fs.readdirSync(POEMS_DIRECTORY);
-
-  return fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, "");
-    return { slug };
-  });
-}
+import { contentService } from "@/services";
 
 export default async function Poetry(props: {
   params: Promise<{ slug: string }>;
 }) {
   const params = await props.params;
   const { slug } = params;
-  const poem = await getPoem(slug);
+  const poem = await contentService.getPoem(slug);
   
+  if (!poem.success) {
+    return (
+      <div className="max-w-[1400px] mx-auto px-6">
+        <Card variant="elevated" className="p-8 text-center">
+          <Heading Level={3} className="mb-6">
+            Poem Not Found
+          </Heading>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-6">
       {/* Back Navigation */}
@@ -59,14 +45,14 @@ export default async function Poetry(props: {
               <div className="flex items-center justify-center gap-3 mb-4">
                 <FaFeather className="w-6 h-6 text-primary" />
                 <Heading Level={2} className="text-primary">
-                  {poem.title}
+                  {poem.data.title}
                 </Heading>
               </div>
             </div>
             
             {/* Poem Text */}
             <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-xl font-serif text-center">
-              {poem.content}
+              {poem.data.content}
             </div>
           </div>
         </Card>

@@ -1,22 +1,13 @@
 import Link from "next/link";
 import Card from "@/components/cards/Card";
-import { getSortedArticlesData } from "@/lib/articles";
 import { ChevronRightIcon, CalendarIcon } from "@heroicons/react/24/solid";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
 import Button from "@/components/buttons/Button";
 import { formatDate } from "@/lib/formatDate";
+import { Article, contentService } from "@/services";
 
-interface ArticleProps {
-  article: {
-    date: string;
-    slug: string;
-    title: string;
-    description: string;
-  };
-}
-
-function Article({ article }: ArticleProps) {
+function ArticleItem({ article }: { article: Article }) {
   return (
     <Card variant="default" interactive className="p-6 hover:bg-neutral-900/40 transition-all duration-300 group">
       <div className="space-y-4">
@@ -55,7 +46,17 @@ function Article({ article }: ArticleProps) {
 }
 
 export default async function ArticlesPage() {
-  const articles = await getSortedArticlesData();
+  const articlesResult = await contentService.getAllArticles();
+
+  if (!articlesResult.success) {
+    return (
+      <div className="max-w-[1400px] mx-auto px-6">
+        <Card variant="elevated" className="p-8 text-center">
+          <Heading Level={3} className="mb-6">Articles & Thoughts</Heading>
+        </Card>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-[1400px] mx-auto px-6">
@@ -73,10 +74,10 @@ export default async function ArticlesPage() {
 
       {/* Articles Section */}
       <section className="py-16">
-        {articles.length > 0 ? (
+        {articlesResult.data.length > 0 ? (
           <div className="space-y-8">
-            {articles.map((article) => (
-              <Article article={article} key={article.slug} />
+            {articlesResult.data.map((article) => (
+              <ArticleItem article={article} key={article.slug} />
             ))}
           </div>
         ) : (
