@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-
+import { SITE_CONFIG, ENV_CONFIG } from "@/config";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -18,8 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bailey Carroll",
-  description: "Making My Mark - One Line of Code at a Time",
+  title: SITE_CONFIG.title,
+  description: SITE_CONFIG.description,
+  metadataBase: new URL(SITE_CONFIG.url),
+  openGraph: {
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+  }
 };
 
 export default function RootLayout({
@@ -34,8 +40,9 @@ export default function RootLayout({
       >
         {/* Vercel Analytics */}
         <Analytics />
-        {/* Google Analytics */}
-        <GoogleAnalytics gaId="G-1TGMX650JG" />
+        {ENV_CONFIG.analytics.enabled && (
+          <GoogleAnalytics gaId={ENV_CONFIG.analytics.google || ""}/>
+        )}
         <SpeedInsights />
         <div id="background-container" className="h-[100dvh] w-[100dvw]">
           <div className="h-full w-full overflow-scroll">
