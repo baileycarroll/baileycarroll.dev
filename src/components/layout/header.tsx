@@ -5,7 +5,11 @@ import MobileNavigation from "@/components/navigation/MobileNavigation";
 
 export default function Header() {
   return (
-    <header className="pointer-events-none z-50 flex flex-none flex-col bg-transparent sticky top-6">
+    <header 
+      className="pointer-events-none z-50 flex flex-none flex-col bg-transparent sticky top-6"
+      role="banner"
+      aria-label="Site header"
+    >
       <div className="top-0 z-10 h-16 pt-6">
         <div className="top-6 w-full">
           <div className="relative flex gap-4">
