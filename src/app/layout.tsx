@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import SplashWrapper from "@/components/SplashWrapper";
+import FloatingElements from "@/components/background/FloatingElements";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,8 +45,9 @@ export default function RootLayout({
           <GoogleAnalytics gaId={ENV_CONFIG.analytics.google || ""}/>
         )}
         <SpeedInsights />
-        <div id="background-container" className="h-[100dvh] w-[100dvw]">
-          <div className="h-full w-full overflow-scroll">
+        <div id="background-container" className="h-[100dvh] w-[100dvw] bg-enhanced">
+          <FloatingElements />
+          <div className="h-full w-full overflow-scroll custom-scrollbar">
            <SplashWrapper>{children}</SplashWrapper>
           </div>
         </div>
