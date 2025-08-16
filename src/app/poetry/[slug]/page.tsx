@@ -39,7 +39,7 @@ export default async function Poetry(props: {
   const poem = await getPoem(slug);
   
   return (
-    <div className="max-w-[1400px] mx-auto px-6">
+    <div className="max-w-4xl mx-auto px-6">
       {/* Back Navigation */}
       <section className="py-8">
         <Link href="/poetry">
@@ -50,25 +50,22 @@ export default async function Poetry(props: {
         </Link>
       </section>
 
-      {/* Poem Header */}
-      <section className="py-8">
-        <Card variant="elevated" className="p-8 text-center">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <FaFeather className="w-8 h-8 text-primary" />
-              <Heading Level={2} className="text-primary">
-                {poem.title}
-              </Heading>
-            </div>
-          </div>
-        </Card>
-      </section>
-
       {/* Poem Content */}
       <section className="py-8">
         <Card variant="elevated" className="p-8">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-lg font-serif">
+          <div className="max-w-2xl mx-auto">
+            {/* Poem Header */}
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <FaFeather className="w-6 h-6 text-primary" />
+                <Heading Level={2} className="text-primary">
+                  {poem.title}
+                </Heading>
+              </div>
+            </div>
+            
+            {/* Poem Text */}
+            <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-xl font-serif text-center">
               {poem.content}
             </div>
           </div>
