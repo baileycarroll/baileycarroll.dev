@@ -39,16 +39,8 @@ export default function RootLayout({
         <GoogleAnalytics gaId="G-1TGMX650JG" />
         <SpeedInsights />
         <div id="background-container" className="h-[100dvh] w-[100dvw]">
-          <Image
-            src={Rose}
-            alt="background"
-            layout="fill"
-            objectFit="contain"
-            className={"-z-10 absolute"}
-            id="rose"
-          />
           <div className="h-full w-full overflow-scroll">
-            <Splash>{children}</Splash>
+          {/*  <Splash>{children}</Splash> */}
           </div>
         </div>
       </body>
