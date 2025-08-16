@@ -26,7 +26,7 @@ const Heading: React.FC<HeadingProps> = ({
     6: "text-xl font-medium leading-normal tracking-normal text-white"
   };
 
-  const Tag = as || `h${Level}` as keyof JSX.IntrinsicElements;
+  const Tag = (as || `h${Level}`) as keyof React.JSX.IntrinsicElements;
 
   return React.createElement(
     Tag,

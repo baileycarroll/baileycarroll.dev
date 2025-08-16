@@ -112,7 +112,6 @@ export default function DesktopNavigation(
               >
                 <Menu.Items 
                   className="absolute right-0 top-full mt-2 w-40 rounded-xl shadow-lg bg-neutral-800/90 backdrop-blur-sm border border-primary/20 focus:outline-none z-[var(--z-dropdown)]"
-                  role="menu"
                   aria-label="More navigation menu"
                 >
                   <div className="py-1" role="none">

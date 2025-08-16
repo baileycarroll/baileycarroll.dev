@@ -81,7 +81,7 @@ export default function MobileNavigation(
           <h2 className="text-sm font-semibold text-neutral-200">Navigation</h2>
         </div>
         <nav className="mt-2" role="navigation" aria-label="Mobile navigation">
-          <ListNone className="space-y-1" role="menu">
+          <ListNone className="space-y-1">
             <MobileNavItem href={"/"}>Home</MobileNavItem>
             <MobileNavItem href={"/about"}>About</MobileNavItem>
             <MobileNavItem href={"/resume"}>Resume</MobileNavItem>
