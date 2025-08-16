@@ -21,13 +21,15 @@ function NavItem({
       <Link
         href={href}
         className={clsx(
-          "relative block px-4 py-2 transition",
-          isActive ? "text-primary" : "hover:text-primary"
+          "relative block px-4 py-2 transition-all duration-200 font-medium",
+          isActive 
+            ? "text-primary" 
+            : "text-neutral-300 hover:text-primary hover:bg-primary/5"
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0" />
+          <span className="absolute inset-x-1 -bottom-px h-0.5 bg-primary rounded-full" />
         )}
       </Link>
     </li>
@@ -39,38 +41,67 @@ export default function DesktopNavigation(
 ) {
   return (
     <nav {...props}>
-              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/40 px-4 text-md font-medium border border-primary/20">
+      <ListNoneHorizontal className="flex rounded-full bg-neutral-800/30 backdrop-blur-sm px-2 py-1 text-sm font-medium border border-primary/20 shadow-lg shadow-primary/5">
         <NavItem href={"/"}>Home</NavItem>
         <NavItem href={"/about"}>About</NavItem>
         <NavItem href={"/resume"}>Resume</NavItem>
         <NavItem href={"/projects"}>Projects</NavItem>
-        {/* <NavItem href={"/articles"}>Articles</NavItem> */}
-        <div className="flex items-center ml-2">
+        <div className="flex items-center">
           <Menu as="div" className="relative inline-block text-center">
             <div>
-              <Menu.Button className="inline-flex justify-center hover:text-primary hover:cursor-pointer">
-                Author{"'"}s Corner
-                <ChevronDownIcon className="w-4 mx-2 my-auto" />
+              <Menu.Button className="inline-flex items-center justify-center px-4 py-2 transition-all duration-200 font-medium text-neutral-300 hover:text-primary hover:bg-primary/5 rounded-full">
+                More
+                <ChevronDownIcon className="w-4 h-4 ml-1 transition-transform duration-200 ui-open:rotate-180" />
               </Menu.Button>
               <Transition
                 as={Fragment}
-                enter="transition ease-out duration-100"
+                enter="transition ease-out duration-200"
                 enterFrom="transform opacity-0 scale-95"
                 enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
+                leave="transition ease-in duration-150"
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute left-0 top-8 mt-2 w-36 rounded-xl shadow-lg bg-neutral-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 top-full mt-2 w-40 rounded-xl shadow-lg bg-neutral-800/90 backdrop-blur-sm border border-primary/20 focus:outline-none z-50">
                   <div className="py-1">
                     <Menu.Item>
-                      <NavItem href={"/books"}>Books</NavItem>
+                      {({ active }) => (
+                        <Link
+                          href="/articles"
+                          className={clsx(
+                            "block px-4 py-2 text-sm transition-colors duration-200",
+                            active ? "bg-primary/10 text-primary" : "text-neutral-300 hover:text-primary"
+                          )}
+                        >
+                          Articles
+                        </Link>
+                      )}
                     </Menu.Item>
                     <Menu.Item>
-                      <NavItem href={"/articles"}>Articles</NavItem>
+                      {({ active }) => (
+                        <Link
+                          href="/books"
+                          className={clsx(
+                            "block px-4 py-2 text-sm transition-colors duration-200",
+                            active ? "bg-primary/10 text-primary" : "text-neutral-300 hover:text-primary"
+                          )}
+                        >
+                          Books
+                        </Link>
+                      )}
                     </Menu.Item>
                     <Menu.Item>
-                      <NavItem href={"/poetry"}>Poetry</NavItem>
+                      {({ active }) => (
+                        <Link
+                          href="/poetry"
+                          className={clsx(
+                            "block px-4 py-2 text-sm transition-colors duration-200",
+                            active ? "bg-primary/10 text-primary" : "text-neutral-300 hover:text-primary"
+                          )}
+                        >
+                          Poetry
+                        </Link>
+                      )}
                     </Menu.Item>
                   </div>
                 </Menu.Items>
