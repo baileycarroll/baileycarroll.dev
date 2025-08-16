@@ -5,7 +5,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
 import Link from "next/link";
 import Button from "@/components/buttons/Button";
-import { FaArrowCircleLeft } from "react-icons/fa";
+import { FaArrowLeft, FaFeather } from "react-icons/fa";
 
 const POEMS_DIRECTORY = path.join(process.cwd(), "src/app/content/poems");
 
@@ -37,19 +37,55 @@ export default async function Poetry(props: {
   const params = await props.params;
   const { slug } = params;
   const poem = await getPoem(slug);
+  
   return (
-    <section id="Poem" className="p-5 flex flex-row items-center mt-6">
-      <Card className="w-full min-h-[80dvh]">
-        <Link href={"/poetry"}>
-          <Button className="mb-4 flex flex-row items-center gap-5 cursor-pointer">
-            <FaArrowCircleLeft />
+    <div className="max-w-[1400px] mx-auto px-6">
+      {/* Back Navigation */}
+      <section className="py-8">
+        <Link href="/poetry">
+          <Button variant="outline" className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300">
+            <FaArrowLeft className="w-4 h-4" />
             Back to Poetry
           </Button>
         </Link>
-        <Heading Level={4}>{poem.title}</Heading>
-        <hr className="my-2" />
-        <pre>{poem.content}</pre>
-      </Card>
-    </section>
+      </section>
+
+      {/* Poem Header */}
+      <section className="py-8">
+        <Card variant="elevated" className="p-8 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <FaFeather className="w-8 h-8 text-primary" />
+              <Heading Level={2} className="text-primary">
+                {poem.title}
+              </Heading>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* Poem Content */}
+      <section className="py-8">
+        <Card variant="elevated" className="p-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-lg font-serif">
+              {poem.content}
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* Back to Poetry Footer */}
+      <section className="py-8">
+        <div className="text-center">
+          <Link href="/poetry">
+            <Button variant="outline" className="flex items-center gap-2 mx-auto hover:bg-primary/10 hover:border-primary/50 transition-all duration-300">
+              <FaArrowLeft className="w-4 h-4" />
+              Back to Poetry
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
