@@ -1,7 +1,7 @@
 import Heading from "@/components/typography/Headings";
 import Card from "@/components/cards/Card";
 import Link from "next/link";
-import { FaDesktop, FaGlobe, FaGithub, FaBook, FaMobile } from "react-icons/fa";
+import { FaDesktop, FaGithub, FaBook, FaMobile } from "react-icons/fa";
 import Image from "next/image";
 import Corpus from "@/assets/CV.png";
 import Acolyte from "@/assets/Acolyte Logo - Icon.png";

@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Logo from "@/assets/rose_shield.svg";
+
 import Link from "next/link";
 import Paragraph from "@/components/typography/Paragraphs";
 import Heading from "@/components/typography/Headings";

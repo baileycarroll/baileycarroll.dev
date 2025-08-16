@@ -137,7 +137,6 @@ export default function Books() {
                             size="sm" 
                             variant={link.available ? "outline" : "default"}
                             className={`flex items-center gap-2 ${!link.available ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            disabled={!link.available}
                           >
                             <FaExternalLinkAlt className="w-3 h-3" />
                             {link.label}

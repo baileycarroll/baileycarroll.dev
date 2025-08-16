@@ -58,7 +58,6 @@ function MobileNavItem({
 }
 
 export default function Header() {
-  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   return (
