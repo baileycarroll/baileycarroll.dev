@@ -1,6 +1,39 @@
 @import "tailwindcss";
 
 @theme {
+  /* Typography System */
+  --font-primary: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  
+  /* Font weights */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Line heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* Letter spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  
   /* Primary Colors */
   --color-primary-400: #22d3ee;  /* cyan-400 */
   --color-primary-500: #06b6d4;  /* cyan-500 */
@@ -77,6 +110,23 @@
 /* Legacy color scheme - now using CSS custom properties above */
 
 @layer utilities {
+  /* Typography utilities */
+  .text-display { font-size: var(--text-6xl); font-weight: var(--font-bold); }
+  .text-heading { font-size: var(--text-4xl); font-weight: var(--font-semibold); }
+  .text-subheading { font-size: var(--text-2xl); font-weight: var(--font-medium); }
+  .text-body { font-size: var(--text-base); font-weight: var(--font-normal); color: var(--color-text-primary); }
+  .text-caption { font-size: var(--text-sm); font-weight: var(--font-normal); }
+  
+  /* Line height utilities */
+  .leading-tight { line-height: var(--leading-tight); }
+  .leading-normal { line-height: var(--leading-normal); }
+  .leading-relaxed { line-height: var(--leading-relaxed); }
+  
+  /* Letter spacing utilities */
+  .tracking-tight { letter-spacing: var(--tracking-tight); }
+  .tracking-normal { letter-spacing: var(--tracking-normal); }
+  .tracking-wide { letter-spacing: var(--tracking-wide); }
+  
   /* Primary color utilities */
   .bg-primary { background-color: var(--color-primary); }
   .text-primary { color: var(--color-primary); }
@@ -95,7 +145,6 @@
   .bg-card-muted { background-color: var(--color-bg-tertiary); }
   
   /* Text utilities */
-  .text-body { color: var(--color-text-primary); }
   .text-muted { color: var(--color-text-muted); }
 }
 
@@ -103,5 +152,8 @@ body {
   color: var(--foreground);
   background: var(--gradient-bg);
   min-height: 100vh;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-primary), system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
 }

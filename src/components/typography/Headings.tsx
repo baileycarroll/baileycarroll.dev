@@ -4,10 +4,6 @@ import React from "react";
 import BaseProps from "@/components/Base";
 // Import CLSX for conditional classes
 import clsx from "clsx";
-// Inter Font
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 interface HeadingProps extends BaseProps {
   Level: 1 | 2 | 3 | 4 | 5 | 6;
@@ -24,19 +20,18 @@ const Heading: React.FC<HeadingProps> = ({
     {
       className: clsx(
         Level === 1
-          ? "text-7xl font-bold"
+          ? "text-6xl font-bold leading-tight tracking-tight"
           : Level === 2
-          ? "text-6xl font-bold"
+          ? "text-5xl font-bold leading-tight tracking-tight"
           : Level === 3
-          ? "text-5xl font-semibold"
+          ? "text-4xl font-semibold leading-tight tracking-normal"
           : Level === 4
-          ? "text-4xl font-semibold"
+          ? "text-3xl font-semibold leading-tight tracking-normal"
           : Level === 5
-          ? "text-3xl font-semibold"
+          ? "text-2xl font-medium leading-normal tracking-normal"
           : Level === 6
-          ? "text-2xl font-semibold"
+          ? "text-xl font-medium leading-normal tracking-normal"
           : "",
-        inter.className,
         className
       ),
       style,
