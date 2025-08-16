@@ -26,18 +26,24 @@ export default function Home() {
       <div className="space-y-8">
         {/* Hero Section */}
         <Card className="flex flex-col items-center text-center">
-          <Image
-            src={Headshot}
-            alt="Profile image of Bailey Carroll."
-            className="rounded-full ring ring-primary-light/50 h-32 w-32 object-cover object-top mb-6"
-          />
+          <div className="relative mb-6">
+            <Image
+              src={Headshot}
+              alt="Profile image of Bailey Carroll, a software developer based in Seattle."
+              className="rounded-full ring-2 ring-primary/30 h-32 w-32 object-cover object-top transition-all duration-300 hover:ring-primary/50 hover:scale-105"
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+          </div>
           <Heading Level={2} className="mb-4">
             Bailey Carroll
           </Heading>
           <Heading Level={5} className="mb-4 text-primary">
             Software Developer & Problem Solver
           </Heading>
-          <Paragraph className="mb-6">
+          <Paragraph size="lg" className="mb-6">
             Passionate software developer based in Seattle, crafting innovative solutions 
             that make a difference. I specialize in full-stack development, system architecture, 
             and creating user-centric applications. When I'm not coding, you'll find me 
@@ -74,9 +80,9 @@ export default function Home() {
         <Card>
           <Heading Level={4} className="mb-6">Featured Projects</Heading>
           <div className="grid grid-cols-1 gap-6 mb-6">
-            <Card className="p-6 hover:bg-card/30 transition-colors">
+            <Card variant="elevated" interactive className="p-6">
               <Heading Level={5} className="mb-3">Corpus Vitae</Heading>
-              <Paragraph className="mb-4 leading-relaxed">
+              <Paragraph size="base" className="mb-4 leading-relaxed">
                 A comprehensive fitness, meal, and life-tracking mobile application built with Flutter. 
                 Features local SQLite storage with cloud MySQL synchronization, iOS-inspired UI design, 
                 and holistic habit tracking capabilities.
@@ -91,9 +97,9 @@ export default function Home() {
                 <Button size="sm" variant="outline">View Project</Button>
               </Link>
             </Card>
-            <Card className="p-6 hover:bg-card/30 transition-colors">
+            <Card variant="elevated" interactive className="p-6">
               <Heading Level={5} className="mb-3">Acolyte R.E.A.L.M.S.</Heading>
-              <Paragraph className="mb-4 leading-relaxed">
+              <Paragraph size="base" className="mb-4 leading-relaxed">
                 A custom Remote Engagement and Learning Management System designed from the ground up. 
                 Currently developing version 5.0 with enhanced user engagement features, serving as 
                 the backbone for educational platforms like 'un-Traditional Magick'.
@@ -117,7 +123,7 @@ export default function Home() {
         {/* Skills */}
         <Card>
           <Heading Level={4} className="mb-6">Technical Skills</Heading>
-          <Paragraph className="mb-4 text-neutral-300">
+          <Paragraph variant="muted" className="mb-4">
             Full-stack developer with expertise in modern web technologies, 
             mobile development, and system architecture.
           </Paragraph>
@@ -127,7 +133,7 @@ export default function Home() {
         {/* Contact */}
         <Card>
           <Heading Level={4} className="mb-6">Let's Connect</Heading>
-          <Paragraph className="mb-6 text-neutral-300">
+          <Paragraph variant="muted" className="mb-6">
             I'm always interested in new opportunities, collaborations, or just 
             connecting with fellow developers. Feel free to reach out!
           </Paragraph>
