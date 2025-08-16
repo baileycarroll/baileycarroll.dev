@@ -27,7 +27,7 @@ export default function Home() {
         <Image
           src={Headshot}
           alt="Profile image of Hunter Bailey."
-          className="rounded-full ring-2 ring-primary-light h-48 w-48 shadow-lg shadow-primary object-cover object-top self-center mb-4 -translate-y-14"
+          className="rounded-full ring ring-primary-light/50 h-48 w-48 object-cover object-top self-center mb-4 -translate-y-14"
         />
         <Heading Level={3} className="mb-4 -translate-y-14">
           Bailey Carroll

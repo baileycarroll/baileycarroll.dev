@@ -10,7 +10,7 @@ const Card: React.FC<BaseProps> = ({ children, className, style }) => {
     "div",
     {
       className: clsx(
-        "bg-card/40 backdrop-blur shadow-lg shadow-primary border-2 border-primary rounded-2xl p-5 ",
+        "bg-card/20 border border-primary/30 rounded-xl p-5 ",
         className
       ),
       style,

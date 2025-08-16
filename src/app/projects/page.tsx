@@ -99,10 +99,10 @@ export default function Projects() {
               <li
                 key={project.name}
                 className={
-                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-neutral-800/60 hover:scale-110 hover:shadow-primary hover:shadow-md hover:border hover:border-primary"
+                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-neutral-800/40 hover:border hover:border-primary/50"
                 }
               >
-                                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-secondary shadow-md shadow-primary/5 ring-1 ring-primary/5">
+                                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-secondary border border-primary/20">
                   <Image
                     src={project.logo}
                     alt={project.name + " Logo"}

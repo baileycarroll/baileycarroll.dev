@@ -97,7 +97,7 @@ export default function SkillsMarquee() {
         {SkillsList.map((skill, index) => (
           <div
             key={index}
-            className="flex flex-col justify-center items-center rounded-lg bg-card/50 backdrop-blur border border-primary shadow-md shadow-primary p-3 mx-3 w-32 transition hover:scale-105"
+            className="flex flex-col justify-center items-center rounded-lg bg-card/20 border border-primary/30 p-3 mx-3 w-32 transition hover:bg-card/30"
           >
             <span className="text-3xl">{skill.icon}</span>
             <span className="mt-2">{skill.name}</span>

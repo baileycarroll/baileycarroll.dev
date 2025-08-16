@@ -92,7 +92,7 @@ export default function About() {
             <Image
               src={Headshot}
               alt="Picture of Bailey leaning against a tree."
-              className="aspect-square rotate-3 rounded-2xl object-cover object-top w-80 mx-auto shadow-md shadow-primary"
+              className="aspect-square rotate-3 rounded-2xl object-cover object-top w-80 mx-auto border border-primary/30"
             />
           </div>
         </div>

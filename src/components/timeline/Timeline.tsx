@@ -130,7 +130,7 @@ export function TimelineFull() {
             <ul className="flex flex-row flex-wrap gap-x-4 gap-y-2 mt-2">
               {event.skills.map((skill, index) => (
                 <li
-                  className="bg-primary-light/20 text-primary-light border border-primary shadow shadow-primary px-2 rounded-full"
+                  className="bg-primary-light/10 text-primary-light border border-primary/30 px-2 rounded-full"
                   key={index}
                 >
                   {skill}

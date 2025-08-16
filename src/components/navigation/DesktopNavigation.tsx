@@ -39,7 +39,7 @@ export default function DesktopNavigation(
 ) {
   return (
     <nav {...props}>
-              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/80 px-3 text-md font-medium shadow-lg shadow-primary/5 ring-1 ring-primary/5 backdrop-blur">
+              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/40 px-3 text-md font-medium border border-primary/20">
         <NavItem href={"/"}>Home</NavItem>
         <NavItem href={"/about"}>About</NavItem>
         <NavItem href={"/resume"}>Resume</NavItem>

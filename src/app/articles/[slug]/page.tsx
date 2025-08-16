@@ -61,7 +61,7 @@ export default async function ArticlePage(props: {
         {articleData.description}
       </Heading>
       <Paragraph className="my-2">{formatDate(articleData.date)}</Paragraph>
-                  <div className="my-2 border-t border-primary/40 h-px" />
+                  <div className="my-2 border-t border-primary/20 h-px" />
               <div className="max-w-none prose prose-headings:text-slate-50 prose-p:text-slate-50 prose-lg prose-ul:text-slate-50 prose-li:text-slate-50 prose-a:text-primary">
         {articleData.compiledSource}
       </div>

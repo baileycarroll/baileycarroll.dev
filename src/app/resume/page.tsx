@@ -33,7 +33,7 @@ export default function Resume() {
                 <Heading Level={6}>Jake Wagner</Heading>
                 <Heading
                   Level={6}
-                  className="text-primary text-base border-b border-primary/40 pb-2 mb-2"
+                  className="text-primary text-base border-b border-primary/20 pb-2 mb-2"
                 >
                   Internal Manufacturing Manager | Carbon Robotics
                 </Heading>
@@ -62,7 +62,7 @@ export default function Resume() {
                 <Heading Level={6}>Jaime Eltit</Heading>
                 <Heading
                   Level={6}
-                  className="text-primary text-base border-b border-primary/40 pb-2 mb-2"
+                  className="text-primary text-base border-b border-primary/20 pb-2 mb-2"
                 >
                   VP Field Operations | Carbon Robotics
                 </Heading>

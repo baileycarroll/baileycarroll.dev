@@ -87,7 +87,7 @@ export default async function ArticlesPage() {
             out there.
           </Paragraph>
         </div>
-                    <div className="my-4 border-t border-primary/40 h-px" />
+                    <div className="my-4 border-t border-primary/20 h-px" />
         <div className="">
           <div className="flex flex-col max-w-3xl space-y-12">
             {articles.length > 0 ? (
