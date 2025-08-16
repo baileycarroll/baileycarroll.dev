@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Card from "@/components/cards/Card";
 import { getSortedArticlesData } from "@/lib/articles";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { ChevronRightIcon, CalendarIcon } from "@heroicons/react/24/solid";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
+import Button from "@/components/buttons/Button";
 import { formatDate } from "@/lib/formatDate";
 
 interface ArticleProps {
@@ -17,54 +18,39 @@ interface ArticleProps {
 
 function Article({ article }: ArticleProps) {
   return (
-    <article className={"md:grid md:grid-cols-4 md:items-baseline"}>
-      <div className="hidden md:block md:col-span-1">
-        <time
-          dateTime={formatDate(article.date)}
-                      className="relative order-first mb-3 flex items-center text-md text-neutral-400"
-        >
-          <span
-            className="absolute inset-y-0 left-0 flex items-center mt-2"
-            aria-hidden={true}
-          >
+    <Card variant="default" interactive className="p-6 hover:bg-neutral-900/40 transition-all duration-300 group">
+      <div className="space-y-4">
+        {/* Date */}
+        <div className="flex items-center gap-2 text-neutral-400">
+          <CalendarIcon className="w-4 h-4" />
+          <time dateTime={formatDate(article.date)} className="text-sm font-medium">
             {formatDate(article.date)}
-            <span className="h-4 w-0.5 rounded-full" />
-          </span>
-        </time>
-      </div>
-      <div className="md:col-span-3">
-        <Heading Level={6} className={"tracking-tight"}>
-          <Link href={`/articles/${article.slug}`}>{article.title}</Link>
+          </time>
+        </div>
+        
+        {/* Title */}
+        <Heading Level={4} className="text-primary group-hover:text-primary-light transition-colors duration-300">
+          <Link href={`/articles/${article.slug}`} className="hover:text-primary-light transition-colors duration-300">
+            {article.title}
+          </Link>
         </Heading>
-        <time
-          dateTime={formatDate(article.date)}
-                      className="relative z-10 order-first my-4 flex items-center text-md text-neutral-400 pl-3.5 md:hidden"
-        >
-          <span
-            className="absolute inset-y-0 left-0 flex items-center"
-            aria-hidden={true}
-          >
-            {formatDate(article.date)}
-            <span className="h-4 w-0.5 rounded-full" />
-          </span>
-        </time>
-        <Paragraph className="relative z-10 mt-2 text-slate-100">
+        
+        {/* Description */}
+        <Paragraph className="text-neutral-200 leading-relaxed">
           {article.description}
         </Paragraph>
-        <div
-                      className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary"
-          aria-hidden={true}
-        >
-          <Link
-            href={`/articles/${article.slug}`}
-            className="font-semibold text-lg"
-          >
-            Read Article
+        
+        {/* Read More Link */}
+        <div className="flex items-center justify-between pt-2">
+          <Link href={`/articles/${article.slug}`}>
+            <Button size="sm" variant="outline" className="flex items-center group-hover:bg-primary/10 group-hover:border-primary/50 transition-all duration-300">
+              Read Article
+              <ChevronRightIcon className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            </Button>
           </Link>
-          <ChevronRightIcon className={"ml-1 h-4 w-4 stroke-current"} />
         </div>
       </div>
-    </article>
+    </Card>
   );
 }
 
@@ -72,36 +58,42 @@ export default async function ArticlesPage() {
   const articles = await getSortedArticlesData();
 
   return (
-    <section className="p-6 mt-6">
-      <Card>
-        <div className="max-w-5xl">
-          <Heading Level={3}>
-            Writing on software development, gaming, and anything else that
-            strikes my mind.
-          </Heading>
-          <Paragraph className="my-3">
-            Over the years I’ve been told many a time, “You need to start a
-            podcast,” “You need to do some content creation,” or other such
-            comments. So after some thought on it, I figured it would be nice to
-            write down my thoughts on those “Soap Boxes” and finally put them
-            out there.
+    <div className="max-w-[1400px] mx-auto px-6">
+      {/* Hero Section */}
+      <section className="py-16">
+        <Card variant="elevated" className="p-8 text-center">
+          <Heading Level={3} className="mb-6">Articles & Thoughts</Heading>
+          <Paragraph size="lg" className="mb-8 max-w-3xl mx-auto">
+            Writing on software development, gaming, and anything else that strikes my mind. 
+            Over the years I've been told many times to start content creation, so here are my thoughts 
+            on various topics that I'm passionate about.
           </Paragraph>
-        </div>
-                    <div className="my-4 border-t border-primary/20 h-px" />
-        <div className="">
-          <div className="flex flex-col max-w-3xl space-y-16">
-            {articles.length > 0 ? (
-              articles.map((article) => (
-                <Article article={article} key={article.slug} />
-              ))
-            ) : (
-              <h3 className={"text-xl font-semibold mx-auto w-full"}>
-                Nothing here yet! Check Back Soon!
-              </h3>
-            )}
+        </Card>
+      </section>
+
+      {/* Articles Section */}
+      <section className="py-16">
+        {articles.length > 0 ? (
+          <div className="space-y-8">
+            {articles.map((article) => (
+              <Article article={article} key={article.slug} />
+            ))}
           </div>
-        </div>
-      </Card>
-    </section>
+        ) : (
+          <Card variant="elevated" className="p-12 text-center">
+            <div className="max-w-md mx-auto">
+              <Heading Level={4} className="mb-4 text-primary">Nothing here yet!</Heading>
+              <Paragraph className="mb-6 text-neutral-300">
+                I'm working on some articles that will be published soon. Check back later for insights on 
+                software development, gaming, and other topics I'm passionate about.
+              </Paragraph>
+              <Link href="/">
+                <Button variant="outline">Back to Home</Button>
+              </Link>
+            </div>
+          </Card>
+        )}
+      </section>
+    </div>
   );
 }
