@@ -60,13 +60,13 @@ export default function MobileNavigation(
       </PopoverButton>
       <PopoverBackdrop
         transition
-        className="fixed inset-0 z-50 bg-neutral-950/50 backdrop-blur-sm duration-200 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
+        className="fixed inset-0 z-[var(--z-modal-backdrop)] bg-neutral-950/50 backdrop-blur-sm duration-200 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
         aria-hidden="true"
       />
       <PopoverPanel
         focus
         transition
-        className="fixed inset-x-4 top-20 z-50 origin-top rounded-2xl bg-neutral-800/90 backdrop-blur-sm p-6 border border-primary/20 shadow-xl shadow-primary/10 duration-200 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
+        className="fixed inset-x-4 top-24 sm:top-28 z-[var(--z-modal)] origin-top rounded-2xl bg-neutral-800/90 backdrop-blur-sm p-6 border border-primary/20 shadow-xl shadow-primary/10 duration-200 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
         role="dialog"
         aria-label="Navigation menu"
         aria-modal="true"

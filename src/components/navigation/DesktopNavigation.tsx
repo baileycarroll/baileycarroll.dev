@@ -111,7 +111,7 @@ export default function DesktopNavigation(
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items 
-                  className="absolute right-0 top-full mt-2 w-40 rounded-xl shadow-lg bg-neutral-800/90 backdrop-blur-sm border border-primary/20 focus:outline-none z-50"
+                  className="absolute right-0 top-full mt-2 w-40 rounded-xl shadow-lg bg-neutral-800/90 backdrop-blur-sm border border-primary/20 focus:outline-none z-[var(--z-dropdown)]"
                   role="menu"
                   aria-label="More navigation menu"
                 >

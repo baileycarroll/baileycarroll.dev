@@ -73,6 +73,15 @@
   --radius-button: var(--radius-full);
   --radius-card: var(--radius-lg);
   
+  /* Z-Index System */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  
   /* Primary Colors */
   --color-primary-400: #22d3ee;  /* cyan-400 */
   --color-primary-500: #06b6d4;  /* cyan-500 */
