@@ -18,10 +18,10 @@ function NavItem({
     <Link
       href={href}
       className={clsx(
-        "relative px-4 py-2 transition-all duration-200 font-medium rounded-lg",
+        "relative px-4 py-2 transition-all duration-200 font-medium rounded-lg backdrop-blur-sm",
         isActive 
-          ? "text-primary bg-primary/10" 
-          : "text-neutral-300 hover:text-primary hover:bg-primary/5"
+          ? "text-primary bg-primary/20 shadow-lg shadow-primary/20" 
+          : "text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10"
       )}
       aria-current={isActive ? "page" : undefined}
     >
@@ -45,10 +45,10 @@ function MobileNavItem({
       href={href}
       onClick={onClick}
       className={clsx(
-        "block py-3 px-4 transition-all duration-200 font-medium rounded-lg",
+        "block py-3 px-4 transition-all duration-200 font-medium rounded-lg backdrop-blur-sm",
         isActive 
-          ? "text-primary bg-primary/10" 
-          : "text-neutral-300 hover:text-primary hover:bg-primary/5"
+          ? "text-primary bg-primary/20 shadow-lg shadow-primary/20" 
+          : "text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10"
       )}
       aria-current={isActive ? "page" : undefined}
     >
@@ -64,7 +64,7 @@ export default function Header() {
   return (
     <>
       <motion.header 
-        className="w-full bg-neutral-800/80 backdrop-blur-md border-b border-primary/20 sticky top-0 z-50"
+        className="w-full bg-neutral-900/40 backdrop-blur-xl border-b border-primary/10 sticky top-0 z-50"
         role="banner"
         aria-label="Site header"
         initial={{ opacity: 0, y: -20 }}
@@ -99,7 +99,7 @@ export default function Header() {
             <div className="md:hidden col-start-3 justify-self-end">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-lg text-neutral-300 hover:text-primary hover:bg-primary/5 transition-colors"
+                className="p-2 rounded-lg text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 backdrop-blur-sm"
                 aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? (
@@ -136,14 +136,14 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 right-0 h-full w-80 bg-neutral-800/95 backdrop-blur-md border-l border-primary/20 z-50 md:hidden"
+            className="fixed top-0 right-0 h-full w-80 bg-neutral-900/60 backdrop-blur-2xl border-l border-primary/10 shadow-2xl shadow-primary/20 z-50 md:hidden"
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-lg font-semibold text-white">Menu</h2>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 rounded-lg text-neutral-400 hover:text-primary hover:bg-primary/5 transition-colors"
+                  className="p-2 rounded-lg text-neutral-400 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 backdrop-blur-sm"
                   aria-label="Close mobile menu"
                 >
                   <XMarkIcon className="w-5 h-5" />
