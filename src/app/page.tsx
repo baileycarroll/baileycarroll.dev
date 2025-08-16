@@ -35,30 +35,34 @@ export default function Home() {
             Bailey Carroll
           </Heading>
           <Heading Level={5} className="mb-4 text-primary">
-            Making My Mark | One Line of Code at a Time
+            Software Developer & Problem Solver
           </Heading>
           <Paragraph className="mb-6">
-            A software developer based in Seattle. Working on making my mark on
-            the world, one line of code, at a time. When not immersed in a book or
-            video game I can be found at the gym, walking a beach, in a cozy cafe,
-            or out dancing in the rain. I love what I do and am always looking for
-            projects to work on or new things to create.
+            Passionate software developer based in Seattle, crafting innovative solutions 
+            that make a difference. I specialize in full-stack development, system architecture, 
+            and creating user-centric applications. When I'm not coding, you'll find me 
+            exploring new technologies, reading, or enjoying the Pacific Northwest outdoors.
           </Paragraph>
-          <Link href="/about">
-            <Button>Read More</Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/about">
+              <Button>Learn More About Me</Button>
+            </Link>
+            <Link href="/projects">
+              <Button variant="outline">View My Work</Button>
+            </Link>
+          </div>
         </Card>
         
         {/* Recent Experience */}
         <Card>
-          <Heading Level={4} className="mb-6">Recent Experience</Heading>
+          <Heading Level={4} className="mb-6">Professional Experience</Heading>
           <TimelineHome />
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Link href="/resume" className="flex-1">
-              <Button className="w-full">See More</Button>
+              <Button className="w-full">View Full Resume</Button>
             </Link>
             <Link href={Resume} target="_blank" className="flex-1">
-              <Button className="w-full">Download Resume</Button>
+              <Button className="w-full" variant="outline">Download PDF</Button>
             </Link>
           </div>
         </Card>
@@ -69,40 +73,68 @@ export default function Home() {
         {/* Featured Projects */}
         <Card>
           <Heading Level={4} className="mb-6">Featured Projects</Heading>
-          <div className="grid grid-cols-1 gap-4 mb-6">
-            <Card className="p-4">
+          <div className="grid grid-cols-1 gap-6 mb-6">
+            <Card className="p-6 hover:bg-card/30 transition-colors">
               <Heading Level={5} className="mb-3">Corpus Vitae</Heading>
-              <Paragraph className="leading-tight">
-                Building a comprehensive fitness, meal, and life-tracking app
-                using Flutter for Android/iOS.
+              <Paragraph className="mb-4 leading-relaxed">
+                A comprehensive fitness, meal, and life-tracking mobile application built with Flutter. 
+                Features local SQLite storage with cloud MySQL synchronization, iOS-inspired UI design, 
+                and holistic habit tracking capabilities.
               </Paragraph>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Flutter</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">SQLite</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">MySQL</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Mobile</span>
+              </div>
+              <Link href="https://github.com/baileycarroll/CorpusVitae" target="_blank">
+                <Button size="sm" variant="outline">View Project</Button>
+              </Link>
             </Card>
-            <Card className="p-4">
-              <Heading Level={5} className="mb-3">Acolyte</Heading>
-              <Paragraph className="leading-tight">
-                Designed and developed a custom Remote Engagement and Learning
-                Management System from the ground up.
+            <Card className="p-6 hover:bg-card/30 transition-colors">
+              <Heading Level={5} className="mb-3">Acolyte R.E.A.L.M.S.</Heading>
+              <Paragraph className="mb-4 leading-relaxed">
+                A custom Remote Engagement and Learning Management System designed from the ground up. 
+                Currently developing version 5.0 with enhanced user engagement features, serving as 
+                the backbone for educational platforms like 'un-Traditional Magick'.
               </Paragraph>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Laravel</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">MySQL</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">JavaScript</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Python</span>
+              </div>
+              <Link href="https://github.com/baileycarroll/Acolyte-v4" target="_blank">
+                <Button size="sm" variant="outline">View Project</Button>
+              </Link>
             </Card>
           </div>
           <Link href="/projects">
-            <Button className="w-full">View All Projects</Button>
+            <Button className="w-full">Explore All Projects</Button>
           </Link>
         </Card>
         
         {/* Skills */}
         <Card>
-          <Heading Level={4} className="mb-4">Skills</Heading>
+          <Heading Level={4} className="mb-6">Technical Skills</Heading>
+          <Paragraph className="mb-4 text-neutral-300">
+            Full-stack developer with expertise in modern web technologies, 
+            mobile development, and system architecture.
+          </Paragraph>
           <SkillsMarquee />
         </Card>
         
         {/* Contact */}
         <Card>
-          <Heading Level={4} className="mb-6">Get In Touch</Heading>
+          <Heading Level={4} className="mb-6">Let's Connect</Heading>
+          <Paragraph className="mb-6 text-neutral-300">
+            I'm always interested in new opportunities, collaborations, or just 
+            connecting with fellow developers. Feel free to reach out!
+          </Paragraph>
           <div className="space-y-4">
             <Link
               href="mailto:baileyrcarroll@gmail.com"
-              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors"
+              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors p-3 rounded-lg hover:bg-card/20"
             >
               <EnvelopeIcon className="w-5 h-5" />
               <span>baileyrcarroll@gmail.com</span>
@@ -110,18 +142,18 @@ export default function Home() {
             <Link
               href="https://www.linkedin.com/in/baileycarroll/"
               target="_blank"
-              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors"
+              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors p-3 rounded-lg hover:bg-card/20"
             >
               <FaLinkedin className="w-5 h-5" />
-              <span>LinkedIn</span>
+              <span>Connect on LinkedIn</span>
             </Link>
             <Link
               href="https://github.com/baileycarroll"
               target="_blank"
-              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors"
+              className="flex items-center gap-3 text-primary hover:text-primary-light transition-colors p-3 rounded-lg hover:bg-card/20"
             >
               <FaGithub className="w-5 h-5" />
-              <span>GitHub</span>
+              <span>View on GitHub</span>
             </Link>
           </div>
         </Card>
