@@ -66,9 +66,6 @@ export default function Resume() {
             <Link href={ResumePdf} target="_blank">
               <Button size="lg">View PDF</Button>
             </Link>
-            <Link href={ResumePdf} download>
-              <Button size="lg" variant="outline">Download PDF</Button>
-            </Link>
             <Link href="/about">
               <Button size="lg" variant="outline">Learn More About Me</Button>
             </Link>

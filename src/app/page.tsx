@@ -67,7 +67,7 @@ export default function Home() {
             <Paragraph variant="muted" className="text-sm">
               View my complete professional history and detailed experience
             </Paragraph>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
               <Link href="/resume" className="flex-1 max-w-xs">
                 <Button className="w-full">View Full Resume</Button>
               </Link>
