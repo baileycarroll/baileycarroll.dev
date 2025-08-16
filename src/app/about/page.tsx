@@ -1,5 +1,4 @@
 // Next Imports
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 // Icons
@@ -10,7 +9,6 @@ import clsx from "clsx";
 // Custom Components
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
-import Headshot from "@/assets/Headshot.png";
 import Paragraph from "@/components/typography/Paragraphs";
 import Button from "@/components/buttons/Button";
 
@@ -43,31 +41,6 @@ function SocialLink({
 export default function About() {
   return (
     <div className="max-w-[1400px] mx-auto px-6">
-      {/* Hero Section */}
-      <section className="min-h-[60vh] flex items-center justify-center py-16">
-        <div className="text-center space-y-8">
-          <div className="relative">
-            <Image
-              src={Headshot}
-              alt="Picture of Bailey leaning against a tree."
-              className="rounded-full ring-2 ring-primary/30 h-40 w-40 object-cover object-top mx-auto transition-all duration-300 hover:ring-primary/50 hover:scale-105"
-              priority
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-            />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-          </div>
-          <div className="space-y-4">
-            <Heading Level={1} className="text-6xl sm:text-7xl">
-              I'm Bailey Carroll
-            </Heading>
-            <Heading Level={2} className="text-2xl sm:text-3xl text-primary">
-              Based in Seattle, making my mark on the world one line of code at a time
-            </Heading>
-          </div>
-        </div>
-      </section>
-
       {/* Story Section */}
       <section className="py-16">
         <Card variant="elevated" className="p-8">
