@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Splash from "./splash_screen";
+import SplashWrapper from "@/components/SplashWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +39,7 @@ export default function RootLayout({
         <SpeedInsights />
         <div id="background-container" className="h-[100dvh] w-[100dvw]">
           <div className="h-full w-full overflow-scroll">
-           <Splash>{children}</Splash>
+           <SplashWrapper>{children}</SplashWrapper>
           </div>
         </div>
       </body>
