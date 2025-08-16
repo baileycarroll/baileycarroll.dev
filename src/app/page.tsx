@@ -61,14 +61,21 @@ export default function Home() {
       <section className="py-16">
         <Card variant="elevated" className="p-8">
           <Heading Level={3} className="mb-8 text-center">Professional Experience</Heading>
-          <TimelineHome />
-          <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
-            <Link href="/resume" className="flex-1 max-w-xs">
-              <Button className="w-full">View Full Resume</Button>
-            </Link>
-            <Link href={Resume} target="_blank" className="flex-1 max-w-xs">
-              <Button className="w-full" variant="outline">Download PDF</Button>
-            </Link>
+          <div className="mb-8">
+            <TimelineHome />
+          </div>
+          <div className="text-center space-y-4">
+            <Paragraph variant="muted" className="text-sm">
+              View my complete professional history and detailed experience
+            </Paragraph>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/resume" className="flex-1 max-w-xs">
+                <Button className="w-full">View Full Resume</Button>
+              </Link>
+              <Link href={Resume} target="_blank" className="flex-1 max-w-xs">
+                <Button className="w-full" variant="outline">Download PDF</Button>
+              </Link>
+            </div>
           </div>
         </Card>
       </section>
