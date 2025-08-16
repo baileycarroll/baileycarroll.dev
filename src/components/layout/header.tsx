@@ -81,7 +81,7 @@ export default function Header() {
             </div>
             
             {/* Center Navigation */}
-            <nav className="hidden md:flex items-center justify-center space-x-2" role="navigation" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center justify-center space-x-2" role="navigation" aria-label="Main navigation">
               <NavItem href="/">Home</NavItem>
               <NavItem href="/about">About</NavItem>
               <NavItem href="/resume">Resume</NavItem>
@@ -89,14 +89,14 @@ export default function Header() {
             </nav>
             
             {/* Right Navigation */}
-            <nav className="hidden md:flex items-center justify-end space-x-2" role="navigation" aria-label="Secondary navigation">
+            <nav className="hidden lg:flex items-center justify-end space-x-2" role="navigation" aria-label="Secondary navigation">
               <NavItem href="/articles">Articles</NavItem>
               <NavItem href="/books">Books</NavItem>
               <NavItem href="/poetry">Poetry</NavItem>
             </nav>
             
             {/* Mobile Menu Button */}
-            <div className="md:hidden col-start-3 justify-self-end">
+            <div className="lg:hidden col-start-3 justify-self-end">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 rounded-lg text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 backdrop-blur-sm"
@@ -122,7 +122,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-neutral-950/50 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 bg-neutral-950/50 backdrop-blur-sm z-40 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
         )}
@@ -136,7 +136,7 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 right-0 h-full w-80 bg-neutral-900/60 backdrop-blur-2xl border-l border-primary/10 shadow-2xl shadow-primary/20 z-50 md:hidden"
+            className="fixed top-0 right-0 h-full w-80 bg-neutral-900/60 backdrop-blur-2xl border-l border-primary/10 shadow-2xl shadow-primary/20 z-50 lg:hidden"
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
