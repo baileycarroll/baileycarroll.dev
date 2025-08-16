@@ -99,10 +99,10 @@ export default function Projects() {
               <li
                 key={project.name}
                 className={
-                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-slate-800/60 hover:scale-110 hover:shadow-cyan-600 hover:shadow-md hover:border hover:border-cyan-600"
+                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-neutral-800/60 hover:scale-110 hover:shadow-primary hover:shadow-md hover:border hover:border-primary"
                 }
               >
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 shadow-md shadow-cyan-500/5 ring-1 ring-cyan-500/5">
+                                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-secondary shadow-md shadow-primary/5 ring-1 ring-primary/5">
                   <Image
                     src={project.logo}
                     alt={project.name + " Logo"}
@@ -124,7 +124,7 @@ export default function Projects() {
                 <Paragraph className="relative mt-6 text-md text-slate-50 transition flex flex-row space-x-3">
                   <Link
                     href={project.link.href}
-                    className={"flex items-center hover:text-cyan-500"}
+                    className={"flex items-center hover:text-primary"}
                     target={"_blank"}
                   >
                     <project.icon />

@@ -108,7 +108,7 @@ export function TimelineFull() {
               alt="Rose & Shield Logo"
               className="mb-1 max-w-[5dvw] lg:max-w-[2dvw]"
             />
-            <span className="border-2 border-cyan-800 bg-cyan-800 rounded-t-full rounded-b-full w-1 h-full"></span>
+            <span className="border-2 border-primary bg-primary rounded-t-full rounded-b-full w-1 h-full"></span>
           </div>
           <div className="flex flex-col px-4">
             <h3 className="text-slate-400 text-md">{event.dates}</h3>
@@ -118,7 +118,7 @@ export function TimelineFull() {
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-primary-light ml-1"
                 >
                   {event.employer}
                 </Link>
@@ -130,7 +130,7 @@ export function TimelineFull() {
             <ul className="flex flex-row flex-wrap gap-x-4 gap-y-2 mt-2">
               {event.skills.map((skill, index) => (
                 <li
-                  className="bg-cyan-400/20 text-cyan-200 border border-cyan-800 shadow shadow-cyan-800 px-2 rounded-full"
+                  className="bg-primary-light/20 text-primary-light border border-primary shadow shadow-primary px-2 rounded-full"
                   key={index}
                 >
                   {skill}
@@ -164,7 +164,7 @@ export function TimelineHome() {
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-primary-light ml-1"
                 >
                   {event.employer}
                 </Link>

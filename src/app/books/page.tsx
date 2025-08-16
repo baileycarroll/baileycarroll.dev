@@ -15,7 +15,7 @@ export default function Books() {
             I have published, and the ones I am working on.
           </Heading>
           <hr />
-          <Heading Level={6} className="text-cyan-400 my-4">
+          <Heading Level={6} className="text-primary-light my-4">
             What do I Write About?
           </Heading>
           <Paragraph className="my-2">
@@ -47,7 +47,7 @@ export default function Books() {
             publishing some of the poems to this website, however they will not
             contain my personal thoughts, analysis, etc of them. You can find
             these poems in{" "}
-            <Link href="/poetry" className="font-bold text-cyan-400 underline">
+            <Link href="/poetry" className="font-bold text-primary-light underline">
               Poetry
             </Link>
             .
@@ -71,7 +71,7 @@ export default function Books() {
                   href={
                     "https://www.barnesandnoble.com/w/a-warriors-journey-hunter-bailey/1146141656%3Bjsessionid=F3C2747E76FFF63C84E6CBB211E48FE3.prodny_store02-atgap08?ean=9798218480882"
                   }
-                  className="text-cyan-400 underline mr-4"
+                  className="text-primary-light underline mr-4"
                 >
                   Barnes & Nobel
                 </Link>

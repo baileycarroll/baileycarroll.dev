@@ -22,12 +22,12 @@ function NavItem({
         href={href}
         className={clsx(
           "relative block px-3 py-2 transition",
-          isActive ? "text-cyan-500" : "hover:text-cyan-500"
+          isActive ? "text-primary" : "hover:text-primary"
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/40 to-cyan-500/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0" />
         )}
       </Link>
     </li>
@@ -39,7 +39,7 @@ export default function DesktopNavigation(
 ) {
   return (
     <nav {...props}>
-      <ListNoneHorizontal className="flex rounded-full bg-slate-800/80 px-3 text-md font-medium shadow-lg shadow-cyan-500/5 ring-1 ring-cyan-800/5 backdrop-blur">
+              <ListNoneHorizontal className="flex rounded-full bg-neutral-800/80 px-3 text-md font-medium shadow-lg shadow-primary/5 ring-1 ring-primary/5 backdrop-blur">
         <NavItem href={"/"}>Home</NavItem>
         <NavItem href={"/about"}>About</NavItem>
         <NavItem href={"/resume"}>Resume</NavItem>
@@ -48,7 +48,7 @@ export default function DesktopNavigation(
         <div className="flex items-center ml-2">
           <Menu as="div" className="relative inline-block text-center">
             <div>
-              <Menu.Button className="inline-flex justify-center hover:text-cyan-500 hover:cursor-pointer">
+              <Menu.Button className="inline-flex justify-center hover:text-primary hover:cursor-pointer">
                 Author{"'"}s Corner
                 <ChevronDownIcon className="w-4 mx-2 my-auto" />
               </Menu.Button>
@@ -61,7 +61,7 @@ export default function DesktopNavigation(
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute left-0 top-8 mt-2 w-36 rounded-xl shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute left-0 top-8 mt-2 w-36 rounded-xl shadow-lg bg-neutral-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
                     <Menu.Item>
                       <NavItem href={"/books"}>Books</NavItem>

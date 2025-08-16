@@ -48,7 +48,7 @@ export default async function Poetry() {
                   href={`/poetry/${poem.title
                     .toLowerCase()
                     .replace(/ /g, "-")}`}
-                  className="self-end mt-auto font-semibold mix-blend-normal float-end text-cyan-400"
+                  className="self-end mt-auto font-semibold mix-blend-normal float-end text-primary-light"
                 >
                   Read More
                 </Link>

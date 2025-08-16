@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import Image from "next/image";
-import Rose from "@/assets/rose_shield.svg";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -40,7 +39,7 @@ export default function RootLayout({
         <SpeedInsights />
         <div id="background-container" className="h-[100dvh] w-[100dvw]">
           <div className="h-full w-full overflow-scroll">
-          {/*  <Splash>{children}</Splash> */}
+           <Splash>{children}</Splash>
           </div>
         </div>
       </body>

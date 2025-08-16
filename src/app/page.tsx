@@ -27,14 +27,14 @@ export default function Home() {
         <Image
           src={Headshot}
           alt="Profile image of Hunter Bailey."
-          className="rounded-full ring-2 ring-cyan-400 h-48 w-48 shadow-lg shadow-cyan-800 object-cover object-top self-center mb-4 -translate-y-14"
+          className="rounded-full ring-2 ring-primary-light h-48 w-48 shadow-lg shadow-primary object-cover object-top self-center mb-4 -translate-y-14"
         />
         <Heading Level={3} className="mb-4 -translate-y-14">
           Bailey Carroll
         </Heading>
         <Heading Level={6} className="mb-2 -translate-y-12">
           Making My Mark |{" "}
-          <span className="text-cyan-500">One Line of Code at a Time</span>
+          <span className="text-primary">One Line of Code at a Time</span>
         </Heading>
         <Paragraph className="-translate-y-10">
           A software developer based in Seattle. Working on making my mark on
@@ -56,14 +56,14 @@ export default function Home() {
         <div className="flex flex-row gap-4 self-end mix-blend-normal">
           <Link
             href={"/resume"}
-            className="self-end text-cyan-500 font-semibold mt-auto mix-blend-normal"
+            className="self-end text-primary font-semibold mt-auto mix-blend-normal"
           >
             <Button className="text-slate-50 mix-blend-normal">See More</Button>
           </Link>
           <Link
             href={Resume}
             target="_blank"
-            className="self-end text-cyan-500 font-semibold"
+            className="self-end text-primary font-semibold"
           >
             <Button className="text-slate-50">Download Resume</Button>
           </Link>
@@ -89,7 +89,7 @@ export default function Home() {
         </div>
         <Link
           href={"/projects"}
-          className="self-end text-cyan-500 font-semibold mt-auto"
+          className="self-end text-primary font-semibold mt-auto"
         >
           <Button className="text-slate-50">Project List</Button>
         </Link>
@@ -109,7 +109,7 @@ export default function Home() {
           one of the methods below.
         </Paragraph>
         <ListNone className="space-y-3 my-4">
-          <li className="text-cyan-500 font-semibold">
+          <li className="text-primary font-semibold">
             <Link
               className="flex flex-row items-center"
               href={"https://www.linkedin.com/in/baileycarroll/"}
@@ -119,7 +119,7 @@ export default function Home() {
               LinkedIn
             </Link>
           </li>
-          <li className="text-cyan-500 font-semibold">
+          <li className="text-primary font-semibold">
             <Link
               href="mailto:baileyrcarroll@gmail.com"
               className="flex flex-row items-center"
@@ -128,7 +128,7 @@ export default function Home() {
               baileyrcarroll@gmail.com
             </Link>
           </li>
-          <li className="text-cyan-500 font-semibold">
+          <li className="text-primary font-semibold">
             <Link
               href={"https://github.com/baileycarroll"}
               target="_blank"
@@ -141,7 +141,7 @@ export default function Home() {
         </ListNone>
         <Link
           href={"/articles"}
-          className="self-end text-cyan-500 font-semibold mt-auto"
+          className="self-end text-primary font-semibold mt-auto"
         >
           <Button className="text-slate-50">See Articles</Button>
         </Link>
