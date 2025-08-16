@@ -12,9 +12,8 @@ import Headshot from "@/assets/Headshot.png";
 import Paragraph from "@/components/typography/Paragraphs";
 import { TimelineHome } from "@/components/timeline/Timeline";
 import SkillsMarquee from "@/components/marquee/SkillsMarquee";
-// Resume Google Drive Link -> Imported here to keep HTML Cleaner
-const Resume =
-  "https://drive.google.com/file/d/1JHdcZUil-WpfKiG0dedAUAr1fenhkP3Z/view?usp=sharing";
+// Local Resume PDF
+const ResumePdf = "/Bailey Carroll - Full Resume.pdf";
 
 export default function Home() {
   return (
@@ -72,7 +71,7 @@ export default function Home() {
               <Link href="/resume" className="flex-1 max-w-xs">
                 <Button className="w-full">View Full Resume</Button>
               </Link>
-              <Link href={Resume} target="_blank" className="flex-1 max-w-xs">
+              <Link href={ResumePdf} target="_blank" className="flex-1 max-w-xs">
                 <Button className="w-full" variant="outline">Download PDF</Button>
               </Link>
             </div>

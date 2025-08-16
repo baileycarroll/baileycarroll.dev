@@ -5,8 +5,8 @@ import Paragraph from "@/components/typography/Paragraphs";
 import Button from "@/components/buttons/Button";
 import Link from "next/link";
 
-// Resume Google Drive Link
-const ResumeUrl = "https://drive.google.com/file/d/1JHdcZUil-WpfKiG0dedAUAr1fenhkP3Z/view?usp=sharing";
+// Local Resume PDF
+const ResumePdf = "/Bailey Carroll - Full Resume.pdf";
 
 // Skills data
 const skillsData = {
@@ -63,8 +63,11 @@ export default function Resume() {
             My complete professional experience, achievements, and the journey that has shaped my career in software development and system architecture.
           </Paragraph>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={ResumeUrl} target="_blank">
-              <Button size="lg">Download PDF</Button>
+            <Link href={ResumePdf} target="_blank">
+              <Button size="lg">View PDF</Button>
+            </Link>
+            <Link href={ResumePdf} download>
+              <Button size="lg" variant="outline">Download PDF</Button>
             </Link>
             <Link href="/about">
               <Button size="lg" variant="outline">Learn More About Me</Button>
