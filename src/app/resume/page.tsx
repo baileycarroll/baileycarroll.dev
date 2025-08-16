@@ -7,13 +7,13 @@ import Button from "@/components/buttons/Button";
 import Link from "next/link";
 export default function Resume() {
   return (
-    <section id="resume" className="p-5 flex flex-col items-center mt-6">
-      <div className="grid grid-cols-3 gap-4">
+    <section id="resume" className="p-6 flex flex-col items-center mt-6">
+      <div className="grid grid-cols-3 gap-6">
         <Card className="col-span-3 lg:col-span-2">
           <Heading Level={4}>Resume</Heading>
           <Heading
             Level={6}
-            className="mt-2 text-cyan-500 text-md font-semibold"
+            className="mt-2 text-primary text-md font-semibold"
           >
             With some fun style to it.
           </Heading>
@@ -23,7 +23,7 @@ export default function Resume() {
           <Heading Level={4}>Testemonials</Heading>
           <Heading
             Level={6}
-            className="mt-2 text-cyan-500 text-md font-semibold"
+            className="mt-2 text-primary text-md font-semibold"
           >
             Letters of Reference
           </Heading>
@@ -33,7 +33,7 @@ export default function Resume() {
                 <Heading Level={6}>Jake Wagner</Heading>
                 <Heading
                   Level={6}
-                  className="text-cyan-500 text-base border-b border-cyan-800/40 pb-2 mb-2"
+                  className="text-primary text-base border-b border-primary/20 pb-2 mb-2"
                 >
                   Internal Manufacturing Manager | Carbon Robotics
                 </Heading>
@@ -62,7 +62,7 @@ export default function Resume() {
                 <Heading Level={6}>Jaime Eltit</Heading>
                 <Heading
                   Level={6}
-                  className="text-cyan-500 text-base border-b border-cyan-800/40 pb-2 mb-2"
+                  className="text-primary text-base border-b border-primary/20 pb-2 mb-2"
                 >
                   VP Field Operations | Carbon Robotics
                 </Heading>

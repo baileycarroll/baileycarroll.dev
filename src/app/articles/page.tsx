@@ -21,7 +21,7 @@ function Article({ article }: ArticleProps) {
       <div className="hidden md:block md:col-span-1">
         <time
           dateTime={formatDate(article.date)}
-          className="relative order-first mb-3 flex items-center text-md text-slate-400"
+                      className="relative order-first mb-3 flex items-center text-md text-neutral-400"
         >
           <span
             className="absolute inset-y-0 left-0 flex items-center mt-2"
@@ -38,7 +38,7 @@ function Article({ article }: ArticleProps) {
         </Heading>
         <time
           dateTime={formatDate(article.date)}
-          className="relative z-10 order-first my-4 flex items-center text-md text-slate-400 pl-3.5 md:hidden"
+                      className="relative z-10 order-first my-4 flex items-center text-md text-neutral-400 pl-3.5 md:hidden"
         >
           <span
             className="absolute inset-y-0 left-0 flex items-center"
@@ -52,7 +52,7 @@ function Article({ article }: ArticleProps) {
           {article.description}
         </Paragraph>
         <div
-          className="relative z-10 mt-4 flex items-center text-sm font-medium text-cyan-500"
+                      className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary"
           aria-hidden={true}
         >
           <Link
@@ -72,7 +72,7 @@ export default async function ArticlesPage() {
   const articles = await getSortedArticlesData();
 
   return (
-    <section className="p-5 mt-6">
+    <section className="p-6 mt-6">
       <Card>
         <div className="max-w-5xl">
           <Heading Level={3}>
@@ -87,9 +87,9 @@ export default async function ArticlesPage() {
             out there.
           </Paragraph>
         </div>
-        <div className="my-4 border-t border-cyan-800/40 h-px" />
+                    <div className="my-4 border-t border-primary/20 h-px" />
         <div className="">
-          <div className="flex flex-col max-w-3xl space-y-12">
+          <div className="flex flex-col max-w-3xl space-y-16">
             {articles.length > 0 ? (
               articles.map((article) => (
                 <Article article={article} key={article.slug} />

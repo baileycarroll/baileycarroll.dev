@@ -30,10 +30,10 @@ function SocialLink({
     <li className={clsx(className, "flex font-semibold")}>
       <Link
         href={href}
-        className="group flex flex-row items-center text-md font-medium transition hover:text-cyan-500"
+                    className="group flex flex-row items-center text-md font-medium transition hover:text-primary"
         target="_blank"
       >
-        <Icon className="w-6 h-6 flex-none fill-cyan-500 transition group-hover:fill-cyan-500" />
+                    <Icon className="w-6 h-6 flex-none fill-primary transition group-hover:fill-primary" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -42,10 +42,10 @@ function SocialLink({
 
 export default function About() {
   return (
-    <section id="about" className="p-5 flex flex-col items-center mt-6">
+    <section id="about" className="p-6 flex flex-col items-center mt-6">
       <Card
         className={
-          "grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-2"
+          "grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-4"
         }
       >
         <div className="flex flex-col lg:order-first lg:row-span-2">
@@ -92,7 +92,7 @@ export default function About() {
             <Image
               src={Headshot}
               alt="Picture of Bailey leaning against a tree."
-              className="aspect-square rotate-3 rounded-2xl object-cover object-top w-80 mx-auto shadow-md shadow-cyan-500"
+              className="aspect-square rotate-3 rounded-2xl object-cover object-top w-80 mx-auto border border-primary/30"
             />
           </div>
         </div>
@@ -121,15 +121,15 @@ export default function About() {
             <SocialLink
               href="mailto:baileyrcarroll@gmail.com"
               icon={EnvelopeIcon}
-              className="mt-8 border-t border-cyan-800 pt-4"
+              className="mt-8 border-t border-primary pt-4"
             >
               baileyrcarroll@gmail.com
             </SocialLink>
           </ListNone>
-          <div className="mt-4 border-t border-cyan-800 pt-4 flex flex-col items-start">
+          <div className="mt-4 border-t border-primary pt-4 flex flex-col items-start">
             <Heading Level={6}>I Wrote A Book!</Heading>
             <Paragraph className="my-2">
-              <em className="font-bold text-cyan-500">
+              <em className="font-bold text-primary">
                 A Warrior{`'`}s Journey:
               </em>{" "}
               A retelling of my life from the early years until the Spring of

@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function Books() {
   return (
-    <section id="Books" className="p-5 flex flex-col items-center mt-6">
-      <Card className="grid grid-cols-1 gap-y-16 xl:grid-cols-2 xl:grid-rows-[auto_1fr] xl:gap-y-2">
+    <section id="Books" className="p-6 flex flex-col items-center mt-6">
+      <Card className="grid grid-cols-1 gap-y-16 xl:grid-cols-2 xl:grid-rows-[auto_1fr] xl:gap-y-4">
         <div className="flex flex-col lg:order-first lg:row-span-2">
           <Heading Level={3}>My Books</Heading>
           <Heading Level={6} className="my-4">
@@ -15,7 +15,7 @@ export default function Books() {
             I have published, and the ones I am working on.
           </Heading>
           <hr />
-          <Heading Level={6} className="text-cyan-400 my-4">
+          <Heading Level={6} className="text-primary-light my-4">
             What do I Write About?
           </Heading>
           <Paragraph className="my-2">
@@ -47,7 +47,7 @@ export default function Books() {
             publishing some of the poems to this website, however they will not
             contain my personal thoughts, analysis, etc of them. You can find
             these poems in{" "}
-            <Link href="/poetry" className="font-bold text-cyan-400 underline">
+            <Link href="/poetry" className="font-bold text-primary-light underline">
               Poetry
             </Link>
             .
@@ -71,7 +71,7 @@ export default function Books() {
                   href={
                     "https://www.barnesandnoble.com/w/a-warriors-journey-hunter-bailey/1146141656%3Bjsessionid=F3C2747E76FFF63C84E6CBB211E48FE3.prodny_store02-atgap08?ean=9798218480882"
                   }
-                  className="text-cyan-400 underline mr-4"
+                  className="text-primary-light underline mr-4"
                 >
                   Barnes & Nobel
                 </Link>

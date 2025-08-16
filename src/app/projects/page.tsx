@@ -75,7 +75,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="p-5 flex flex-col items-end mix-blend-normal mt-6"
+      className="p-6 flex flex-col items-end mix-blend-normal mt-6"
     >
       <Card>
         <div className="max-w-7xl">
@@ -92,17 +92,17 @@ export default function Projects() {
           <ul
             role={"list"}
             className={
-              "grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 p-5"
+              "grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 p-6"
             }
           >
             {projects.map((project) => (
               <li
                 key={project.name}
                 className={
-                  "group relative flex flex-col items-start rounded-2xl p-4 transition ease-in hover:bg-slate-800/60 hover:scale-110 hover:shadow-cyan-600 hover:shadow-md hover:border hover:border-cyan-600"
+                  "group relative flex flex-col items-start rounded-2xl p-6 transition ease-in hover:bg-neutral-800/40 hover:border hover:border-primary/50"
                 }
               >
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 shadow-md shadow-cyan-500/5 ring-1 ring-cyan-500/5">
+                                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-secondary border border-primary/20">
                   <Image
                     src={project.logo}
                     alt={project.name + " Logo"}
@@ -124,7 +124,7 @@ export default function Projects() {
                 <Paragraph className="relative mt-6 text-md text-slate-50 transition flex flex-row space-x-3">
                   <Link
                     href={project.link.href}
-                    className={"flex items-center hover:text-cyan-500"}
+                    className={"flex items-center hover:text-primary"}
                     target={"_blank"}
                   >
                     <project.icon />

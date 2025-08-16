@@ -96,7 +96,7 @@ const events = [
 
 export function TimelineFull() {
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-6">
       {events.map((event, index) => (
         <div
           key={index}
@@ -108,7 +108,7 @@ export function TimelineFull() {
               alt="Rose & Shield Logo"
               className="mb-1 max-w-[5dvw] lg:max-w-[2dvw]"
             />
-            <span className="border-2 border-cyan-800 bg-cyan-800 rounded-t-full rounded-b-full w-1 h-full"></span>
+            <span className="border-2 border-primary bg-primary rounded-t-full rounded-b-full w-1 h-full"></span>
           </div>
           <div className="flex flex-col px-4">
             <h3 className="text-slate-400 text-md">{event.dates}</h3>
@@ -118,7 +118,7 @@ export function TimelineFull() {
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-primary-light ml-1"
                 >
                   {event.employer}
                 </Link>
@@ -130,7 +130,7 @@ export function TimelineFull() {
             <ul className="flex flex-row flex-wrap gap-x-4 gap-y-2 mt-2">
               {event.skills.map((skill, index) => (
                 <li
-                  className="bg-cyan-400/20 text-cyan-200 border border-cyan-800 shadow shadow-cyan-800 px-2 rounded-full"
+                  className="bg-primary-light/10 text-primary-light border border-primary/30 px-2 rounded-full"
                   key={index}
                 >
                   {skill}
@@ -146,32 +146,56 @@ export function TimelineFull() {
 // Smaller more condensed timeline for the home page, better sizing.
 export function TimelineHome() {
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-6">
       {events.slice(0, 3).map((event, index) => (
-        <div key={index} className="flex flex-row mt-4">
+        <div key={index} className="flex flex-row mt-4 last:mb-0">
           <div className="flex flex-col justify-center items-center">
             <Image
               src={Logo}
               alt="Rose & Shield Logo"
               className="mb-1 max-w-12"
             />
+            <span className="border-2 border-primary bg-primary rounded-t-full rounded-b-full w-1 h-full"></span>
           </div>
-          <div className="flex flex-col px-4">
-            <h3 className="text-slate-400 text-md">{event.dates}</h3>
-            <h4 className="text-slate-300 text-md lg:text-md font-semibold flex flex-row align-top">
-              {event.title} |{" "}
+          <div className="flex flex-col px-4 flex-1">
+            <h3 className="text-slate-400 text-sm font-medium">{event.dates}</h3>
+            <h4 className="text-slate-300 text-base font-semibold mb-2">
+              {event.title}
+            </h4>
+            <p className="text-slate-400 text-sm mb-2">
               {event.link !== "" ? (
                 <Link
                   href={event.link}
                   target="_blank"
-                  className="text-cyan-400 ml-1"
+                  className="text-primary-light hover:text-primary transition-colors"
                 >
                   {event.employer}
                 </Link>
               ) : (
                 event.employer
               )}
-            </h4>
+            </p>
+            <p className="text-slate-300 text-sm leading-relaxed mb-3">
+              {event.details.length > 120 
+                ? `${event.details.substring(0, 120)}...` 
+                : event.details
+              }
+            </p>
+            <div className="flex flex-wrap gap-1">
+              {event.skills.slice(0, 4).map((skill, skillIndex) => (
+                <span
+                  className="bg-primary-light/10 text-primary-light border border-primary/30 px-2 py-1 rounded-full text-xs"
+                  key={skillIndex}
+                >
+                  {skill}
+                </span>
+              ))}
+              {event.skills.length > 4 && (
+                <span className="text-primary-light/60 text-xs px-2 py-1">
+                  +{event.skills.length - 4} more
+                </span>
+              )}
+            </div>
           </div>
         </div>
       ))}
