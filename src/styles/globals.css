@@ -140,6 +140,11 @@
    BASE STYLES
    ========================================================================== */
 @layer base {
+  /* Prevent horizontal overflow globally */
+  html {
+    overflow-x: hidden;
+  }
+  
   /* Border color compatibility for Tailwind CSS v4 */
   *,
   ::after,
@@ -158,6 +163,7 @@
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     letter-spacing: var(--tracking-normal);
+    overflow-x: hidden;
     
     /* Global scrollbar styles */
     scrollbar-width: thin;
@@ -231,6 +237,7 @@
   /* Enhanced Background utilities */
   .bg-enhanced {
     background: var(--gradient-bg);
+    overflow-x: hidden;
   }
   
 

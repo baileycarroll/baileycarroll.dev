@@ -35,9 +35,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-slate-950 text-slate-100">
+    <html lang="en" className="bg-slate-950 text-slate-100 overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* Vercel Analytics */}
         <Analytics />
@@ -45,9 +45,9 @@ export default function RootLayout({
           <GoogleAnalytics gaId={ENV_CONFIG.analytics.google || ""}/>
         )}
         <SpeedInsights />
-        <div id="background-container" className="h-[100dvh] w-[100dvw] bg-enhanced">
+        <div id="background-container" className="h-[100dvh] w-full bg-enhanced">
           <FloatingElements />
-          <div className="h-full w-full overflow-scroll custom-scrollbar">
+          <div className="h-full w-full overflow-y-auto overflow-x-hidden custom-scrollbar">
            <SplashWrapper>{children}</SplashWrapper>
           </div>
         </div>
