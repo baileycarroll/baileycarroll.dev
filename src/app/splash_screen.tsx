@@ -34,9 +34,10 @@ export default function Splash({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
+            className="min-h-screen"
           >
             <Header />
-            <main className="overflow-y-scroll">
+            <main>
               {children}
             </main>
           </motion.div>

@@ -50,7 +50,7 @@ export default function MobileNavigation(
   return (
     <Popover {...props}>
       <PopoverButton 
-        className="group flex items-center rounded-full bg-neutral-800/30 backdrop-blur-sm px-4 py-2 text-sm font-medium text-neutral-300 border border-primary/20 shadow-lg shadow-primary/5 transition-all duration-200 hover:bg-neutral-800/50 hover:border-primary/30"
+        className="group flex items-center rounded-full bg-neutral-800/40 backdrop-blur-sm px-4 py-2 text-sm font-medium text-neutral-300 border border-primary/20 transition-all duration-200 hover:bg-neutral-800/50 hover:border-primary/30"
         aria-label="Open navigation menu"
         aria-expanded="false"
         aria-haspopup="true"
@@ -66,7 +66,7 @@ export default function MobileNavigation(
       <PopoverPanel
         focus
         transition
-        className="fixed inset-x-4 top-24 sm:top-28 z-[var(--z-modal)] origin-top rounded-2xl bg-neutral-800/90 backdrop-blur-sm p-6 border border-primary/20 shadow-xl shadow-primary/10 duration-200 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
+        className="fixed inset-x-4 top-20 z-[var(--z-modal)] origin-top rounded-2xl bg-neutral-800/90 backdrop-blur-sm p-6 border border-primary/20 shadow-xl shadow-primary/10 duration-200 data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in"
         role="dialog"
         aria-label="Navigation menu"
         aria-modal="true"

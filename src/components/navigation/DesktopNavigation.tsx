@@ -79,7 +79,7 @@ export default function DesktopNavigation(
   
   return (
     <nav {...props} role="navigation" aria-label="Main navigation">
-      <ListNoneHorizontal className="flex rounded-full bg-neutral-800/30 backdrop-blur-sm px-2 py-1 text-sm font-medium border border-primary/20 shadow-lg shadow-primary/5">
+      <ListNoneHorizontal className="flex rounded-full bg-neutral-800/40 backdrop-blur-sm px-2 py-1 text-sm font-medium border border-primary/20">
         <NavItem href={"/"}>Home</NavItem>
         <NavItem href={"/about"}>About</NavItem>
         <NavItem href={"/resume"}>Resume</NavItem>
