@@ -19,14 +19,14 @@ export default function FloatingElements() {
     // Generate random floating elements
     const generateElements = () => {
       const newElements: FloatingElement[] = [];
-      const elementCount = 12; // Increased number of floating elements
+      const elementCount = 200; // Increased number of floating elements
 
       for (let i = 0; i < elementCount; i++) {
         newElements.push({
           id: i,
           x: Math.random() * 100, // Percentage across screen
           y: Math.random() * 100, // Percentage down screen
-          size: Math.random() * 6 + 1, // 1-7px
+          size: Math.random() * 20 + 1, // 1-7px
           opacity: Math.random() * 0.4 + 0.05, // 0.05-0.45
           delay: Math.random() * 3, // 0-3s delay
           duration: Math.random() * 4 + 3, // 3-7s duration
