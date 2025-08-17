@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-export interface BaseService {};
+export interface BaseService {}
 
 export class ServiceError extends Error {
     constructor(

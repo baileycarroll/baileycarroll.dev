@@ -1,4 +1,11 @@
 import { ContentService } from "./contentService";
+import { 
+    articleService, 
+    poemService,
+    projectService,
+    skillService,
+    disconnectDatabase
+} from "./database";
 
 export interface PoemMetadata {
     title?: string;
@@ -28,8 +35,23 @@ export type ServiceResult<T> = {
     error: ServiceError;
 }
 
-// Create single instances
-export const contentService = new ContentService();
+// Create single instances with dependency injection
+export const contentService = new ContentService(articleService, poemService);
+
+// Export database services
+export { 
+    articleService, 
+    poemService,
+    projectService,
+    skillService,
+    disconnectDatabase
+} from "./database";
 
 // Export Types
 export type { Article, Poem } from "./contentService";
+export type { 
+    DatabaseArticle, 
+    DatabasePoem, 
+    DatabaseSkill, 
+    DatabaseProject 
+} from "./database";

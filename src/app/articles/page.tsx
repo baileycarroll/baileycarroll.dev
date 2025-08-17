@@ -82,7 +82,7 @@ export default async function ArticlesPage() {
           </div>
         ) : (
           <Card variant="elevated" className="p-12 text-center">
-            <div className="max-w-md mx-auto">
+            <div className="max-w-3xl mx-auto">
               <Heading Level={4} className="mb-4 text-primary">Nothing here yet!</Heading>
               <Paragraph className="mb-6 text-neutral-300">
                 I'm working on some articles that will be published soon. Check back later for insights on 

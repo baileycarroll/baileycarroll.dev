@@ -33,54 +33,71 @@ export default async function Poetry() {
 
       {/* Poems Section */}
       <section className="py-16">
-        <Heading Level={3} className="mb-8 text-center">Poems</Heading>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {poemsResult.data.map((poem) => (
-            <Card key={poem.title} variant="default" interactive className="p-6 flex flex-col h-full hover:bg-neutral-900/40 transition-all duration-300 group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <FaFeather className="w-5 h-5 text-primary" />
-                  <Heading Level={5} className="text-primary group-hover:text-primary-light transition-colors duration-300">
-                    {poem.title}
-                  </Heading>
-                </div>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
-                  poem.status === "Published" 
-                    ? "bg-green-500/20 text-green-400 border border-green-500/30" 
-                    : "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                }`}>
-                  {poem.status === "Published" ? <FaBook className="w-3 h-3" /> : <FaGlobe className="w-3 h-3" />}
-                  {poem.status}
-                </span>
-              </div>
-              
-              <div className="mb-3">
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs border border-primary/20">
-                  {poem.category}
-                </span>
-              </div>
-              
-              <Paragraph size="sm" className="text-neutral-300 mb-4 leading-relaxed">
-                {poem.summary}
+        {poemsResult.data.length > 0 ? (
+          <>
+            <Heading Level={3} className="mb-8 text-center">Poems</Heading>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {poemsResult.data.map((poem) => (
+                <Card key={poem.title} variant="default" interactive className="p-6 flex flex-col h-full hover:bg-neutral-900/40 transition-all duration-300 group">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <FaFeather className="w-5 h-5 text-primary" />
+                      <Heading Level={5} className="text-primary group-hover:text-primary-light transition-colors duration-300">
+                        {poem.title}
+                      </Heading>
+                    </div>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
+                      poem.status === "Published" 
+                        ? "bg-green-500/20 text-green-400 border border-green-500/30" 
+                        : "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                    }`}>
+                      {poem.status === "Published" ? <FaBook className="w-3 h-3" /> : <FaGlobe className="w-3 h-3" />}
+                      {poem.status}
+                    </span>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs border border-primary/20">
+                      {poem.category}
+                    </span>
+                  </div>
+                  
+                  <Paragraph size="sm" className="text-neutral-300 mb-4 leading-relaxed">
+                    {poem.summary}
+                  </Paragraph>
+                  
+                  <div className="flex-1 mb-6">
+                    <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-sm italic border-l-2 border-primary/30 pl-4">
+                      "{poem.excerpt}"
+                    </div>
+                  </div>
+                  
+                  <div className="mt-auto">
+                    <Link href={`/poetry/${poem.slug}`}>
+                      <Button size="sm" variant="outline" className="flex items-center gap-2 w-full group-hover:bg-primary/10 group-hover:border-primary/50 transition-all duration-300">
+                        Read Full Poem
+                        <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </>
+        ) : (
+          <Card variant="elevated" className="p-12 text-center">
+            <div className="max-w-3xl mx-auto">
+              <Heading Level={4} className="mb-4 text-primary">No poems yet!</Heading>
+              <Paragraph className="mb-6 text-neutral-300">
+                I'm working on some poetry that will be published soon. Check back later for personal expressions, 
+                creative writing, and poetic reflections on life and experiences.
               </Paragraph>
-              
-              <div className="flex-1 mb-6">
-                <div className="text-neutral-200 leading-relaxed whitespace-pre-line text-sm italic border-l-2 border-primary/30 pl-4">
-                  "{poem.excerpt}"
-                </div>
-              </div>
-              
-              <div className="mt-auto">
-                <Link href={`/poetry/${poem.slug}`}>
-                  <Button size="sm" variant="outline" className="flex items-center gap-2 w-full group-hover:bg-primary/10 group-hover:border-primary/50 transition-all duration-300">
-                    Read Full Poem
-                    <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
-                </Link>
-              </div>
-            </Card>
-          ))}
-        </div>
+              <Link href="/">
+                <Button variant="outline">Back to Home</Button>
+              </Link>
+            </div>
+          </Card>
+        )}
       </section>
     </div>
   );
