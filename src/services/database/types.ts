@@ -53,6 +53,18 @@ export interface DatabaseProject {
     categories: { category: string }[];
 }
 
+export interface DatabaseExperience {
+    id: string;
+    title: string;
+    employer: string;
+    startDate: string;
+    endDate: string;
+    details: string;
+    link?: string;
+    order: number;
+    skills: { skill: DatabaseSkill }[];
+}
+
 // Internal types for Prisma query results (with full relation data)
 export interface PrismaArticleWithRelations {
     id: string;
@@ -92,6 +104,18 @@ export interface PrismaProjectWithRelations {
     logoUrl?: string;
     skills: { id: string; projectId: string; skillId: string; skill: { id: string; name: string; years: number } }[];
     categories: { id: string; projectId: string; category: string }[];
+}
+
+export interface PrismaExperienceWithRelations {
+    id: string;
+    title: string;
+    employer: string;
+    startDate: string;
+    endDate: string;
+    details: string;
+    link?: string;
+    order: number;
+    skills: { id: string; experienceId: string; skillId: string; skill: { id: string; name: string; years: number; category: { id: string; name: string; description: string | null; display: boolean } } }[];
 }
 
 export interface PrismaSkill {

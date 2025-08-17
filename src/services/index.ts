@@ -1,6 +1,7 @@
 import { ContentService } from "./contentService";
 import { 
-    articleService, 
+    articleService,
+    experienceService,
     poemService,
     projectService,
     skillService,
@@ -40,7 +41,8 @@ export const contentService = new ContentService(articleService, poemService);
 
 // Export database services
 export { 
-    articleService, 
+    articleService,
+    experienceService,
     poemService,
     projectService,
     skillService,
@@ -50,7 +52,8 @@ export {
 // Export Types
 export type { Article, Poem } from "./contentService";
 export type { 
-    DatabaseArticle, 
+    DatabaseArticle,
+    DatabaseExperience,
     DatabasePoem, 
     DatabaseSkill, 
     DatabaseProject 

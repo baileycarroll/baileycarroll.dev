@@ -68,11 +68,12 @@ model PoemCategories {
 
 model Skill {
   id            String   @id @default(uuid())
-  name          String
+  name          String   @unique
   years         Int
   categoryId    String
   category      SkillCategory @relation(fields: [categoryId], references: [id])
   projects      ProjectSkills[]
+  experiences   ExperienceSkill[]
 }
 
 model SkillCategory {
@@ -112,4 +113,24 @@ model ProjectCategories {
   projectId     String
   category      String
   project       Project  @relation(fields: [projectId], references: [id])
+}
+
+model Experience {
+  id            String   @id @default(uuid())
+  title         String
+  employer      String
+  startDate     String
+  endDate       String
+  details       String   @db.Text
+  link          String?
+  order         Int      @default(0)
+  skills        ExperienceSkill[]
+}
+
+model ExperienceSkill {
+  id            String   @id @default(uuid())
+  experienceId  String
+  skillId       String
+  experience    Experience @relation(fields: [experienceId], references: [id])
+  skill         Skill    @relation(fields: [skillId], references: [id])
 }
