@@ -7,8 +7,10 @@ import Header from "@/components/layout/header";
 
 export default function Splash({
   children,
+  showHeader = true,
 }: Readonly<{
   children: React.ReactNode;
+  showHeader?: boolean;
 }>) {
   const [isSplashComplete, setSplashComplete] = useState(false);
   const [showContent, setShowContent] = useState(false);
@@ -34,12 +36,8 @@ export default function Splash({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen"
           >
-            <Header />
-            <main>
-              {children}
-            </main>
+            {children}
           </motion.div>
         )}
       </AnimatePresence>

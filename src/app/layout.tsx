@@ -6,8 +6,6 @@ import { SITE_CONFIG, ENV_CONFIG } from "@/config";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import SplashWrapper from "@/components/SplashWrapper";
-import FloatingElements from "@/components/background/FloatingElements";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-slate-950 text-slate-100 overflow-x-hidden">
+    <html lang="en" className="text-slate-100 overflow-x-hidden">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
@@ -46,12 +44,7 @@ export default function RootLayout({
           <GoogleAnalytics gaId={ENV_CONFIG.analytics.google || ""}/>
         )}
         <SpeedInsights />
-        <div id="background-container" className="h-[100dvh] w-full bg-enhanced">
-          <FloatingElements />
-          <div className="h-full w-full overflow-y-auto overflow-x-hidden custom-scrollbar">
-           <SplashWrapper>{children}</SplashWrapper>
-          </div>
-        </div>
+        {children}
       </body>
     </html>
   );

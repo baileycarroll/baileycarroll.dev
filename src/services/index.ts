@@ -12,25 +12,8 @@ export interface PoemMetadata {
     category?: string;
 }
 
-export class ServiceError extends Error {
-    constructor(
-        message: string,
-        public code: string,
-        public statusCode: number = 500,
-        public originalError?: Error
-    ) {
-        super(message);
-        this.name = "ServiceError";
-    }
-}
-
-export type ServiceResult<T> = {
-    success: true;
-    data: T;
-} | {
-    success: false;
-    error: ServiceError;
-}
+export { ServiceError } from "./types";
+export type { ServiceResult } from "./types";
 
 // Create single instances with dependency injection
 export const contentService = new ContentService(articleService, poemService);

@@ -17,6 +17,9 @@ export default async function Poetry() {
       </div>
     )
   }
+
+  // Filter to only show published poems
+  const publishedPoems = poemsResult.data.filter(poem => poem.status === "published");
   
   return (
     <div className="max-w-[1400px] mx-auto px-6">
@@ -33,11 +36,11 @@ export default async function Poetry() {
 
       {/* Poems Section */}
       <section className="py-16">
-        {poemsResult.data.length > 0 ? (
+        {publishedPoems.length > 0 ? (
           <>
             <Heading Level={3} className="mb-8 text-center">Poems</Heading>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {poemsResult.data.map((poem) => (
+              {publishedPoems.map((poem) => (
                 <Card key={poem.title} variant="default" interactive className="p-6 flex flex-col h-full hover:bg-neutral-900/40 transition-all duration-300 group">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -46,13 +49,9 @@ export default async function Poetry() {
                         {poem.title}
                       </Heading>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
-                      poem.status === "Published" 
-                        ? "bg-green-500/20 text-green-400 border border-green-500/30" 
-                        : "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                    }`}>
-                      {poem.status === "Published" ? <FaBook className="w-3 h-3" /> : <FaGlobe className="w-3 h-3" />}
-                      {poem.status}
+                    <span className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 bg-green-500/20 text-green-400 border border-green-500/30">
+                      <FaBook className="w-3 h-3" />
+                      Published
                     </span>
                   </div>
                   

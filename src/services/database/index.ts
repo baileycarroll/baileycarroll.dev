@@ -1,55 +1,9 @@
-import { PrismaClient } from "../../../generated/prisma/client";
 import { ArticleService } from "./ArticleService";
 import { ExperienceService } from "./ExperienceService";
 import { PoemService } from "./PoemService";
 import { ProjectService } from "./ProjectService";
 import { SkillService } from "./SkillService";
-
-// Prisma Client Singleton with proper connection management
-class PrismaClientSingleton {
-    private static instance: PrismaClient | null = null;
-
-    static getInstance(): PrismaClient {
-        if (!PrismaClientSingleton.instance) {
-            PrismaClientSingleton.instance = new PrismaClient({
-                log: process.env.NODE_ENV === "development" ? ["query", "info", "warn", "error"] : ["error"],
-                datasources: {
-                    db: {
-                        url: process.env.DATABASE_URL
-                    }
-                }
-            });
-
-            // Handle graceful shutdown
-            if (typeof window === 'undefined') { // Server-side only
-                process.on('beforeExit', async () => {
-                    await PrismaClientSingleton.instance?.$disconnect();
-                });
-
-                process.on('SIGINT', async () => {
-                    await PrismaClientSingleton.instance?.$disconnect();
-                    process.exit(0);
-                });
-
-                process.on('SIGTERM', async () => {
-                    await PrismaClientSingleton.instance?.$disconnect();
-                    process.exit(0);
-                });
-            }
-        }
-        return PrismaClientSingleton.instance;
-    }
-
-    static async disconnect(): Promise<void> {
-        if (PrismaClientSingleton.instance) {
-            await PrismaClientSingleton.instance.$disconnect();
-            PrismaClientSingleton.instance = null;
-        }
-    }
-}
-
-// Get the singleton instance
-const prisma = PrismaClientSingleton.getInstance();
+import { prisma } from "@/lib/database";
 
 // Create service instances
 export const articleService = new ArticleService(prisma);
@@ -58,8 +12,8 @@ export const poemService = new PoemService(prisma);
 export const projectService = new ProjectService(prisma);
 export const skillService = new SkillService(prisma);
 
-// Export disconnect function for cleanup
-export const disconnectDatabase = () => PrismaClientSingleton.disconnect();
+// Re-export disconnect function from lib/database
+export { disconnectDatabase } from "@/lib/database";
 
 // Export types
 export type {
