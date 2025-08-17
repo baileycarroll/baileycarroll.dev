@@ -16,7 +16,11 @@ export class ProjectService extends DatabaseService {
                 include: {
                     skills: {
                         include: {
-                            skill: true,
+                            skill: {
+                                include: {
+                                    category: true,
+                                },
+                            },
                         },
                     },
                     categories: true,
@@ -26,10 +30,10 @@ export class ProjectService extends DatabaseService {
 
             const result = projects.map(project => ({
                 ...project,
-                skills: (project as PrismaProjectWithRelations).skills.map(ps => ({ 
-                    skill: ps.skill 
+                skills: project.skills.map(ps => ({ 
+                    skill: ps.skill as any
                 })),
-                categories: (project as PrismaProjectWithRelations).categories.map(c => ({ 
+                categories: project.categories.map(c => ({ 
                     category: c.category 
                 })),
             }));
@@ -59,7 +63,11 @@ export class ProjectService extends DatabaseService {
                 include: {
                     skills: {
                         include: {
-                            skill: true,
+                            skill: {
+                                include: {
+                                    category: true,
+                                },
+                            },
                         },
                     },
                     categories: true,
@@ -137,7 +145,11 @@ export class ProjectService extends DatabaseService {
                     include: {
                         skills: {
                             include: {
-                                skill: true,
+                                skill: {
+                                    include: {
+                                        category: true,
+                                    },
+                                },
                             },
                         },
                         categories: true,
@@ -193,7 +205,11 @@ export class ProjectService extends DatabaseService {
                 include: {
                     skills: {
                         include: {
-                            skill: true,
+                            skill: {
+                                include: {
+                                    category: true,
+                                },
+                            },
                         },
                     },
                     categories: true,
@@ -242,7 +258,11 @@ export class ProjectService extends DatabaseService {
                 include: {
                     skills: {
                         include: {
-                            skill: true,
+                            skill: {
+                                include: {
+                                    category: true,
+                                },
+                            },
                         },
                     },
                     categories: true,

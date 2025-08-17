@@ -9,8 +9,7 @@ import { skillService } from "@/services";
 // Local Resume PDF
 const ResumePdf = "/Bailey Carroll - Full Resume.pdf";
 
-// Available skill categories
-const skillCategories = ["Frontend", "Backend", "Mobile", "Tools & Other"];
+
 
 function SkillCard({ name, years }: { name: string; years: number }) {
   const getExperienceLevel = (years: number) => {

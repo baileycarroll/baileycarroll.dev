@@ -38,31 +38,31 @@ export interface DatabaseSkillCategory {
 }
 
 export interface DatabaseProject {
-    id: string;
-    name: string;
-    description: string;
-    type: string;
-    status: string;
-    featured: boolean;
-    startDate: string;
-    endDate: string;
-    url: string;
-    urlText: string;
-    logoUrl?: string;
-    skills: { skill: DatabaseSkill }[];
-    categories: { category: string }[];
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  status: string;
+  featured: boolean;
+  startDate: string;
+  endDate: string;
+  url: string;
+  urlText: string;
+  logoUrl?: string | null;
+  skills: { skill: DatabaseSkill }[];
+  categories: { category: string }[];
 }
 
 export interface DatabaseExperience {
-    id: string;
-    title: string;
-    employer: string;
-    startDate: string;
-    endDate: string;
-    details: string;
-    link?: string;
-    order: number;
-    skills: { skill: DatabaseSkill }[];
+  id: string;
+  title: string;
+  employer: string;
+  startDate: string;
+  endDate: string;
+  details: string;
+  link?: string | null;
+  order: number;
+  skills: { skill: DatabaseSkill }[];
 }
 
 // Internal types for Prisma query results (with full relation data)
@@ -101,8 +101,8 @@ export interface PrismaProjectWithRelations {
     endDate: string;
     url: string;
     urlText: string;
-    logoUrl?: string;
-    skills: { id: string; projectId: string; skillId: string; skill: { id: string; name: string; years: number } }[];
+    logoUrl?: string | null;
+    skills: { id: string; projectId: string; skillId: string; skill: { id: string; name: string; years: number; category: { id: string; name: string; description: string | null; display: boolean } } }[];
     categories: { id: string; projectId: string; category: string }[];
 }
 
@@ -113,7 +113,7 @@ export interface PrismaExperienceWithRelations {
     startDate: string;
     endDate: string;
     details: string;
-    link?: string;
+    link?: string | null;
     order: number;
     skills: { id: string; experienceId: string; skillId: string; skill: { id: string; name: string; years: number; category: { id: string; name: string; description: string | null; display: boolean } } }[];
 }

@@ -1,11 +1,7 @@
 import { ContentService } from "./contentService";
-import { 
+import {
     articleService,
-    experienceService,
     poemService,
-    projectService,
-    skillService,
-    disconnectDatabase
 } from "./database";
 
 export interface PoemMetadata {
@@ -40,14 +36,13 @@ export type ServiceResult<T> = {
 export const contentService = new ContentService(articleService, poemService);
 
 // Export database services
-export { 
+export {
     articleService,
-    experienceService,
     poemService,
-    projectService,
-    skillService,
-    disconnectDatabase
 } from "./database";
+
+// Re-export other services directly
+export { experienceService, projectService, skillService, disconnectDatabase } from "./database";
 
 // Export Types
 export type { Article, Poem } from "./contentService";

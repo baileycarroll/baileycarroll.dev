@@ -4,7 +4,6 @@ import Paragraph from "@/components/typography/Paragraphs";
 import Heading from "@/components/typography/Headings";
 import Card from "@/components/cards/Card";
 import { experienceService } from "@/services";
-import { DatabaseExperience } from "@/services/database/types";
 
 // Helper function to format dates
 const formatDateRange = (startDate: string, endDate: string): string => {
@@ -43,7 +42,7 @@ export async function TimelineFull() {
 
   return (
     <div className="space-y-8">
-      {experiencesResult.data.map((experience, index) => (
+              {experiencesResult.data.map((experience) => (
         <Card 
           key={experience.id} 
           variant="default" 
@@ -80,7 +79,7 @@ export async function TimelineFull() {
                 {experience.details}
               </Paragraph>
               <div className="flex flex-wrap gap-2">
-                {experience.skills.map((skillItem, skillIndex) => (
+                {experience.skills.map((skillItem) => (
                   <span 
                     key={skillItem.skill.id} 
                     className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all duration-200"
@@ -122,7 +121,7 @@ export async function TimelineHome() {
 
   return (
     <div className="space-y-6">
-      {recentExperiences.map((experience, index) => (
+      {recentExperiences.map((experience) => (
         <Card 
           key={experience.id} 
           variant="default" 
@@ -162,7 +161,7 @@ export async function TimelineHome() {
                 }
               </Paragraph>
               <div className="flex flex-wrap gap-1">
-                {experience.skills.slice(0, 4).map((skillItem, skillIndex) => (
+                {experience.skills.slice(0, 4).map((skillItem) => (
                   <span
                     key={skillItem.skill.id}
                     className="bg-primary/10 text-primary border border-primary/20 px-2 py-1 rounded-full text-xs hover:bg-primary/20 hover:border-primary/30 transition-all duration-200"

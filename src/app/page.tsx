@@ -12,10 +12,17 @@ import Headshot from "@/assets/Headshot.png";
 import Paragraph from "@/components/typography/Paragraphs";
 import { TimelineHome } from "@/components/timeline/Timeline";
 import SkillsMarquee from "@/components/marquee/SkillsMarquee";
+import { projectService } from "@/services";
 // Local Resume PDF
 const ResumePdf = "/Bailey Carroll - Full Resume.pdf";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch featured projects from database
+  const projectsResult = await projectService.getAllProjects();
+  const featuredProjects = projectsResult.success 
+    ? projectsResult.data.filter(project => project.featured).slice(0, 2)
+    : [];
+
   return (
     <div className="max-w-[1400px] mx-auto px-6">
       {/* Hero Section */}
@@ -81,47 +88,44 @@ export default function Home() {
       {/* Projects Section */}
       <section className="py-16">
         <Heading Level={3} className="mb-8 text-center">Featured Projects</Heading>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card variant="elevated" interactive className="p-8">
-            <Heading Level={4} className="mb-4">Corpus Vitae</Heading>
-            <Paragraph size="base" className="mb-6">
-              A comprehensive fitness, meal, and life-tracking mobile application built with Flutter. 
-              Features local SQLite storage with cloud MySQL synchronization, iOS-inspired UI design, 
-              and holistic habit tracking capabilities.
-            </Paragraph>
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">Flutter</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">SQLite</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">MySQL</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">Mobile</span>
+        {featuredProjects.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {featuredProjects.map((project) => (
+                <Card key={project.id} variant="elevated" interactive className="p-8">
+                  <Heading Level={4} className="mb-4">{project.name}</Heading>
+                  <Paragraph size="base" className="mb-6">
+                    {project.description}
+                  </Paragraph>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.skills.map((skillItem) => (
+                      <span key={skillItem.skill.id} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                        {skillItem.skill.name}
+                      </span>
+                    ))}
+                  </div>
+                  {project.url && (
+                    <Link href={project.url} target="_blank">
+                      <Button size="sm" variant="outline">View Project</Button>
+                    </Link>
+                  )}
+                </Card>
+              ))}
             </div>
-            <Link href="https://github.com/baileycarroll/CorpusVitae" target="_blank">
-              <Button size="sm" variant="outline">View Project</Button>
-            </Link>
-          </Card>
-          <Card variant="elevated" interactive className="p-8">
-            <Heading Level={4} className="mb-4">Acolyte R.E.A.L.M.S.</Heading>
-            <Paragraph size="base" className="mb-6">
-              A custom Remote Engagement and Learning Management System designed from the ground up. 
-              Currently developing version 5.0 with enhanced user engagement features, serving as 
-              the backbone for educational platforms like 'un-Traditional Magick'.
-            </Paragraph>
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">Laravel</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">MySQL</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">JavaScript</span>
-              <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">Python</span>
+            <div className="text-center mt-8">
+              <Link href="/projects">
+                <Button size="lg">Explore All Projects</Button>
+              </Link>
             </div>
-            <Link href="https://github.com/baileycarroll/Acolyte-v4" target="_blank">
-              <Button size="sm" variant="outline">View Project</Button>
+          </>
+        ) : (
+          <div className="text-center">
+            <Paragraph className="mb-6 text-neutral-400">No featured projects available.</Paragraph>
+            <Link href="/projects">
+              <Button size="lg">View All Projects</Button>
             </Link>
-          </Card>
-        </div>
-        <div className="text-center mt-8">
-          <Link href="/projects">
-            <Button size="lg">Explore All Projects</Button>
-          </Link>
-        </div>
+          </div>
+        )}
       </section>
 
       {/* Skills Section */}
