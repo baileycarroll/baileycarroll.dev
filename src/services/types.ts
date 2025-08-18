@@ -101,6 +101,7 @@ export interface DatabaseExperience {
     details: string;
     link?: string | null;
     order: number;
+    featured: boolean;
     skills: Array<{
         skill: {
             id: string;

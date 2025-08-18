@@ -15,6 +15,7 @@ interface Experience {
   details: string;
   link?: string;
   order: number;
+  featured: boolean;
   skills: Array<{ skill: { id: string; name: string; category: { name: string } } }>;
 }
 
@@ -43,6 +44,7 @@ export default function AdminExperiences() {
     details: '',
     link: '',
     order: 0,
+    featured: false,
     skillIds: [] as string[],
   });
 
@@ -112,6 +114,7 @@ export default function AdminExperiences() {
       details: '',
       link: '',
       order: experiences.length,
+      featured: false,
       skillIds: [],
     });
     setShowForm(true);
@@ -127,6 +130,7 @@ export default function AdminExperiences() {
       details: experience.details,
       link: experience.link || '',
       order: experience.order,
+      featured: experience.featured,
       skillIds: experience.skills.map(s => s.skill.id),
     });
     setShowForm(true);
@@ -180,6 +184,7 @@ export default function AdminExperiences() {
             details: formData.details,
             link: formData.link || null,
             order: formData.order,
+            featured: formData.featured,
           },
           skillIds: formData.skillIds,
         }),
@@ -221,6 +226,19 @@ export default function AdminExperiences() {
     {
       key: 'order',
       label: 'Order',
+    },
+    {
+      key: 'featured',
+      label: 'Featured',
+      render: (value: boolean) => (
+        <span className={`px-2 py-1 text-xs rounded-full ${
+          value 
+            ? 'bg-green-100 text-green-800' 
+            : 'bg-gray-100 text-gray-600'
+        }`}>
+          {value ? 'Yes' : 'No'}
+        </span>
+      ),
     },
     {
       key: 'skills',
@@ -347,6 +365,44 @@ export default function AdminExperiences() {
                       onChange={(e) => setFormData({ ...formData, link: e.target.value })}
                       placeholder="https://example.com"
                     />
+                  </FormField>
+
+                  <FormField label="Featured">
+                    <div 
+                      className="flex items-center p-3 bg-neutral-700/50 border border-neutral-600 rounded-lg hover:bg-neutral-600/50 transition-colors cursor-pointer"
+                      onClick={() => setFormData({ ...formData, featured: !formData.featured })}
+                    >
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={formData.featured}
+                          onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                          className="sr-only"
+                        />
+                        <div className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                          formData.featured 
+                            ? 'bg-primary border-primary' 
+                            : 'bg-neutral-700 border-neutral-500'
+                        }`}>
+                          {formData.featured && (
+                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </div>
+                      </div>
+                      <div className="ml-3 flex-1">
+                        <div className="text-sm font-medium text-neutral-200">Show on home page</div>
+                        <div className="text-xs text-neutral-400">Mark this experience as featured to display it on the home page</div>
+                      </div>
+                      <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        formData.featured 
+                          ? 'bg-green-100 text-green-800' 
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {formData.featured ? 'Featured' : 'Hidden'}
+                      </div>
+                    </div>
                   </FormField>
 
                   <FormField label="Skills">

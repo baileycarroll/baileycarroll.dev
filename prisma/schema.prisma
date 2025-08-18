@@ -124,6 +124,7 @@ model Experience {
   details   String            @db.Text
   link      String?
   order     Int               @default(0)
+  featured  Boolean           @default(false)
   skills    ExperienceSkill[]
 }
 

@@ -110,7 +110,7 @@ export async function TimelineFull() {
 // Smaller more condensed timeline for the home page, better sizing.
 export async function TimelineHome() {
   try {
-    const experiencesResult = await experienceService.getAllExperiences();
+    const experiencesResult = await experienceService.getFeaturedExperiences();
     
     if (!experiencesResult.success) {
       console.error('Failed to fetch experiences:', experiencesResult.error);

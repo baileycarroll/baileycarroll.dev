@@ -48,6 +48,51 @@ export class ExperienceService extends DatabaseService {
         }
     }
 
+    async getFeaturedExperiences(): Promise<ServiceResult<DatabaseExperience[]>> {
+        const cacheKey = this.getCacheKey('getFeaturedExperiences', {});
+        const cached = this.getFromCache<DatabaseExperience[]>(cacheKey);
+        if (cached) {
+            return { success: true, data: cached };
+        }
+
+        try {
+            const experiences = await this.prisma.experience.findMany({
+                where: { featured: true },
+                include: {
+                    skills: {
+                        include: {
+                            skill: {
+                                include: {
+                                    category: true,
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: { order: 'asc' },
+            });
+
+            const result = experiences.map(experience => ({
+                ...experience,
+                skills: (experience as PrismaExperienceWithRelations).skills.map(es => ({ 
+                    skill: es.skill 
+                })),
+            }));
+
+            this.setCache(cacheKey, result);
+            return { success: true, data: result };
+        } catch (err) {
+            return this.failure(
+                'Failed to fetch featured experiences',
+                'FEATURED_EXPERIENCES_FETCH_ERROR',
+                500,
+                err instanceof Error ? err : new Error('FEATURED_EXPERIENCES_FETCH_ERROR')
+            );
+        } finally {
+            await this.disconnect();
+        }
+    }
+
     async getExperienceById(id: string): Promise<ServiceResult<DatabaseExperience>> {
         const cacheKey = this.getCacheKey('getExperienceById', { id });
         const cached = this.getFromCache<DatabaseExperience>(cacheKey);
@@ -112,6 +157,7 @@ export class ExperienceService extends DatabaseService {
                         details: experienceData.details,
                         link: experienceData.link,
                         order: experienceData.order,
+                        featured: experienceData.featured,
                     }
                 });
 
@@ -153,6 +199,7 @@ export class ExperienceService extends DatabaseService {
 
             // Invalidate relevant caches
             this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getFeaturedExperiences');
             this.invalidateCache('getExperienceById');
 
             return { success: true, data: databaseExperience };
@@ -181,6 +228,7 @@ export class ExperienceService extends DatabaseService {
                         details: experienceData.details,
                         link: experienceData.link,
                         order: experienceData.order,
+                        featured: experienceData.featured,
                     }
                 });
 
@@ -231,6 +279,7 @@ export class ExperienceService extends DatabaseService {
 
             // Invalidate relevant caches
             this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getFeaturedExperiences');
             this.invalidateCache('getExperienceById');
 
             return { success: true, data: databaseExperience };
@@ -262,6 +311,7 @@ export class ExperienceService extends DatabaseService {
 
             // Invalidate relevant caches
             this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getFeaturedExperiences');
             this.invalidateCache('getExperienceById');
 
             return { success: true, data: undefined };
@@ -304,6 +354,7 @@ export class ExperienceService extends DatabaseService {
 
             // Invalidate relevant caches
             this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getFeaturedExperiences');
             this.invalidateCache('getExperienceById');
 
             return { success: true, data: result };
