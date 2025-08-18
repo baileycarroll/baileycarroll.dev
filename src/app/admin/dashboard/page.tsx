@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSession } from "@/lib/auth-client";
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
@@ -19,6 +20,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
+  const { data: session, isPending, error } = useSession();
   const [stats, setStats] = useState<DashboardStats>({
     articles: 0,
     poems: 0,
@@ -30,9 +32,18 @@ export default function AdminDashboard() {
   });
   const [loading, setLoading] = useState(true);
 
+  // Redirect if not authenticated
   useEffect(() => {
-    loadDashboardStats();
-  }, []);
+    if (!isPending && !session) {
+      window.location.href = "/login";
+    }
+  }, [session, isPending]);
+
+  useEffect(() => {
+    if (session && !isPending) {
+      loadDashboardStats();
+    }
+  }, [session, isPending]);
 
   const loadDashboardStats = async () => {
     try {
@@ -45,8 +56,6 @@ export default function AdminDashboard() {
         fetch('/api/admin/skills'),
         fetch('/api/admin/experiences')
       ]);
-
-
 
       const [articles, poems, projects, skills, experiences] = await Promise.all([
         articlesResponse.json(),
@@ -79,6 +88,29 @@ export default function AdminDashboard() {
     }
   };
 
+  // Show loading while checking authentication
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-neutral-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading while not authenticated
+  if (!session) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p className="text-neutral-400">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -89,6 +121,11 @@ export default function AdminDashboard() {
         <Paragraph className="text-neutral-400">
           Welcome to the admin portal. Manage your content and site configuration from here.
         </Paragraph>
+        {session && (
+          <Paragraph className="text-sm text-neutral-500 mt-2">
+            Logged in as: {session.user.email}
+          </Paragraph>
+        )}
       </div>
 
       {/* Overview Cards */}
