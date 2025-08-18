@@ -21,16 +21,18 @@ const formatDateRange = (startDate: string, endDate?: string | null): string => 
 };
 
 export async function TimelineFull() {
-  const experiencesResult = await experienceService.getAllExperiences();
-  
-  if (!experiencesResult.success) {
-    console.error('Failed to fetch experiences:', experiencesResult.error);
-    return (
-      <div className="text-center text-neutral-400">
-        <Paragraph>Failed to load experience timeline.</Paragraph>
-      </div>
-    );
-  }
+  try {
+    const experiencesResult = await experienceService.getAllExperiences();
+    
+    if (!experiencesResult.success) {
+      console.error('Failed to fetch experiences:', experiencesResult.error);
+      return (
+        <div className="text-center text-neutral-400">
+          <Paragraph>Failed to load experience timeline.</Paragraph>
+          <Paragraph size="sm" className="mt-2">Error: {experiencesResult.error?.message || 'Unknown error'}</Paragraph>
+        </div>
+      );
+    }
 
   if (experiencesResult.data.length === 0) {
     return (
@@ -91,23 +93,43 @@ export async function TimelineFull() {
             </div>
           </div>
         </Card>
-      ))}
+            ))}
     </div>
   );
+  } catch (error) {
+    console.error('Unexpected error in TimelineHome:', error);
+    return (
+      <div className="text-center text-neutral-400">
+        <Paragraph size="sm">An unexpected error occurred while loading experiences.</Paragraph>
+        <Paragraph size="sm" className="mt-2">Please try refreshing the page.</Paragraph>
+      </div>
+    );
+  }
+} catch (error) {
+    console.error('Unexpected error in TimelineFull:', error);
+    return (
+      <div className="text-center text-neutral-400">
+        <Paragraph>An unexpected error occurred while loading experiences.</Paragraph>
+        <Paragraph size="sm" className="mt-2">Please try refreshing the page.</Paragraph>
+      </div>
+    );
+  }
 }
 
 // Smaller more condensed timeline for the home page, better sizing.
 export async function TimelineHome() {
-  const experiencesResult = await experienceService.getAllExperiences();
-  
-  if (!experiencesResult.success) {
-    console.error('Failed to fetch experiences:', experiencesResult.error);
-    return (
-      <div className="text-center text-neutral-400">
-        <Paragraph size="sm">Failed to load experience timeline.</Paragraph>
-      </div>
-    );
-  }
+  try {
+    const experiencesResult = await experienceService.getAllExperiences();
+    
+    if (!experiencesResult.success) {
+      console.error('Failed to fetch experiences:', experiencesResult.error);
+      return (
+        <div className="text-center text-neutral-400">
+          <Paragraph size="sm">Failed to load experience timeline.</Paragraph>
+          <Paragraph size="sm" className="mt-2">Error: {experiencesResult.error?.message || 'Unknown error'}</Paragraph>
+        </div>
+      );
+    }
 
   if (experiencesResult.data.length === 0) {
     return (
