@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSession, signOut } from "@/lib/auth-client";
 import { 
   MagnifyingGlassIcon,
   UserCircleIcon,
@@ -10,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function AdminHeader() {
+  const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -96,11 +98,18 @@ export default function AdminHeader() {
                     <GlobeAltIcon className="w-4 h-4" />
                     <span>Visit Site</span>
                   </Link>
+                  <div className="px-4 py-2 border-b border-neutral-700">
+                    <div className="text-sm text-neutral-400">
+                      Signed in as
+                    </div>
+                    <div className="text-sm font-medium text-neutral-200">
+                      {session?.user?.email}
+                    </div>
+                  </div>
                   <button
                     onClick={() => {
                       setUserMenuOpen(false);
-                      // TODO: Implement logout functionality
-                      console.log('Logout clicked');
+                      signOut({ callbackUrl: "/" });
                     }}
                     className="flex items-center gap-3 px-4 py-2 text-sm text-neutral-300 hover:text-red-400 hover:bg-red-400/10 transition-colors w-full"
                   >

@@ -43,6 +43,8 @@ export default function AdminDashboard() {
         fetch('/api/admin/experiences')
       ]);
 
+
+
       const [articles, poems, projects, skills, experiences] = await Promise.all([
         articlesResponse.json(),
         poemsResponse.json(),
@@ -51,14 +53,21 @@ export default function AdminDashboard() {
         experiencesResponse.json()
       ]);
 
+      // Ensure all responses are arrays and handle potential errors
+      const articlesArray = Array.isArray(articles) ? articles : [];
+      const poemsArray = Array.isArray(poems) ? poems : [];
+      const projectsArray = Array.isArray(projects) ? projects : [];
+      const skillsArray = Array.isArray(skills) ? skills : [];
+      const experiencesArray = Array.isArray(experiences) ? experiences : [];
+
       setStats({
-        articles: Array.isArray(articles) ? articles.length : 0,
-        poems: Array.isArray(poems) ? poems.length : 0,
-        projects: Array.isArray(projects) ? projects.length : 0,
-        skills: Array.isArray(skills) ? skills.length : 0,
-        experiences: Array.isArray(experiences) ? experiences.length : 0,
-        publishedPoems: Array.isArray(poems) ? poems.filter((p: any) => p.status === 'published').length : 0,
-        featuredProjects: Array.isArray(projects) ? projects.filter((p: any) => p.featured).length : 0
+        articles: articlesArray.length,
+        poems: poemsArray.length,
+        projects: projectsArray.length,
+        skills: skillsArray.length,
+        experiences: experiencesArray.length,
+        publishedPoems: poemsArray.filter((p: any) => p.status === 'published').length,
+        featuredProjects: projectsArray.filter((p: any) => p.featured).length
       });
     } catch (error) {
       console.error("Error loading dashboard stats:", error);
