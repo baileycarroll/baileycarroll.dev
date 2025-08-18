@@ -17,7 +17,6 @@ export const auth = betterAuth({
   advanced: {
     useSecureCookies: process.env.NODE_ENV === "production",
   },
-  basePath: "/api/auth",
 });
 
 
