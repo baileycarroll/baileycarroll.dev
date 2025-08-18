@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { signIn } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
@@ -31,7 +30,7 @@ export default function SignIn() {
     setError("");
 
     try {
-      const result = await signIn.email({
+      await signIn.email({
         email,
         password,
         callbackURL: "/admin/dashboard",

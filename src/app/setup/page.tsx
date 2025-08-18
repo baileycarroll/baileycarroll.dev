@@ -29,11 +29,11 @@ export default function Setup() {
           setSetupAllowed(true);
         } else {
           // Redirect to sign-in if setup is not allowed
-          router.push('/auth/signin');
+          router.push('/login');
         }
       } catch (error) {
         console.error('Failed to check setup status:', error);
-        router.push('/auth/signin');
+        router.push('/login');
       } finally {
         setChecking(false);
       }

@@ -41,7 +41,7 @@ async function main() {
       console.log("✅ Admin user created successfully!");
       console.log(`Email: ${email}`);
       console.log(`Name: ${name}`);
-      console.log("\nYou can now sign in to the admin portal at /auth/signin");
+      console.log("\nYou can now sign in to the admin portal at /login");
     } else {
       console.error("❌ Failed to create user");
       process.exit(1);

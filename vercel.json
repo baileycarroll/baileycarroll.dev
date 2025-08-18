@@ -47,13 +47,7 @@
       "destination": "/admin/dashboard"
     }
   ],
-  "redirects": [
-    {
-      "source": "/auth/signin",
-      "destination": "/auth/signin",
-      "permanent": false
-    }
-  ],
+
   "env": {
     "NODE_ENV": "production"
   }
