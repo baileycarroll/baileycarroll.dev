@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSession, getSession } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
@@ -31,33 +31,6 @@ export default function AdminDashboard() {
     featuredProjects: 0
   });
   const [loading, setLoading] = useState(true);
-  const [debugInfo, setDebugInfo] = useState<string>("");
-
-  // Debug session info
-  useEffect(() => {
-    const debugSession = async () => {
-      try {
-        const manualSession = await getSession();
-        setDebugInfo(`useSession: ${JSON.stringify(session)}, manual: ${JSON.stringify(manualSession)}`);
-        console.log("Session debug:", { useSession: session, manual: manualSession });
-      } catch (error) {
-        console.error("Session debug error:", error);
-        setDebugInfo(`Error: ${error}`);
-      }
-    };
-    
-    if (!isPending) {
-      debugSession();
-    }
-  }, [session, isPending]);
-
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (!isPending && !session) {
-      console.log("No session, redirecting to login");
-      window.location.href = "/login";
-    }
-  }, [session, isPending]);
 
   useEffect(() => {
     if (session && !isPending) {
@@ -120,27 +93,8 @@ export default function AdminDashboard() {
     );
   }
 
-  // Show loading while not authenticated
-  if (!session) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <p className="text-neutral-400">Redirecting to login...</p>
-          <p className="text-xs text-neutral-500 mt-2">Debug: {debugInfo}</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
-      {/* Debug Info */}
-      <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
-        <Paragraph className="text-yellow-400 text-xs">
-          Debug: {debugInfo}
-        </Paragraph>
-      </div>
-
       {/* Page Header */}
       <div className="mb-8">
         <Heading Level={1} className="text-3xl font-bold mb-2">
