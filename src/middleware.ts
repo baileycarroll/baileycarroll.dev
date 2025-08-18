@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+  // Skip middleware for auth-related routes to prevent redirect loops
+  if (
+    request.nextUrl.pathname.startsWith("/auth") ||
+    request.nextUrl.pathname.startsWith("/api/auth")
+  ) {
+    return NextResponse.next();
+  }
+
   // Check if the request is for an admin route
   if (request.nextUrl.pathname.startsWith("/admin")) {
     // Check for session cookie - Better Auth uses "better-auth.session_token" (with underscore)
