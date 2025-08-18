@@ -1,0 +1,196 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id          String              @id @default(uuid())
+  title       String
+  description String
+  date        String
+  author      String
+  content     String              @db.Text
+  slug        String              @unique
+  tags        ArticleTags[]
+  categories  ArticleCategories[]
+}
+
+model ArticleTags {
+  id        String  @id @default(uuid())
+  articleId String
+  tag       String
+  article   Article @relation(fields: [articleId], references: [id])
+}
+
+model ArticleCategories {
+  id        String  @id @default(uuid())
+  articleId String
+  category  String
+  article   Article @relation(fields: [articleId], references: [id])
+}
+
+model Poem {
+  id         String           @id @default(uuid())
+  title      String
+  status     String
+  excerpt    String
+  summary    String
+  content    String           @db.Text
+  slug       String           @unique
+  tags       PoemTags[]
+  categories PoemCategories[]
+}
+
+model PoemTags {
+  id     String @id @default(uuid())
+  poemId String
+  tag    String
+  poem   Poem   @relation(fields: [poemId], references: [id])
+}
+
+model PoemCategories {
+  id       String @id @default(uuid())
+  poemId   String
+  category String
+  poem     Poem   @relation(fields: [poemId], references: [id])
+}
+
+model Skill {
+  id          String            @id @default(uuid())
+  name        String            @unique
+  years       Int
+  categoryId  String
+  category    SkillCategory     @relation(fields: [categoryId], references: [id])
+  projects    ProjectSkills[]
+  experiences ExperienceSkill[]
+}
+
+model SkillCategory {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+  display     Boolean @default(true)
+  skills      Skill[]
+}
+
+model Project {
+  id          String              @id @default(uuid())
+  name        String
+  description String
+  type        String
+  status      String
+  featured    Boolean             @default(false)
+  startDate   String
+  endDate     String?
+  url         String?
+  urlText     String?
+  logoUrl     String?
+  skills      ProjectSkills[]
+  categories  ProjectCategories[]
+}
+
+model ProjectSkills {
+  id        String  @id @default(uuid())
+  projectId String
+  skillId   String
+  project   Project @relation(fields: [projectId], references: [id])
+  skill     Skill   @relation(fields: [skillId], references: [id])
+}
+
+model ProjectCategories {
+  id        String  @id @default(uuid())
+  projectId String
+  category  String
+  project   Project @relation(fields: [projectId], references: [id])
+}
+
+model Experience {
+  id        String            @id @default(uuid())
+  title     String
+  employer  String
+  startDate String
+  endDate   String?
+  details   String            @db.Text
+  link      String?
+  order     Int               @default(0)
+  skills    ExperienceSkill[]
+}
+
+model ExperienceSkill {
+  id           String     @id @default(uuid())
+  experienceId String
+  skillId      String
+  experience   Experience @relation(fields: [experienceId], references: [id])
+  skill        Skill      @relation(fields: [skillId], references: [id])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}

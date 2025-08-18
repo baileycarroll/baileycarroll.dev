@@ -4,42 +4,40 @@ import React from "react";
 import BaseProps from "@/components/Base";
 // Import CLSX for conditional classes
 import clsx from "clsx";
-// Inter Font
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 interface HeadingProps extends BaseProps {
   Level: 1 | 2 | 3 | 4 | 5 | 6;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 const Heading: React.FC<HeadingProps> = ({
   Level,
+  as,
   children,
   className,
   style,
 }) => {
+  const headingStyles = {
+    1: "text-6xl font-bold leading-tight tracking-tight text-white",
+    2: "text-5xl font-bold leading-tight tracking-tight text-white",
+    3: "text-4xl font-semibold leading-tight tracking-normal text-white",
+    4: "text-3xl font-semibold leading-tight tracking-normal text-white",
+    5: "text-2xl font-medium leading-normal tracking-normal text-white",
+    6: "text-xl font-medium leading-normal tracking-normal text-white"
+  };
+
+  const Tag = (as || `h${Level}`) as keyof React.JSX.IntrinsicElements;
+
   return React.createElement(
-    `h${Level}`,
+    Tag,
     {
       className: clsx(
-        Level === 1
-          ? "text-7xl font-bold"
-          : Level === 2
-          ? "text-6xl font-bold"
-          : Level === 3
-          ? "text-5xl font-semibold"
-          : Level === 4
-          ? "text-4xl font-semibold"
-          : Level === 5
-          ? "text-3xl font-semibold"
-          : Level === 6
-          ? "text-2xl font-semibold"
-          : "",
-        inter.className,
+        headingStyles[Level],
+        "scroll-mt-20", // For smooth scrolling to headings
         className
       ),
       style,
+      id: typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : undefined,
     },
     children
   );

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-import Image from "next/image";
-import Rose from "@/assets/rose_shield.svg";
+import "@/lib/database"; // Import for database connection management
+import { SITE_CONFIG, ENV_CONFIG } from "@/config";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Splash from "./splash_screen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bailey Carroll",
-  description: "Making My Mark - One Line of Code at a Time",
+  title: SITE_CONFIG.title,
+  description: SITE_CONFIG.description,
+  metadataBase: new URL(SITE_CONFIG.url),
+  openGraph: {
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+  }
 };
 
 export default function RootLayout({
@@ -29,28 +34,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-slate-950 text-slate-100">
+    <html lang="en" className="text-slate-100 overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* Vercel Analytics */}
         <Analytics />
-        {/* Google Analytics */}
-        <GoogleAnalytics gaId="G-1TGMX650JG" />
+        {ENV_CONFIG.analytics.enabled && (
+          <GoogleAnalytics gaId={ENV_CONFIG.analytics.google || ""}/>
+        )}
         <SpeedInsights />
-        <div id="background-container" className="h-[100dvh] w-[100dvw]">
-          <Image
-            src={Rose}
-            alt="background"
-            layout="fill"
-            objectFit="contain"
-            className={"-z-10 absolute"}
-            id="rose"
-          />
-          <div className="h-full w-full overflow-scroll">
-            <Splash>{children}</Splash>
-          </div>
-        </div>
+        {children}
       </body>
     </html>
   );

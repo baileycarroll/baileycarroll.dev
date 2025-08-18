@@ -20,7 +20,6 @@ import {
   SiRubyonrails,
 } from "react-icons/si";
 import { RiNextjsLine } from "react-icons/ri";
-import Heading from "@/components/typography/Headings";
 
 const SkillsList = [
   {
@@ -91,16 +90,15 @@ const SkillsList = [
 
 export default function SkillsMarquee() {
   return (
-    <div className="w-full mb-2">
-      <Heading Level={6}>Skills</Heading>
-      <Marquee speed={50} className="py-2">
+    <div className="w-full">
+      <Marquee speed={40} className="py-2">
         {SkillsList.map((skill, index) => (
           <div
             key={index}
-            className="flex flex-col justify-center items-center rounded-lg bg-slate-950/50 backdrop-blur border border-cyan-800 shadow-md shadow-cyan-800 p-3 mx-3 w-32 transition hover:scale-105"
+            className="flex flex-col justify-center items-center rounded-lg bg-card/20 border border-primary/30 p-4 mx-4 w-32 transition hover:bg-card/30 hover:border-primary/50"
           >
-            <span className="text-3xl">{skill.icon}</span>
-            <span className="mt-2">{skill.name}</span>
+            <span className="text-3xl text-primary">{skill.icon}</span>
+            <span className="mt-2 text-sm font-medium">{skill.name}</span>
           </div>
         ))}
       </Marquee>

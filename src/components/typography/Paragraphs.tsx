@@ -4,17 +4,37 @@ import React from "react";
 import BaseProps from "@/components/Base";
 // Import CLSX for conditional classes
 import clsx from "clsx";
-// WorkSans Font
-import { Work_Sans } from "next/font/google";
 
-const workSans = Work_Sans({ subsets: ["latin"] });
+interface ParagraphProps extends BaseProps {
+  size?: "sm" | "base" | "lg";
+  variant?: "default" | "muted";
+}
 
-const Paragraph: React.FC<BaseProps> = ({ children, className, style }) => {
+const Paragraph: React.FC<ParagraphProps> = ({ 
+  children, 
+  className, 
+  style,
+  size = "base",
+  variant = "default"
+}) => {
+  const sizeClasses = {
+    sm: "text-sm leading-relaxed",
+    base: "text-base leading-relaxed",
+    lg: "text-lg leading-relaxed"
+  };
+
+  const variantClasses = {
+    default: "text-neutral-200",
+    muted: "text-neutral-400"
+  };
+
   return React.createElement(
     "p",
     {
       className: clsx(
-        "text-lg leading-relaxed " + workSans.className,
+        sizeClasses[size],
+        variantClasses[variant],
+        "tracking-normal",
         className
       ),
       style,
