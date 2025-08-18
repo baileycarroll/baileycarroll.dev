@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { articleService } from '@/services';
+import { articleService, disconnectDatabase } from '@/services';
 
 export async function GET() {
   try {
@@ -19,6 +19,8 @@ export async function GET() {
       { error: 'Failed to fetch articles' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }
 
@@ -43,5 +45,7 @@ export async function POST(request: NextRequest) {
       { error: 'Failed to create article' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }

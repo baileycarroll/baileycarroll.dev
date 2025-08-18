@@ -47,6 +47,8 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECTS_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -101,6 +103,8 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECT_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -183,6 +187,8 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECT_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -236,6 +242,8 @@ export class ProjectService extends DatabaseService {
                 500,
                 error instanceof Error ? error : undefined
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -289,6 +297,8 @@ export class ProjectService extends DatabaseService {
                 500,
                 error instanceof Error ? error : undefined
             );
+        } finally {
+            await this.disconnect();
         }
     }
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { poemService } from '@/services';
+import { poemService, disconnectDatabase } from '@/services';
 
 export async function GET() {
   try {
@@ -22,6 +22,8 @@ export async function GET() {
       { error: 'Failed to fetch poems' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }
 
@@ -46,5 +48,7 @@ export async function POST(request: NextRequest) {
       { error: 'Failed to create poem' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }

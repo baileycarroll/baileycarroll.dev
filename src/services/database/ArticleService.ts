@@ -35,6 +35,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLES_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -77,6 +79,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLE_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -119,6 +123,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLE_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -194,6 +200,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLE_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -235,6 +243,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLE_UPDATE_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -259,6 +269,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('ARTICLE_DELETION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -300,6 +312,8 @@ export class ArticleService extends DatabaseService {
                 500,
                 error instanceof Error ? error : undefined
             );
+        } finally {
+            await this.disconnect();
         }
     }
 }

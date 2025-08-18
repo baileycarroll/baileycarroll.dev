@@ -1,6 +1,6 @@
 import { DatabaseService } from "./DatabaseService";
 import { ServiceResult } from "../types";
-import { DatabaseSkill } from "./types";
+import { DatabaseSkill, DatabaseSkillCategory } from "./types";
 
 export class SkillService extends DatabaseService {
     // Skill CRUD Operations
@@ -28,6 +28,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILLS_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -63,6 +65,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -91,6 +95,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -120,6 +126,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_UPDATE_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -141,6 +149,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_DELETION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -166,6 +176,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORIES_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -198,6 +210,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -223,6 +237,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -249,6 +265,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_UPDATE_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -270,6 +288,8 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_DELETION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 }

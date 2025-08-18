@@ -35,6 +35,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEMS_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -77,6 +79,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEM_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -143,6 +147,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEM_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -185,6 +191,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEM_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -271,6 +279,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEM_UPDATE_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -295,6 +305,8 @@ export class PoemService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('POEM_DELETION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 }

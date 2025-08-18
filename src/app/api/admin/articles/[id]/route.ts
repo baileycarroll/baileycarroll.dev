@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { articleService } from '@/services';
+import { articleService, disconnectDatabase } from '@/services';
 
 export async function GET(
   request: NextRequest,
@@ -22,6 +22,8 @@ export async function GET(
       { error: 'Failed to fetch article' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }
 
@@ -49,6 +51,8 @@ export async function PUT(
       { error: 'Failed to update article' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }
 
@@ -73,5 +77,7 @@ export async function DELETE(
       { error: 'Failed to delete article' },
       { status: 500 }
     );
+  } finally {
+    await disconnectDatabase();
   }
 }

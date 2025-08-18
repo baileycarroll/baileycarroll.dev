@@ -43,6 +43,8 @@ export class ExperienceService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('EXPERIENCES_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -93,6 +95,8 @@ export class ExperienceService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('EXPERIENCE_FETCH_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -159,6 +163,8 @@ export class ExperienceService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('EXPERIENCE_CREATION_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 
@@ -199,6 +205,8 @@ export class ExperienceService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('EXPERIENCE_UPDATE_ERROR')
             );
+        } finally {
+            await this.disconnect();
         }
     }
 }
