@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "public"."Project" ALTER COLUMN "endDate" DROP NOT NULL,
+ALTER COLUMN "url" DROP NOT NULL,
+ALTER COLUMN "urlText" DROP NOT NULL;

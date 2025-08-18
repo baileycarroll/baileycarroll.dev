@@ -45,9 +45,9 @@ export interface DatabaseProject {
   status: string;
   featured: boolean;
   startDate: string;
-  endDate: string;
-  url: string;
-  urlText: string;
+  endDate?: string | null;
+  url?: string | null;
+  urlText?: string | null;
   logoUrl?: string | null;
   skills: { skill: DatabaseSkill }[];
   categories: { category: string }[];
@@ -58,7 +58,7 @@ export interface DatabaseExperience {
   title: string;
   employer: string;
   startDate: string;
-  endDate: string;
+  endDate?: string | null;
   details: string;
   link?: string | null;
   order: number;
@@ -98,9 +98,9 @@ export interface PrismaProjectWithRelations {
     status: string;
     featured: boolean;
     startDate: string;
-    endDate: string;
-    url: string;
-    urlText: string;
+    endDate?: string | null;
+    url?: string | null;
+    urlText?: string | null;
     logoUrl?: string | null;
     skills: { id: string; projectId: string; skillId: string; skill: { id: string; name: string; years: number; category: { id: string; name: string; description: string | null; display: boolean } } }[];
     categories: { id: string; projectId: string; category: string }[];
@@ -111,7 +111,7 @@ export interface PrismaExperienceWithRelations {
     title: string;
     employer: string;
     startDate: string;
-    endDate: string;
+    endDate?: string | null;
     details: string;
     link?: string | null;
     order: number;

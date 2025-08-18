@@ -92,9 +92,9 @@ model Project {
   status        String
   featured      Boolean  @default(false)
   startDate     String
-  endDate       String
-  url           String
-  urlText       String
+  endDate       String?
+  url           String?
+  urlText       String?
   logoUrl       String?
   skills        ProjectSkills[]
   categories    ProjectCategories[]
@@ -120,7 +120,7 @@ model Experience {
   title         String
   employer      String
   startDate     String
-  endDate       String
+  endDate       String?
   details       String   @db.Text
   link          String?
   order         Int      @default(0)

@@ -168,6 +168,115 @@ export class ExperienceService extends DatabaseService {
         }
     }
 
+    async updateExperience(id: string, experienceData: Partial<DatabaseExperience>, skillIds?: string[]): Promise<ServiceResult<DatabaseExperience>> {
+        try {
+            const result = await this.prisma.$transaction(async (tx) => {
+                const experience = await tx.experience.update({
+                    where: { id },
+                    data: {
+                        title: experienceData.title,
+                        employer: experienceData.employer,
+                        startDate: experienceData.startDate,
+                        endDate: experienceData.endDate,
+                        details: experienceData.details,
+                        link: experienceData.link,
+                        order: experienceData.order,
+                    }
+                });
+
+                // Update skills if provided
+                if (skillIds !== undefined) {
+                    // Delete existing skills
+                    await tx.experienceSkill.deleteMany({
+                        where: { experienceId: id }
+                    });
+
+                    // Add new skills
+                    if (skillIds.length > 0) {
+                        await tx.experienceSkill.createMany({
+                            data: skillIds.map(skillId => ({
+                                experienceId: id,
+                                skillId,
+                            })),
+                        });
+                    }
+                }
+
+                return await tx.experience.findUnique({
+                    where: { id },
+                    include: {
+                        skills: {
+                            include: {
+                                skill: {
+                                    include: {
+                                        category: true,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            if (!result) {
+                throw new Error('Failed to update experience');
+            }
+
+            const databaseExperience = {
+                ...result,
+                skills: (result as PrismaExperienceWithRelations).skills.map(es => ({ 
+                    skill: es.skill 
+                })),
+            };
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getExperienceById');
+
+            return { success: true, data: databaseExperience };
+        } catch (err) {
+            return this.failure(
+                `Failed to update experience: ${id}`,
+                'EXPERIENCE_UPDATE_ERROR',
+                500,
+                err instanceof Error ? err : new Error('EXPERIENCE_UPDATE_ERROR')
+            );
+        } finally {
+            await this.disconnect();
+        }
+    }
+
+    async deleteExperience(id: string): Promise<ServiceResult<void>> {
+        try {
+            await this.prisma.$transaction(async (tx) => {
+                // Delete associated skills first
+                await tx.experienceSkill.deleteMany({
+                    where: { experienceId: id }
+                });
+
+                // Delete the experience
+                await tx.experience.delete({
+                    where: { id }
+                });
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllExperiences');
+            this.invalidateCache('getExperienceById');
+
+            return { success: true, data: undefined };
+        } catch (err) {
+            return this.failure(
+                `Failed to delete experience: ${id}`,
+                'EXPERIENCE_DELETE_ERROR',
+                500,
+                err instanceof Error ? err : new Error('EXPERIENCE_DELETE_ERROR')
+            );
+        } finally {
+            await this.disconnect();
+        }
+    }
+
     async updateExperienceOrder(id: string, order: number): Promise<ServiceResult<DatabaseExperience>> {
         try {
             const experience = await this.prisma.experience.update({

@@ -301,4 +301,134 @@ export class ProjectService extends DatabaseService {
             await this.disconnect();
         }
     }
+
+    async updateProject(id: string, projectData: Partial<DatabaseProject>, skillIds?: string[], categories?: string[]): Promise<ServiceResult<DatabaseProject>> {
+        try {
+            console.log('Updating project with data:', { id, projectData, skillIds, categories });
+            
+            const result = await this.prisma.$transaction(async (tx) => {
+                // Update the project
+                await tx.project.update({
+                    where: { id },
+                    data: {
+                        name: projectData.name,
+                        description: projectData.description,
+                        type: projectData.type,
+                        status: projectData.status,
+                        featured: projectData.featured,
+                        startDate: projectData.startDate,
+                        endDate: projectData.endDate,
+                        url: projectData.url,
+                        urlText: projectData.urlText,
+                        logoUrl: projectData.logoUrl,
+                    }
+                });
+
+                // Update skills if provided
+                if (skillIds !== undefined) {
+                    // Delete existing skills
+                    await tx.projectSkills.deleteMany({
+                        where: { projectId: id }
+                    });
+                    
+                    // Create new skills
+                    if (skillIds.length > 0) {
+                        await tx.projectSkills.createMany({
+                            data: skillIds.map(skillId => ({
+                                projectId: id,
+                                skillId,
+                            })),
+                        });
+                    }
+                }
+
+                // Update categories if provided
+                if (categories !== undefined) {
+                    // Delete existing categories
+                    await tx.projectCategories.deleteMany({
+                        where: { projectId: id }
+                    });
+                    
+                    // Create new categories
+                    if (categories.length > 0) {
+                        await tx.projectCategories.createMany({
+                            data: categories.map(category => ({
+                                projectId: id,
+                                category,
+                            })),
+                        });
+                    }
+                }
+
+                // Fetch the complete project with relations
+                return await tx.project.findUnique({
+                    where: { id },
+                    include: {
+                        skills: {
+                            include: {
+                                skill: {
+                                    include: {
+                                        category: true,
+                                    },
+                                },
+                            },
+                        },
+                        categories: true,
+                    }
+                });
+            });
+
+            const databaseProject = {
+                ...result,
+                skills: (result as PrismaProjectWithRelations).skills.map(ps => ({ 
+                    skill: ps.skill 
+                })),
+                categories: (result as PrismaProjectWithRelations).categories.map(c => ({ 
+                    category: c.category 
+                })),
+            };
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllProjects');
+            this.invalidateCache('getProjectById');
+
+            return { success: true, data: databaseProject };
+        } catch (err) {
+            console.error('Project update error:', err);
+            return this.failure(
+                `Failed to update project: ${err instanceof Error ? err.message : 'Unknown error'}`,
+                'PROJECT_UPDATE_ERROR',
+                500,
+                err instanceof Error ? err : new Error('PROJECT_UPDATE_ERROR')
+            );
+        } finally {
+            await this.disconnect();
+        }
+    }
+
+    async deleteProject(id: string): Promise<ServiceResult<boolean>> {
+        try {
+            console.log('Deleting project:', id);
+            
+            await this.prisma.project.delete({
+                where: { id }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllProjects');
+            this.invalidateCache('getProjectById');
+
+            return { success: true, data: true };
+        } catch (err) {
+            console.error('Project deletion error:', err);
+            return this.failure(
+                `Failed to delete project: ${err instanceof Error ? err.message : 'Unknown error'}`,
+                'PROJECT_DELETION_ERROR',
+                500,
+                err instanceof Error ? err : new Error('PROJECT_DELETION_ERROR')
+            );
+        } finally {
+            await this.disconnect();
+        }
+    }
 }
