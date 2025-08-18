@@ -9,9 +9,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  pages: {
-    signIn: "/auth/signin",
-  },
+  // Remove custom pages configuration to use defaults
+  // pages: {
+  //   signIn: "/auth/signin",
+  // },
 });
 
 

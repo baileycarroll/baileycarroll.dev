@@ -40,14 +40,12 @@ export default function SignIn() {
 
       if (result?.error) {
         setError("Invalid email or password");
-      } else if (result?.data) {
-        // Redirect to admin dashboard - Better Auth handles the session automatically
-        window.location.href = "/admin/dashboard";
       } else {
-        // Redirect to admin dashboard
-        router.push("/admin/dashboard");
+        // Simple redirect to admin dashboard
+        window.location.href = "/admin/dashboard";
       }
-    } catch {
+    } catch (error) {
+      console.error("Signin error:", error);
       setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);

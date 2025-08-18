@@ -2,15 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // Skip middleware for auth-related routes to prevent redirect loops
-  if (
-    request.nextUrl.pathname.startsWith("/auth") ||
-    request.nextUrl.pathname.startsWith("/api/auth")
-  ) {
-    return NextResponse.next();
-  }
-
-  // Check if the request is for an admin route
+  // Only protect admin routes
   if (request.nextUrl.pathname.startsWith("/admin")) {
     // Check for session cookie - Better Auth uses "better-auth.session_token" (with underscore)
     const sessionCookie = request.cookies.get("better-auth.session_token");
@@ -25,5 +17,15 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api/auth (auth API routes)
+     * - auth (auth pages)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!api/auth|auth|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
