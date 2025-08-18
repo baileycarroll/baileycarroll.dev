@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   // Only protect admin routes
   if (request.nextUrl.pathname.startsWith("/admin")) {
-    // Check for session cookie
+    // Check for session cookie - Better Auth uses "better-auth.session"
     const sessionCookie = request.cookies.get("better-auth.session");
     
     if (!sessionCookie) {
