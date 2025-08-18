@@ -228,16 +228,40 @@ export default function PoemsPage() {
     {
       key: 'tags' as keyof DatabasePoem,
       label: 'Tags',
-      render: (value: string[]) => (
+      render: (value: any[]) => (
         <div className="flex flex-wrap gap-1">
-          {value.slice(0, 3).map((tag, index) => (
-            <span key={index} className="px-2 py-1 text-xs bg-primary/20 text-primary rounded-full">
-              {tag}
-            </span>
-          ))}
+          {value.slice(0, 3).map((tagObj, index) => {
+            const tagName = typeof tagObj === 'string' ? tagObj : tagObj.tag;
+            return (
+              <span key={index} className="px-2 py-1 text-xs bg-primary/20 text-primary rounded-full">
+                {tagName}
+              </span>
+            );
+          })}
           {value.length > 3 && (
             <span className="px-2 py-1 text-xs bg-neutral-600 text-neutral-300 rounded-full">
               +{value.length - 3}
+            </span>
+          )}
+        </div>
+      )
+    },
+    {
+      key: 'categories' as keyof DatabasePoem,
+      label: 'Categories',
+      render: (value: any[]) => (
+        <div className="flex flex-wrap gap-1">
+          {value.slice(0, 2).map((categoryObj, index) => {
+            const categoryName = typeof categoryObj === 'string' ? categoryObj : categoryObj.category;
+            return (
+              <span key={index} className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-full">
+                {categoryName}
+              </span>
+            );
+          })}
+          {value.length > 2 && (
+            <span className="px-2 py-1 text-xs bg-neutral-600 text-neutral-300 rounded-full">
+              +{value.length - 2}
             </span>
           )}
         </div>

@@ -56,9 +56,39 @@ export default async function Poetry() {
                   </div>
                   
                   <div className="mb-3">
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs border border-primary/20">
-                      {poem.category}
-                    </span>
+                    {(() => {
+                      // Combine tags and categories, extract their names
+                      const allItems = [
+                        ...(poem.tags || []).map((tag: any) => ({
+                          name: typeof tag === 'string' ? tag : tag.tag,
+                          type: 'tag'
+                        })),
+                        ...(poem.categories || []).map((category: any) => ({
+                          name: typeof category === 'string' ? category : category.category,
+                          type: 'category'
+                        }))
+                      ];
+                      
+                      // Shuffle and take up to 3 items
+                      const shuffled = allItems.sort(() => Math.random() - 0.5).slice(0, 3);
+                      
+                      return (
+                        <div className="flex flex-wrap gap-2">
+                          {shuffled.map((item, index) => (
+                            <span 
+                              key={index} 
+                              className={`px-3 py-1 rounded-full text-xs border ${
+                                item.type === 'tag' 
+                                  ? 'bg-primary/10 text-primary border-primary/20' 
+                                  : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                              }`}
+                            >
+                              {item.name}
+                            </span>
+                          ))}
+                        </div>
+                      );
+                    })()}
                   </div>
                   
                   <Paragraph size="sm" className="text-neutral-300 mb-4 leading-relaxed">
