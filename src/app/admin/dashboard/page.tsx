@@ -5,6 +5,9 @@ import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic';
+
 interface DashboardStats {
   articles: number;
   poems: number;
