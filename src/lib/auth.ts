@@ -9,10 +9,14 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  // Remove custom pages configuration to use defaults
-  // pages: {
-  //   signIn: "/auth/signin",
-  // },
+  session: {
+    expiresIn: 60 * 60 * 24 * 7, // 7 days
+    updateAge: 60 * 60 * 24, // 1 day
+    freshAge: 60 * 60 * 24, // 1 day
+  },
+  advanced: {
+    useSecureCookies: process.env.NODE_ENV === "production",
+  },
 });
 
 

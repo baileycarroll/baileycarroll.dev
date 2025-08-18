@@ -107,9 +107,9 @@ export default function AdminHeader() {
                     </div>
                   </div>
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       setUserMenuOpen(false);
-                      signOut();
+                      await signOut();
                       // Redirect to home page after sign out
                       window.location.href = "/";
                     }}

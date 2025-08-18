@@ -14,14 +14,12 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const router = useRouter();
-
   // Check for success message in URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const message = urlParams.get('message');
-    if (message) {
-      setSuccessMessage(message);
+    const success = urlParams.get('success');
+    if (success) {
+      setSuccessMessage('Account created successfully! Please sign in.');
       // Clear the message from URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
@@ -36,14 +34,15 @@ export default function SignIn() {
       const result = await signIn.email({
         email,
         password,
+        callbackURL: "/admin/dashboard",
+      }, {
+        onSuccess: () => {
+          window.location.href = "/admin/dashboard";
+        },
+        onError: (ctx) => {
+          setError(ctx.error.message || "Invalid email or password");
+        },
       });
-
-      if (result?.error) {
-        setError("Invalid email or password");
-      } else {
-        // Simple redirect to admin dashboard
-        window.location.href = "/admin/dashboard";
-      }
     } catch (error) {
       console.error("Signin error:", error);
       setError("An error occurred. Please try again.");

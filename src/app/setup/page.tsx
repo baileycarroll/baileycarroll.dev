@@ -78,7 +78,7 @@ export default function Setup() {
 
       if (response.ok) {
         // Redirect to sign-in page
-        router.push('/auth/signin?message=Account created successfully');
+        router.push('/login?success=true');
       } else {
         setError(data.error || 'Failed to create admin account');
       }
