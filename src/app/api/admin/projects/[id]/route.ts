@@ -3,17 +3,18 @@ import { projectService, disconnectDatabase } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await projectService.getProjectById(params.id);
+    const result = await projectService.getProjectById(id);
     
     if (result.success) {
       return NextResponse.json(result.data);
     } else {
       return NextResponse.json(
         { error: result.error },
-        { status: result.status || 500 }
+        { status: 500 }
       );
     }
   } catch (error) {
@@ -29,13 +30,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const { projectData, skillIds, categories } = body;
 
-    const result = await projectService.updateProject(params.id, projectData, skillIds, categories);
+    const result = await projectService.updateProject(id, projectData, skillIds, categories);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -58,10 +60,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await projectService.deleteProject(params.id);
+    const result = await projectService.deleteProject(id);
     
     if (result.success) {
       return NextResponse.json({ success: true });

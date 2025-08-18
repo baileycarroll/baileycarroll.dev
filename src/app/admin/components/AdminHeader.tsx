@@ -109,7 +109,9 @@ export default function AdminHeader() {
                   <button
                     onClick={() => {
                       setUserMenuOpen(false);
-                      signOut({ callbackUrl: "/" });
+                      signOut();
+                      // Redirect to home page after sign out
+                      window.location.href = "/";
                     }}
                     className="flex items-center gap-3 px-4 py-2 text-sm text-neutral-300 hover:text-red-400 hover:bg-red-400/10 transition-colors w-full"
                   >

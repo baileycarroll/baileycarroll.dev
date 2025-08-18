@@ -3,10 +3,11 @@ import { articleService, disconnectDatabase } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await articleService.getArticleById(params.id);
+    const result = await articleService.getArticleById(id);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -29,13 +30,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const { articleData } = body;
 
-    const result = await articleService.updateArticle(params.id, articleData);
+    const result = await articleService.updateArticle(id, articleData);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -58,10 +60,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await articleService.deleteArticle(params.id);
+    const result = await articleService.deleteArticle(id);
     
     if (result.success) {
       return NextResponse.json({ success: true });

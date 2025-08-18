@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlusIcon, ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import AdminTable from '../components/ui/AdminTable';
+import AdminTable, { Column } from '../components/ui/AdminTable';
 import AdminForm, { FormField, FormInput, FormTextarea } from '../components/ui/AdminForm';
 
 interface Experience {
@@ -39,7 +39,7 @@ export default function AdminExperiences() {
     title: '',
     employer: '',
     startDate: '',
-    endDate: '',
+    endDate: '' as string | null,
     details: '',
     link: '',
     order: 0,
@@ -197,7 +197,7 @@ export default function AdminExperiences() {
     }
   };
 
-  const experienceColumns = [
+  const experienceColumns: Column<Experience>[] = [
     {
       key: 'title',
       label: 'Title',
@@ -334,7 +334,7 @@ export default function AdminExperiences() {
                   <FormField label="Order">
                     <FormInput
                       type="number"
-                      value={formData.order}
+                      value={formData.order.toString()}
                       onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
                       placeholder="0"
                     />

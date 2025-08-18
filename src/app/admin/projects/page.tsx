@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlusIcon, ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import AdminTable from '../components/ui/AdminTable';
+import AdminTable, { Column } from '../components/ui/AdminTable';
 import AdminForm, { FormField, FormInput, FormTextarea, FormSelect } from '../components/ui/AdminForm';
 
 interface Project {
@@ -46,7 +46,7 @@ export default function AdminProjects() {
     status: 'active',
     featured: false,
     startDate: '',
-    endDate: '',
+    endDate: '' as string | null,
     url: '',
     urlText: '',
     logoUrl: '',
@@ -215,7 +215,7 @@ export default function AdminProjects() {
     }
   };
 
-  const projectColumns = [
+  const projectColumns: Column<Project>[] = [
     {
       key: 'name',
       label: 'Name',

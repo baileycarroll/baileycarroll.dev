@@ -3,14 +3,12 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SplashScreen from "@/components/layout/SplashScreen";
-import Header from "@/components/layout/header";
+
 
 export default function Splash({
   children,
-  showHeader = true,
 }: Readonly<{
   children: React.ReactNode;
-  showHeader?: boolean;
 }>) {
   const [isSplashComplete, setSplashComplete] = useState(false);
   const [showContent, setShowContent] = useState(false);

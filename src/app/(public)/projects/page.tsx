@@ -122,12 +122,14 @@ export default async function Projects() {
                     <span className="text-sm text-neutral-400 font-medium">
                       {project.categories[0]?.category || 'Uncategorized'}
                     </span>
-                    <Link href={project.url} target="_blank">
-                      <Button size="sm" variant="outline" className="flex items-center">
-                        <ProjectIcon className="w-4 h-4 mr-2" />
-                        {project.urlText}
-                      </Button>
-                    </Link>
+                    {project.url && (
+                      <Link href={project.url} target="_blank">
+                        <Button size="sm" variant="outline" className="flex items-center">
+                          <ProjectIcon className="w-4 h-4 mr-2" />
+                          {project.urlText}
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </Card>
               );
@@ -187,12 +189,14 @@ export default async function Projects() {
                     <span className="text-xs text-neutral-400 font-medium">
                       {project.categories[0]?.category || 'Uncategorized'}
                     </span>
-                    <Link href={project.url} target="_blank">
-                      <Button size="sm" variant="outline" className="flex items-center">
-                        <ProjectIcon className="w-3 h-3 mr-1" />
-                        {project.urlText}
-                      </Button>
-                    </Link>
+                    {project.url && (
+                      <Link href={project.url} target="_blank">
+                        <Button size="sm" variant="outline" className="flex items-center">
+                          <ProjectIcon className="w-3 h-3 mr-1" />
+                          {project.urlText}
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </Card>
               );

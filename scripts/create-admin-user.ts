@@ -29,7 +29,7 @@ async function main() {
     }
 
     // Create user using Better Auth's API
-    const result = await auth.api.signUp({
+    const result = await auth.api.signUpEmail({
       body: {
         email,
         password,
@@ -37,13 +37,13 @@ async function main() {
       },
     });
 
-    if (result.ok) {
+    if (result.user) {
       console.log("✅ Admin user created successfully!");
       console.log(`Email: ${email}`);
       console.log(`Name: ${name}`);
       console.log("\nYou can now sign in to the admin portal at /auth/signin");
     } else {
-      console.error("❌ Failed to create user:", result.error);
+      console.error("❌ Failed to create user");
       process.exit(1);
     }
   } catch (error) {

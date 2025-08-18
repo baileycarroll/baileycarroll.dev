@@ -82,7 +82,7 @@ export default function Setup() {
       } else {
         setError(data.error || 'Failed to create admin account');
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);

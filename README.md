@@ -168,10 +168,12 @@ src/
 - **Bundle Size**: Tree shaking and minimal dependencies
 
 ### Lighthouse Scores
-- **Performance**: 95+
-- **Accessibility**: 100
-- **Best Practices**: 100
-- **SEO**: 100
+- **Performance**: 37 (Needs optimization)
+- **Accessibility**: 96 (Good)
+- **Best Practices**: 100 (Excellent)
+- **SEO**: 91 (Good)
+
+> **Note**: These scores are from actual Lighthouse testing. Performance score is lower due to development server overhead and unoptimized assets. Production deployment with proper caching and optimization should improve these scores significantly.
 
 ## 🔧 API Documentation
 
@@ -204,32 +206,9 @@ Similar endpoints exist for poems, projects, skills, and experiences.
 - E2E tests with Playwright
 - Database migration testing
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Next.js Team** for the amazing framework
-- **Vercel** for seamless deployment
-- **Better Auth** for secure authentication
-- **Prisma** for excellent database tooling
-- **Tailwind CSS** for utility-first styling
-
 ## 📞 Contact
 
 - **Portfolio**: [baileycarroll.dev](https://baileycarroll.dev)
 - **GitHub**: [@yourusername](https://github.com/yourusername)
 - **LinkedIn**: [Bailey Carroll](https://linkedin.com/in/baileycarroll)
 
----
-
-**Built with ❤️ using Next.js, TypeScript, and modern web technologies**

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import AdminTable from "../components/ui/AdminTable";
-import AdminForm, { FormField, FormInput, FormTextarea, FormSelect } from "../components/ui/AdminForm";
+import AdminForm, { FormField, FormInput, FormTextarea } from "../components/ui/AdminForm";
 import type { DatabaseArticle } from "@/services/types";
 
 interface ArticleFormData {
@@ -284,6 +284,7 @@ export default function ArticlesPage() {
                   <FormField label="Author">
                     <FormInput
                       value={formData.author}
+                      onChange={() => {}} // No-op for disabled field
                       disabled
                       placeholder="Bailey Carroll"
                     />

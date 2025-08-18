@@ -5,7 +5,15 @@ import { disconnectDatabase } from '@/lib/database';
 export async function GET() {
   try {
     const result = await experienceService.getAllExperiences();
-    return NextResponse.json(result.data);
+    
+    if (result.success) {
+      return NextResponse.json(result.data);
+    } else {
+      return NextResponse.json(
+        { error: result.error },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error('Error fetching experiences:', error);
     return NextResponse.json(

@@ -378,8 +378,22 @@ export class ProjectService extends DatabaseService {
                 });
             });
 
-            const databaseProject = {
-                ...result,
+            if (!result) {
+                return this.failure('Project not found after update', 'PROJECT_NOT_FOUND', 404);
+            }
+
+            const databaseProject: DatabaseProject = {
+                id: result.id,
+                name: result.name,
+                description: result.description,
+                type: result.type,
+                status: result.status,
+                featured: result.featured,
+                startDate: result.startDate,
+                endDate: result.endDate,
+                url: result.url,
+                urlText: result.urlText,
+                logoUrl: result.logoUrl,
                 skills: (result as PrismaProjectWithRelations).skills.map(ps => ({ 
                     skill: ps.skill 
                 })),

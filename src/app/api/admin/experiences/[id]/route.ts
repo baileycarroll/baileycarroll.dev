@@ -4,10 +4,11 @@ import { disconnectDatabase } from '@/lib/database';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await experienceService.getExperienceById(params.id);
+    const result = await experienceService.getExperienceById(id);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -30,13 +31,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const { experienceData, skillIds } = body;
 
-    const result = await experienceService.updateExperience(params.id, experienceData, skillIds);
+    const result = await experienceService.updateExperience(id, experienceData, skillIds);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -59,10 +61,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await experienceService.deleteExperience(params.id);
+    const result = await experienceService.deleteExperience(id);
     
     if (result.success) {
       return NextResponse.json({ message: 'Experience deleted successfully' });

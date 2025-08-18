@@ -88,8 +88,8 @@ export default function PoemsPage() {
       summary: poem.summary,
       content: poem.content,
       slug: poem.slug,
-      tags: poem.tags.map(t => typeof t === 'string' ? t : t.tag).join(", "),
-      categories: poem.categories.map(c => typeof c === 'string' ? c : c.category).join(", ")
+      tags: poem.tags.join(", "),
+      categories: poem.categories.join(", ")
     });
     setFormErrors({});
     setShowForm(true);

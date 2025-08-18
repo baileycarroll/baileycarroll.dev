@@ -6,14 +6,14 @@ import Card from "@/components/cards/Card";
 import { experienceService } from "@/services";
 
 // Helper function to format dates
-const formatDateRange = (startDate: string, endDate: string): string => {
+const formatDateRange = (startDate: string, endDate?: string | null): string => {
   const start = new Date(startDate);
-  const end = endDate === 'Current' || endDate === 'Ongoing' ? null : new Date(endDate);
+  const end = endDate && (endDate === 'Current' || endDate === 'Ongoing') ? null : endDate ? new Date(endDate) : null;
   
   const startFormatted = start.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   
   if (!end) {
-    return `${startFormatted} - ${endDate}`;
+    return `${startFormatted} - ${endDate || 'Present'}`;
   }
   
   const endFormatted = end.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });

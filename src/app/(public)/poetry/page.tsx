@@ -3,7 +3,7 @@ import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
 import Link from "next/link";
 import Button from "@/components/buttons/Button";
-import { FaFeather, FaArrowRight, FaBook, FaGlobe } from "react-icons/fa";
+import { FaFeather, FaArrowRight, FaBook } from "react-icons/fa";
 import { contentService } from "@/services";
 
 export default async function Poetry() {

@@ -202,7 +202,7 @@ export class PoemService extends DatabaseService {
             
             const result = await this.prisma.$transaction(async (tx) => {
                 // Update the poem
-                const poem = await tx.poem.update({
+                await tx.poem.update({
                     where: { id },
                     data: {
                         title: poemData.title,
@@ -260,8 +260,18 @@ export class PoemService extends DatabaseService {
                 });
             });
 
-            const databasePoem = {
-                ...result,
+            if (!result) {
+                return this.failure('Poem not found after update', 'POEM_NOT_FOUND', 404);
+            }
+
+            const databasePoem: DatabasePoem = {
+                id: result.id,
+                title: result.title,
+                status: result.status,
+                excerpt: result.excerpt,
+                summary: result.summary,
+                content: result.content,
+                slug: result.slug,
                 tags: (result as PrismaPoemWithRelations).tags.map(t => ({ tag: t.tag })),
                 categories: (result as PrismaPoemWithRelations).categories.map(c => ({ category: c.category })),
             };

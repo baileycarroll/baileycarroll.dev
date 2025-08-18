@@ -37,18 +37,15 @@ if (typeof window === 'undefined') { // Server-side only
 
   // Handle process termination
   process.on('beforeExit', async () => {
-    console.log('🔄 Disconnecting database before exit...');
     await PrismaClientSingleton.disconnect();
   });
 
   process.on('SIGINT', async () => {
-    console.log('🔄 Received SIGINT, disconnecting database...');
     await PrismaClientSingleton.disconnect();
     process.exit(0);
   });
 
   process.on('SIGTERM', async () => {
-    console.log('🔄 Received SIGTERM, disconnecting database...');
     await PrismaClientSingleton.disconnect();
     process.exit(0);
   });

@@ -50,15 +50,15 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Check if the result has a user (success) or error
-    if (result.user && result.token) {
+    // Check if the result has a user (success)
+    if (result.user) {
       return NextResponse.json({ 
         success: true, 
         message: "Admin account created successfully" 
       });
     } else {
       return NextResponse.json(
-        { error: result.error?.message || result.error || "Failed to create admin account" },
+        { error: "Failed to create admin account" },
         { status: 400 }
       );
     }

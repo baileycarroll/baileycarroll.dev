@@ -8,7 +8,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SplashWrapper showHeader={false}>
+    <SplashWrapper>
       <div className="min-h-screen text-slate-100">
         {/* Background Container */}
         <div id="background-container" className="h-[100dvh] w-full bg-enhanced fixed inset-0 -z-10">

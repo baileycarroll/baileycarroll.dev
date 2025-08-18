@@ -3,17 +3,18 @@ import { skillService, disconnectDatabase } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await skillService.getSkillCategoryById(params.id);
+    const result = await skillService.getSkillCategoryById(id);
     
     if (result.success) {
       return NextResponse.json(result.data);
     } else {
       return NextResponse.json(
         { error: result.error },
-        { status: result.status || 500 }
+        { status: 500 }
       );
     }
   } catch (error) {
@@ -29,13 +30,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const { categoryData } = body;
 
-    const result = await skillService.updateSkillCategory(params.id, categoryData);
+    const result = await skillService.updateSkillCategory(id, categoryData);
     
     if (result.success) {
       return NextResponse.json(result.data);
@@ -58,10 +60,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const result = await skillService.deleteSkillCategory(params.id);
+    const result = await skillService.deleteSkillCategory(id);
     
     if (result.success) {
       return NextResponse.json({ success: true });

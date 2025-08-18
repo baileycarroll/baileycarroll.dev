@@ -171,7 +171,7 @@ export class ExperienceService extends DatabaseService {
     async updateExperience(id: string, experienceData: Partial<DatabaseExperience>, skillIds?: string[]): Promise<ServiceResult<DatabaseExperience>> {
         try {
             const result = await this.prisma.$transaction(async (tx) => {
-                const experience = await tx.experience.update({
+                await tx.experience.update({
                     where: { id },
                     data: {
                         title: experienceData.title,
