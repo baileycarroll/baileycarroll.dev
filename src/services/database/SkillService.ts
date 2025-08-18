@@ -93,4 +93,183 @@ export class SkillService extends DatabaseService {
             );
         }
     }
+
+    async updateSkill(id: string, skillData: Partial<DatabaseSkill>): Promise<ServiceResult<DatabaseSkill>> {
+        try {
+            const skill = await this.prisma.skill.update({
+                where: { id },
+                data: {
+                    name: skillData.name,
+                    years: skillData.years,
+                    categoryId: skillData.category?.id,
+                },
+                include: {
+                    category: true,
+                }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllSkills');
+            this.invalidateCache('getSkillById');
+
+            return { success: true, data: skill };
+        } catch (err) {
+            return this.failure(
+                'Failed to update skill',
+                'SKILL_UPDATE_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_UPDATE_ERROR')
+            );
+        }
+    }
+
+    async deleteSkill(id: string): Promise<ServiceResult<void>> {
+        try {
+            await this.prisma.skill.delete({
+                where: { id }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllSkills');
+            this.invalidateCache('getSkillById');
+
+            return { success: true, data: undefined };
+        } catch (err) {
+            return this.failure(
+                'Failed to delete skill',
+                'SKILL_DELETION_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_DELETION_ERROR')
+            );
+        }
+    }
+
+    // Skill Category CRUD Operations
+    async getAllSkillCategories(): Promise<ServiceResult<DatabaseSkillCategory[]>> {
+        const cacheKey = this.getCacheKey('getAllSkillCategories', {});
+        const cached = this.getFromCache<DatabaseSkillCategory[]>(cacheKey);
+        if (cached) {
+            return { success: true, data: cached };
+        }
+
+        try {
+            const categories = await this.prisma.skillCategory.findMany({
+                orderBy: { name: 'asc' },
+            });
+
+            this.setCache(cacheKey, categories);
+            return { success: true, data: categories };
+        } catch (err) {
+            return this.failure(
+                'Failed to fetch skill categories',
+                'SKILL_CATEGORIES_FETCH_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_CATEGORIES_FETCH_ERROR')
+            );
+        }
+    }
+
+    async getSkillCategoryById(id: string): Promise<ServiceResult<DatabaseSkillCategory>> {
+        const cacheKey = this.getCacheKey('getSkillCategoryById', { id });
+        const cached = this.getFromCache<DatabaseSkillCategory>(cacheKey);
+        if (cached) {
+            return { success: true, data: cached };
+        }
+
+        try {
+            const category = await this.prisma.skillCategory.findUnique({
+                where: { id }
+            });
+
+            if (!category) {
+                return this.failure(
+                    `Skill category not found: ${id}`,
+                    'SKILL_CATEGORY_NOT_FOUND',
+                    404,
+                );
+            }
+
+            this.setCache(cacheKey, category);
+            return { success: true, data: category };
+        } catch (err) {
+            return this.failure(
+                `Failed to fetch skill category: ${id}`,
+                'SKILL_CATEGORY_FETCH_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_CATEGORY_FETCH_ERROR')
+            );
+        }
+    }
+
+    async createSkillCategory(categoryData: Omit<DatabaseSkillCategory, 'id'>): Promise<ServiceResult<DatabaseSkillCategory>> {
+        try {
+            const category = await this.prisma.skillCategory.create({
+                data: {
+                    name: categoryData.name,
+                    description: categoryData.description,
+                    display: categoryData.display,
+                }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllSkillCategories');
+            this.invalidateCache('getSkillCategoryById');
+
+            return { success: true, data: category };
+        } catch (err) {
+            return this.failure(
+                'Failed to create skill category',
+                'SKILL_CATEGORY_CREATION_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_CATEGORY_CREATION_ERROR')
+            );
+        }
+    }
+
+    async updateSkillCategory(id: string, categoryData: Partial<DatabaseSkillCategory>): Promise<ServiceResult<DatabaseSkillCategory>> {
+        try {
+            const category = await this.prisma.skillCategory.update({
+                where: { id },
+                data: {
+                    name: categoryData.name,
+                    description: categoryData.description,
+                    display: categoryData.display,
+                }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllSkillCategories');
+            this.invalidateCache('getSkillCategoryById');
+
+            return { success: true, data: category };
+        } catch (err) {
+            return this.failure(
+                'Failed to update skill category',
+                'SKILL_CATEGORY_UPDATE_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_CATEGORY_UPDATE_ERROR')
+            );
+        }
+    }
+
+    async deleteSkillCategory(id: string): Promise<ServiceResult<void>> {
+        try {
+            await this.prisma.skillCategory.delete({
+                where: { id }
+            });
+
+            // Invalidate relevant caches
+            this.invalidateCache('getAllSkillCategories');
+            this.invalidateCache('getSkillCategoryById');
+
+            return { success: true, data: undefined };
+        } catch (err) {
+            return this.failure(
+                'Failed to delete skill category',
+                'SKILL_CATEGORY_DELETION_ERROR',
+                500,
+                err instanceof Error ? err : new Error('SKILL_CATEGORY_DELETION_ERROR')
+            );
+        }
+    }
 }
