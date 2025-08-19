@@ -214,11 +214,11 @@ export default function ArticlesPage() {
     {
       key: 'tags' as keyof DatabaseArticle,
       label: 'Tags',
-      render: (value: string[]) => (
+      render: (value: any[]) => (
         <div className="flex flex-wrap gap-1">
           {value.slice(0, 3).map((tag, index) => (
             <span key={index} className="px-2 py-1 text-xs bg-primary/20 text-primary rounded-full">
-              {tag}
+              {typeof tag === 'string' ? tag : tag.tag}
             </span>
           ))}
           {value.length > 3 && (
