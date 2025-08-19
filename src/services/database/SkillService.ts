@@ -133,6 +133,16 @@ export class SkillService extends DatabaseService {
 
     async deleteSkill(id: string): Promise<ServiceResult<void>> {
         try {
+            // First, remove all references to this skill from projects and experiences
+            await this.prisma.projectSkills.deleteMany({
+                where: { skillId: id }
+            });
+
+            await this.prisma.experienceSkill.deleteMany({
+                where: { skillId: id }
+            });
+
+            // Now delete the skill
             await this.prisma.skill.delete({
                 where: { id }
             });
