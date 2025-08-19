@@ -73,7 +73,7 @@ export default async function Projects() {
       {featuredProjects.length > 0 && (
         <section className="py-16">
           <Heading Level={3} className="mb-8 text-center">Featured Projects</Heading>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className={`grid grid-cols-1 md:grid-cols-${featuredProjects.length} gap-8`}>
             {featuredProjects.map((project) => {
               const ProjectIcon = getProjectIcon(project.type);
               const projectLogo = getProjectLogo(project.name);

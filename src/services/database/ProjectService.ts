@@ -424,6 +424,17 @@ export class ProjectService extends DatabaseService {
         try {
             console.log('Deleting project:', id);
             
+            // Delete all skills associated with this project
+            await this.prisma.projectSkills.deleteMany({
+                where: { projectId: id }
+            });
+
+            // Delete all categories associated with this project
+            await this.prisma.projectCategories.deleteMany({
+                where: { projectId: id }
+            });
+
+            // Delete the project   
             await this.prisma.project.delete({
                 where: { id }
             });
@@ -432,6 +443,7 @@ export class ProjectService extends DatabaseService {
             this.invalidateCache('getAllProjects');
             this.invalidateCache('getProjectById');
 
+            await this.prisma.$disconnect()
             return { success: true, data: true };
         } catch (err) {
             console.error('Project deletion error:', err);

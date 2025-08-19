@@ -20,7 +20,7 @@ export default async function Home() {
   // Fetch featured projects from database
   const projectsResult = await projectService.getAllProjects();
   const featuredProjects = projectsResult.success 
-    ? projectsResult.data.filter(project => project.featured).slice(0, 2)
+    ? projectsResult.data.filter(project => project.featured).slice(0, 3)
     : [];
 
   return (
@@ -90,7 +90,7 @@ export default async function Home() {
         <Heading Level={3} className="mb-8 text-center">Featured Projects</Heading>
         {featuredProjects.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className={`grid grid-cols-1 md:grid-cols-${featuredProjects.length} gap-8`}>
               {featuredProjects.map((project) => (
                 <Card key={project.id} variant="elevated" interactive className="p-8">
                   <Heading Level={4} className="mb-4">{project.name}</Heading>
