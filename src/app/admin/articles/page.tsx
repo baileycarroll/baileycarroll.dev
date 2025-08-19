@@ -117,10 +117,10 @@ export default function ArticlesPage() {
     if (!formData.slug.trim()) errors.slug = "Slug is required";
     if (!formData.date) errors.date = "Published date is required";
 
-          if (Object.keys(errors).length > 0) {
-        setFormErrors(errors);
-        return;
-      }
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
       // Note: Slug validation will be handled by the database unique constraint
 
@@ -201,7 +201,15 @@ export default function ArticlesPage() {
       key: 'date' as keyof DatabaseArticle,
       label: 'Date',
       sortable: true,
-      render: (value: Date) => value.toLocaleDateString()
+      render: (value: Date | string) => {
+        if (value instanceof Date) {
+          return value.toLocaleDateString();
+        }
+        if (typeof value === 'string') {
+          return new Date(value).toLocaleDateString();
+        }
+        return 'Invalid date';
+      }
     },
     {
       key: 'tags' as keyof DatabaseArticle,
