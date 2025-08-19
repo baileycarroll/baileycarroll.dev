@@ -45,6 +45,9 @@ function ArticleItem({ article }: { article: Article }) {
   );
 }
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function ArticlesPage() {
   const articlesResult = await contentService.getAllArticles();
 

@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
         // Redirect to sign-in page if no valid session
         return NextResponse.redirect(new URL("/login", request.url));
       }
-    } catch (error) {
+    } catch {
       // If session check fails, redirect to login
       return NextResponse.redirect(new URL("/login", request.url));
     }

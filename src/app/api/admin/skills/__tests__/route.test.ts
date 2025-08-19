@@ -11,21 +11,6 @@ jest.mock('@/services', () => ({
 
 const mockSkillService = skillService as jest.Mocked<typeof skillService>
 
-// Mock NextRequest and NextResponse
-const mockNextRequest = (url: string, options?: any) => ({
-  url,
-  method: options?.method || 'GET',
-  headers: new Map(Object.entries(options?.headers || {})),
-  json: jest.fn().mockResolvedValue(options?.body || {}),
-})
-
-const mockNextResponse = {
-  json: jest.fn().mockImplementation((data, options) => ({
-    status: options?.status || 200,
-    json: () => Promise.resolve(data),
-  })),
-}
-
 // Mock the route handlers
 jest.mock('../route', () => ({
   GET: jest.fn(),

@@ -35,6 +35,9 @@ const getProjectLogo = (name: string) => {
   return RoseShield;
 };
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function Projects() {
   const projectsResult = await projectService.getAllProjects();
   

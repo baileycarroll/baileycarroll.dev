@@ -49,6 +49,9 @@ function SkillCard({ name, years }: { name: string; years: number }) {
   );
 }
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function Resume() {
   // Fetch skills from database
   const skillsResult = await skillService.getAllSkills();

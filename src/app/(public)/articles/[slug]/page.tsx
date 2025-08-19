@@ -7,6 +7,9 @@ import { FaArrowLeft, FaCalendar, FaUser } from "react-icons/fa";
 import { formatDate } from "@/lib/formatDate";
 import { contentService } from "@/services";
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 // The dynamic article page component
 export default async function ArticlePage(props: {
   params: Promise<{ slug: string }>;

@@ -1,5 +1,4 @@
 // Next Components
-import Image from "next/image";
 import Link from "next/link";
 // Icons
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
@@ -8,13 +7,15 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Button from "@/components/buttons/Button";
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
-import Headshot from "@/assets/Headshot.png";
 import Paragraph from "@/components/typography/Paragraphs";
 import { TimelineHome } from "@/components/timeline/Timeline";
 import SkillsMarquee from "@/components/marquee/SkillsMarquee";
 import { projectService } from "@/services";
 // Local Resume PDF
 const ResumePdf = "/Bailey Carroll - Full Resume.pdf";
+
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   // Fetch featured projects from database

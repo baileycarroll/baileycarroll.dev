@@ -12,7 +12,7 @@ interface CacheEntry<T> {
 export abstract class DatabaseService {
     protected prisma: PrismaClient;
     protected cache: Map<string, CacheEntry<unknown>>;
-    protected readonly DEFAULT_TTL = 5 * 60 * 1000; // 5 minutes
+    protected readonly DEFAULT_TTL = 30 * 1000; // 30 seconds (reduced for more responsive updates)
     protected readonly CACHE_CLEANUP_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
     constructor(prisma: PrismaClient) {

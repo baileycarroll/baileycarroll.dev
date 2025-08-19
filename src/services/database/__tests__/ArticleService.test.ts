@@ -8,18 +8,6 @@ describe('ArticleService', () => {
   let service: ArticleService
   let mockPrisma: jest.Mocked<PrismaClient>
 
-  const mockArticle = {
-    id: 'article-1',
-    title: 'Test Article',
-    description: 'Test description',
-    date: new Date('2024-01-15'),
-    author: 'Bailey Carroll',
-    content: 'Test content',
-    slug: 'test-article',
-    tags: [{ tag: 'test' }],
-    categories: [{ category: 'general' }],
-  }
-
   beforeEach(() => {
     jest.clearAllMocks()
 

@@ -6,6 +6,9 @@ import Button from "@/components/buttons/Button";
 import { FaFeather, FaArrowRight, FaBook } from "react-icons/fa";
 import { contentService } from "@/services";
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function Poetry() {
   const poemsResult = await contentService.getAllPoems();
   if (!poemsResult.success) {

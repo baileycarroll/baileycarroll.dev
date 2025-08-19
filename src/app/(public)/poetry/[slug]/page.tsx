@@ -5,6 +5,9 @@ import Button from "@/components/buttons/Button";
 import { FaArrowLeft, FaFeather } from "react-icons/fa";
 import { contentService } from "@/services";
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function Poetry(props: {
   params: Promise<{ slug: string }>;
 }) {

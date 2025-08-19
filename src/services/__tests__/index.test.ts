@@ -113,14 +113,6 @@ describe('Services Index', () => {
       expect(disconnectDatabase).toBeDefined()
       expect(typeof disconnectDatabase).toBe('function')
     })
-
-    it('should call disconnect on all services', async () => {
-      // Mock the disconnect methods
-      const mockDisconnect = jest.fn().mockResolvedValue({ success: true, data: undefined })
-      
-      // We can't easily mock the private disconnect methods, but we can verify the function exists
-      expect(disconnectDatabase).toBeDefined()
-    })
   })
 
   describe('Service Inheritance', () => {
