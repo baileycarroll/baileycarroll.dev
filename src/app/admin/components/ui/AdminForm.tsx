@@ -219,3 +219,6 @@ export function FormSelect({
     </select>
   );
 }
+
+// Re-export DateSelector components for convenience
+export { default as DateSelector, DateField } from './DateSelector';

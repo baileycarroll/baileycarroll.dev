@@ -47,30 +47,16 @@ export default function About() {
           <Heading Level={3} className="mb-8 text-center">My Story</Heading>
           <div className="max-w-4xl mx-auto space-y-6">
             <Paragraph size="lg">
-              I've been tinkering and working in the technical industry for over 12 years. 
-              I wrote my first "program" in Perl at 11 years old for a family friend in Reno, 
-              Nevada (who was the ISP for the valley I grew up in) - it was a somewhat simple 
-              program that helped them manage each of the customers networking equipment from 
-              their local server.
+            I’ve spent more than twelve years building and refining software. At eleven, I wrote my first Perl script for a family friend in Reno who ran our valley’s ISP—a small tool that let them manage customer networking gear from a local server. That early taste of utility never left.
             </Paragraph>
             <Paragraph size="lg">
-              When I was 19 I had corrective surgeries to fix the genetic deformities in my legs. 
-              During that recovery time a dear friend of mine approached me with an idea to deliver 
-              video content to a community gathering. This started what is my largest and most 
-              passionate project, Acolyte. Since then I dove further into the idea of making 
-              products and things that improve not only my life, but the lives of those I care about.
+            At nineteen, while recovering from corrective leg surgeries, a friend asked if I could deliver video to a community gathering. That spark became Acolyte, my longest and most devoted project. Since then I’ve chased the same feeling: making products that remove friction and make life better for the people around me.
             </Paragraph>
             <Paragraph size="lg">
-              While I have many side hobbies, I am a gamer at heart. I really enjoy video games 
-              with a good amount of lore in them. One of my all time favorites being the Elder 
-              Scrolls series. (I cannot pick just one of them.) Other franchises such as Pokemon, 
-              Final Fantasy, The Legend of Zelda, and the Soulsborne series are close to my heart as well.
+            I’m a gamer at heart and drawn to worlds with deep lore. Elder Scrolls sits near the center, with Pokémon, Final Fantasy, The Legend of Zelda, and the Soulsborne series close behind. Those worlds remind me that systems can be both elegant and vast.
             </Paragraph>
             <Paragraph size="lg">
-              Today, I work as a <em className="text-primary font-semibold">Senior Computer Specialist</em> for the 
-              University of Washington during the day and like to spend my evenings either at home 
-              with my house tiger (Leo) programming, reading or playing video games. Or out exploring 
-              the beautiful city I have made my home in.
+            Today I serve as a <span className="text-primary font-semibold">Senior Computer Specialist (Atlassian Platform Engineer)</span> at the University of Washington, focusing on platform reliability, identity, and migrations. Recent work includes restoring secure SSO for thousands of users, modernizing stacks across Java, Ubuntu, and Postgres, and making indexing dramatically faster. Evenings are for quiet joys with my house tiger, Leo—coding, reading, playing games—or wandering the city I now call home.
             </Paragraph>
           </div>
         </Card>

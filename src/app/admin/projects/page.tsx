@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlusIcon, ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import AdminTable, { Column } from '../components/ui/AdminTable';
-import AdminForm, { FormField, FormInput, FormTextarea, FormSelect } from '../components/ui/AdminForm';
+import AdminForm, { FormField, FormInput, FormTextarea, FormSelect, DateField } from '../components/ui/AdminForm';
 
 interface Project {
   id: string;
@@ -418,22 +418,18 @@ export default function AdminProjects() {
                     </div>
                   </FormField>
 
-                  <FormField label="Start Date" required>
-                    <FormInput
-                      type="date"
-                      value={formData.startDate}
-                      onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                      required
-                    />
-                  </FormField>
+                  <DateField
+                    label="Start Date"
+                    value={formData.startDate}
+                    onChange={(value) => setFormData({ ...formData, startDate: value })}
+                    required
+                  />
 
-                  <FormField label="End Date">
-                    <FormInput
-                      type="date"
-                      value={formData.endDate || ''}
-                      onChange={(e) => setFormData({ ...formData, endDate: e.target.value || null })}
-                    />
-                  </FormField>
+                  <DateField
+                    label="End Date"
+                    value={formData.endDate || ''}
+                    onChange={(value) => setFormData({ ...formData, endDate: value || null })}
+                  />
 
                   <FormField label="Project URL">
                     <FormInput

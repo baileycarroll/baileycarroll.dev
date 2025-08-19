@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import AdminTable from "../components/ui/AdminTable";
-import AdminForm, { FormField, FormInput, FormTextarea } from "../components/ui/AdminForm";
+import AdminForm, { FormField, FormInput, FormTextarea, DateField } from "../components/ui/AdminForm";
 import type { DatabaseArticle } from "@/services/types";
 
 interface ArticleFormData {
@@ -12,6 +12,7 @@ interface ArticleFormData {
   content: string;
   author: string;
   slug: string;
+  date: string;
   tags: string;
   categories: string;
 }
@@ -27,6 +28,7 @@ export default function ArticlesPage() {
     content: "",
     author: "",
     slug: "",
+    date: new Date().toISOString().split('T')[0], // Default to today
     tags: "",
     categories: ""
   });
@@ -63,6 +65,7 @@ export default function ArticlesPage() {
       content: "",
       author: "Bailey Carroll",
       slug: "",
+      date: new Date().toISOString().split('T')[0], // Default to today
       tags: "",
       categories: ""
     });
@@ -78,6 +81,7 @@ export default function ArticlesPage() {
       content: article.content,
       author: "Bailey Carroll",
       slug: article.slug,
+      date: article.date.toISOString().split('T')[0], // Convert to YYYY-MM-DD format
       tags: article.tags.join(", "),
       categories: article.categories.join(", ")
     });
@@ -111,6 +115,7 @@ export default function ArticlesPage() {
     if (!formData.description.trim()) errors.description = "Description is required";
     if (!formData.content.trim()) errors.content = "Content is required";
     if (!formData.slug.trim()) errors.slug = "Slug is required";
+    if (!formData.date) errors.date = "Published date is required";
 
           if (Object.keys(errors).length > 0) {
         setFormErrors(errors);
@@ -131,7 +136,7 @@ export default function ArticlesPage() {
         content: formData.content.trim(),
         author: formData.author.trim(),
         slug: formData.slug.trim(),
-        date: new Date().toISOString()
+        date: new Date(formData.date).toISOString()
       };
 
       let response;
@@ -196,7 +201,7 @@ export default function ArticlesPage() {
       key: 'date' as keyof DatabaseArticle,
       label: 'Date',
       sortable: true,
-      render: (value: string) => new Date(value).toLocaleDateString()
+      render: (value: Date) => value.toLocaleDateString()
     },
     {
       key: 'tags' as keyof DatabaseArticle,
@@ -299,6 +304,14 @@ export default function ArticlesPage() {
                       required
                     />
                   </FormField>
+
+                  <DateField
+                    label="Published Date"
+                    value={formData.date}
+                    onChange={(value) => setFormData({ ...formData, date: value })}
+                    error={formErrors.date}
+                    required
+                  />
 
                   <FormField label="Tags" helpText="Comma-separated tags">
                     <FormInput

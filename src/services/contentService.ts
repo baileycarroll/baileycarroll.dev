@@ -53,7 +53,7 @@ export class ContentService {
                     return {
                         title: dbArticle.title,
                         description: dbArticle.description,
-                        date: dbArticle.date,
+                        date: dbArticle.date.toISOString(),
                         author: dbArticle.author,
                         content: compiledResult.data,
                         slug: dbArticle.slug,
@@ -104,7 +104,7 @@ export class ContentService {
             const article: Article = {
                 title: result.data.title,
                 description: result.data.description,
-                date: result.data.date,
+                date: result.data.date.toISOString(),
                 author: result.data.author,
                 content: compiledResult.data,
                 slug: result.data.slug,
@@ -217,7 +217,7 @@ export class ContentService {
                 {
                     title: articleData.title,
                     description: articleData.description,
-                    date: articleData.date,
+                    date: new Date(articleData.date),
                     author: articleData.author,
                     content: mdxContent, // Store raw MDX content
                     slug: articleData.slug,

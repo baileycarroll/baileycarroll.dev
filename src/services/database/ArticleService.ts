@@ -27,6 +27,7 @@ export class ArticleService extends DatabaseService {
             }));
 
             this.setCache(cacheKey, result);
+            await this.disconnect();
             return { success: true, data: result };
         } catch (err) {
             return this.failure(
@@ -71,6 +72,7 @@ export class ArticleService extends DatabaseService {
             };
 
             this.setCache(cacheKey, result);
+            await this.disconnect();
             return { success: true, data: result };
         } catch (err) {
             return this.failure(
@@ -115,6 +117,7 @@ export class ArticleService extends DatabaseService {
             };
 
             this.setCache(cacheKey, result);
+            await this.disconnect();
             return { success: true, data: result };
         } catch (err) {
             return this.failure(
@@ -137,7 +140,7 @@ export class ArticleService extends DatabaseService {
                 data: {
                     title: articleData.title,
                     description: articleData.description,
-                    date: articleData.date,
+                    date: new Date(articleData.date),
                     author: articleData.author,
                     content: articleData.content,
                     slug: articleData.slug,
@@ -212,11 +215,12 @@ export class ArticleService extends DatabaseService {
             const result = await this.prisma.article.update({
                 where: { id },
                 data: {
-                    title: articleData.title,
-                    description: articleData.description,
-                    content: articleData.content,
-                    author: articleData.author,
-                    slug: articleData.slug,
+                    ...(articleData.title && { title: articleData.title }),
+                    ...(articleData.description && { description: articleData.description }),
+                    ...(articleData.content && { content: articleData.content }),
+                    ...(articleData.author && { author: articleData.author }),
+                    ...(articleData.slug && { slug: articleData.slug }),
+                    ...(articleData.date && { date: new Date(articleData.date) }),
                 },
                 include: {
                     tags: true,

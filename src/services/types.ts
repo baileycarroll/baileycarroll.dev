@@ -28,7 +28,7 @@ export interface DatabaseArticle {
     content: string;
     author: string;
     slug: string;
-    date: string;
+    date: Date;
     tags: string[];
     categories: string[];
 }

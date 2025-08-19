@@ -3,7 +3,7 @@ export interface DatabaseArticle {
     id: string;
     title: string;
     description: string;
-    date: string;
+    date: Date;
     author: string;
     content: string;
     slug: string;
@@ -71,7 +71,7 @@ export interface PrismaArticleWithRelations {
     id: string;
     title: string;
     description: string;
-    date: string;
+    date: Date;
     author: string;
     content: string;
     slug: string;

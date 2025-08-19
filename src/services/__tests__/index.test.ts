@@ -62,6 +62,10 @@ describe('Services Index', () => {
     jest.clearAllMocks()
   })
 
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
+
   describe('Service Instances', () => {
     it('should export skillService', () => {
       expect(skillService).toBeDefined()

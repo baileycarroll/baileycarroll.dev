@@ -60,6 +60,10 @@ describe('SkillService', () => {
     service = new SkillService(mockPrisma)
   })
 
+  afterAll(async () => {
+    await service.disconnect()
+  })
+
   describe('Skill CRUD Operations', () => {
     describe('getAllSkills', () => {
       it('should return all skills successfully', async () => {

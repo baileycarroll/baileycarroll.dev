@@ -16,6 +16,10 @@ describe('/api/admin/skill-categories', () => {
     jest.clearAllMocks()
   })
 
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
+
   describe('GET', () => {
     it('should return all skill categories successfully', async () => {
       const mockCategories = [

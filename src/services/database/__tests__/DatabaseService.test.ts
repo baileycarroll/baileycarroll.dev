@@ -51,6 +51,10 @@ describe('DatabaseService', () => {
     jest.clearAllTimers()
   })
 
+  afterAll(async () => {
+    await service.disconnect()
+  })
+
   describe('Connection Management', () => {
     describe('connect', () => {
       it('should successfully connect to database', async () => {

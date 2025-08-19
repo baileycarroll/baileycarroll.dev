@@ -28,28 +28,25 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="min-h-[60vh] flex items-center justify-center py-16">
         <div className="text-center space-y-8">
-          <div className="relative">
-            <Image
+          {/* <div className="relative">
+            {/* <Image
               src={Headshot}
               alt="Profile image of Bailey Carroll, a software developer based in Seattle."
               className="rounded-full ring-2 ring-primary/30 h-40 w-40 object-cover object-top mx-auto transition-all duration-300"
               priority
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-            />
-          </div>
+            /> 
+          </div> */}
           <div className="space-y-4">
             <Heading Level={1} className="text-6xl sm:text-7xl">
               Bailey Carroll
             </Heading>
             <Heading Level={2} className="text-2xl sm:text-3xl text-primary">
-              Software Developer & Problem Solver
+              Platform & Software Engineer | Seattle, WA
             </Heading>
             <Paragraph size="lg" className="max-w-2xl mx-auto">
-              Passionate software developer based in Seattle, crafting innovative solutions 
-              that make a difference. I specialize in full-stack development, system architecture, 
-              and creating user-centric applications.
-            </Paragraph>
+            I work at the seams where identity, infrastructure, and developer experience meet. Give me a messy migration or a brittle pipeline and I will turn it into a calm, repeatable path. Quiet platforms make loud results.            </Paragraph>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/projects">
                 <Button size="lg">View My Work</Button>

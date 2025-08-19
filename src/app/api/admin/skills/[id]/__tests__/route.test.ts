@@ -30,6 +30,10 @@ describe('/api/admin/skills/[id]', () => {
     jest.clearAllMocks()
   })
 
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
+
   describe('GET', () => {
     it('should return a skill by id successfully', async () => {
       mockSkillService.getSkillById.mockResolvedValueOnce({
