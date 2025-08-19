@@ -111,6 +111,14 @@ export async function TimelineFull() {
 export async function TimelineHome() {
   try {
     const experiencesResult = await experienceService.getFeaturedExperiences();
+
+    if (experiencesResult.success && experiencesResult.data.length < 1) {
+      return (
+        <div className="text-center text-neutral-400">
+          <Paragraph size="sm">No experience data available.</Paragraph>
+        </div>
+      );
+    }
     
     if (!experiencesResult.success) {
       console.error('Failed to fetch experiences:', experiencesResult.error);
@@ -118,14 +126,6 @@ export async function TimelineHome() {
         <div className="text-center text-neutral-400">
           <Paragraph size="sm">Failed to load experience timeline.</Paragraph>
           <Paragraph size="sm" className="mt-2">Error: {experiencesResult.error?.message || 'Unknown error'}</Paragraph>
-        </div>
-      );
-    }
-
-    if (experiencesResult.data.length === 0) {
-      return (
-        <div className="text-center text-neutral-400">
-          <Paragraph size="sm">No experience data available.</Paragraph>
         </div>
       );
     }
