@@ -27,7 +27,7 @@ export interface DatabaseSkill {
     id: string;
     name: string;
     years: number;
-    category: DatabaseSkillCategory;
+    category: DatabaseSkillCategory | null;
 }
 
 export interface DatabaseSkillCategory {
@@ -123,7 +123,7 @@ export interface PrismaSkill {
     id: string;
     name: string;
     years: number;
-    categoryId: string;
+    categoryId: string | null;
     category: {
         id: string;
         name: string;

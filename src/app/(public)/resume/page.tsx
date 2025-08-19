@@ -60,9 +60,9 @@ export default async function Resume() {
   // Group skills by category (only display categories that are enabled)
   const groupedSkills = skillsResult.success 
     ? skillsResult.data
-        .filter(skill => skill.category.display)
+        .filter(skill => skill.category?.display)
         .reduce((acc, skill) => {
-          const categoryName = skill.category.name;
+          const categoryName = skill.category?.name || 'Uncategorized';
           if (!acc[categoryName]) {
             acc[categoryName] = [];
           }

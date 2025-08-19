@@ -77,12 +77,12 @@ export interface DatabaseSkill {
     id: string;
     name: string;
     years: number;
-    category: {
+    category?: {
         id: string;
         name: string;
         description?: string | null;
         display: boolean;
-    };
+    } | null;
 }
 
 export interface DatabaseSkillCategory {

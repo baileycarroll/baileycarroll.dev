@@ -130,7 +130,7 @@ export default function SkillsPage() {
     setSkillFormData({
       name: skill.name,
       years: skill.years,
-      categoryId: skill.category.id
+      categoryId: skill.category?.id || ''
     });
     setSkillFormErrors({});
     setCategorySearchTerm('');
@@ -336,9 +336,9 @@ export default function SkillsPage() {
       key: 'category' as keyof DatabaseSkill,
       label: 'Category',
       searchable: true,
-      render: (value: DatabaseSkillCategory) => (
+      render: (value: DatabaseSkillCategory | null) => (
         <span className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-full">
-          {value.name}
+          {value?.name || 'No category'}
         </span>
       )
     }

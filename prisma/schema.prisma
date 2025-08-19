@@ -70,8 +70,8 @@ model Skill {
   id          String            @id @default(uuid())
   name        String            @unique
   years       Int
-  categoryId  String
-  category    SkillCategory     @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+  category    SkillCategory?     @relation(fields: [categoryId], references: [id])
   projects    ProjectSkills[]
   experiences ExperienceSkill[]
 }

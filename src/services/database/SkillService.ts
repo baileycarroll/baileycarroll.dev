@@ -76,7 +76,7 @@ export class SkillService extends DatabaseService {
                 data: {
                     name: skillData.name,
                     years: skillData.years,
-                    categoryId: skillData.category.id,
+                    categoryId: skillData.category?.id,
                 },
                 include: {
                     category: true,
@@ -272,6 +272,22 @@ export class SkillService extends DatabaseService {
 
     async deleteSkillCategory(id: string): Promise<ServiceResult<void>> {
         try {
+            let skills = await this.prisma.skill.findMany({
+                where: {categoryId: id}
+            })
+            
+            // Map through each skill in the list, and update the caetgory id to be null
+            skills.forEach(async (skill) => {
+                await this.prisma.skill.update({
+                    where: { id: skill.id },
+                    data: {
+                        categoryId: undefined
+                    }
+                })
+                await this.prisma.$disconnect()
+            })
+
+
             await this.prisma.skillCategory.delete({
                 where: { id }
             });
