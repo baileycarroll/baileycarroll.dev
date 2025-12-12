@@ -39,7 +39,7 @@
     "framer-motion": "^12.23.12",
     "fs": "0.0.1-security",
     "gray-matter": "^4.0.3",
-    "next": "15.4.6",
+    "next": "15.4.9",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
