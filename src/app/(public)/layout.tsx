@@ -21,7 +21,7 @@ export default function PublicLayout({
         <Header />
         
         {/* Main Content */}
-        <main className="pt-16">
+        <main className="pt-8 sm:pt-10 lg:pt-12 pb-20">
           {children}
         </main>
       </div>

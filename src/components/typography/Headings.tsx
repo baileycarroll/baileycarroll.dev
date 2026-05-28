@@ -18,12 +18,12 @@ const Heading: React.FC<HeadingProps> = ({
   style,
 }) => {
   const headingStyles = {
-    1: "text-6xl font-bold leading-tight tracking-tight text-white",
-    2: "text-5xl font-bold leading-tight tracking-tight text-white",
-    3: "text-4xl font-semibold leading-tight tracking-normal text-white",
-    4: "text-3xl font-semibold leading-tight tracking-normal text-white",
-    5: "text-2xl font-medium leading-normal tracking-normal text-white",
-    6: "text-xl font-medium leading-normal tracking-normal text-white"
+    1: "text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.02] tracking-normal text-white",
+    2: "text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-normal text-white",
+    3: "text-3xl sm:text-4xl font-semibold leading-tight tracking-normal text-white",
+    4: "text-2xl sm:text-3xl font-semibold leading-tight tracking-normal text-white",
+    5: "text-xl sm:text-2xl font-medium leading-snug tracking-normal text-white",
+    6: "text-lg sm:text-xl font-medium leading-snug tracking-normal text-white"
   };
 
   const Tag = (as || `h${Level}`) as keyof React.JSX.IntrinsicElements;

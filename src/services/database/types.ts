@@ -1,28 +1,3 @@
-// Database Interfaces Matching the Types from the Prisma Schema
-export interface DatabaseArticle {
-    id: string;
-    title: string;
-    description: string;
-    date: Date;
-    author: string;
-    content: string;
-    slug: string;
-    tags: { tag: string }[];
-    categories: { category: string }[];
-}
-
-export interface DatabasePoem {
-    id: string;
-    title: string;
-    status: string;
-    excerpt: string;
-    summary: string;
-    content: string;
-    slug: string;
-    tags: { tag: string }[];
-    categories: { category: string }[];
-}
-
 export interface DatabaseSkill {
     id: string;
     name: string;
@@ -64,31 +39,6 @@ export interface DatabaseExperience {
   order: number;
   featured: boolean;
   skills: { skill: DatabaseSkill }[];
-}
-
-// Internal types for Prisma query results (with full relation data)
-export interface PrismaArticleWithRelations {
-    id: string;
-    title: string;
-    description: string;
-    date: Date;
-    author: string;
-    content: string;
-    slug: string;
-    tags: { id: string; articleId: string; tag: string }[];
-    categories: { id: string; articleId: string; category: string }[];
-}
-
-export interface PrismaPoemWithRelations {
-    id: string;
-    title: string;
-    status: string;
-    excerpt: string;
-    summary: string;
-    content: string;
-    slug: string;
-    tags: { id: string; poemId: string; tag: string }[];
-    categories: { id: string; poemId: string; category: string }[];
 }
 
 export interface PrismaProjectWithRelations {

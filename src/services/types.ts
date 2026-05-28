@@ -20,31 +20,6 @@ export type ServiceResult<T> = {
     error: ServiceError;
 };
 
-// Database Types
-export interface DatabaseArticle {
-    id: string;
-    title: string;
-    description: string;
-    content: string;
-    author: string;
-    slug: string;
-    date: Date;
-    tags: string[];
-    categories: string[];
-}
-
-export interface DatabasePoem {
-    id: string;
-    title: string;
-    status: string;
-    excerpt: string;
-    summary: string;
-    content: string;
-    slug: string;
-    tags: string[];
-    categories: string[];
-}
-
 export interface DatabaseProject {
     id: string;
     name: string;

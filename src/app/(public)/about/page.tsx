@@ -1,16 +1,32 @@
-// Next Imports
 import Link from "next/link";
-import React from "react";
-// Icons
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
-import { FaGithub, FaLinkedin, FaSpotify } from "react-icons/fa";
-// Clsx for conditional classes
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import type { ComponentType, ReactNode } from "react";
 import clsx from "clsx";
-// Custom Components
 import Card from "@/components/cards/Card";
 import Heading from "@/components/typography/Headings";
 import Paragraph from "@/components/typography/Paragraphs";
-import Button from "@/components/buttons/Button";
+
+function SectionEyebrow({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium uppercase tracking-wide text-primary">
+      {children}
+    </span>
+  );
+}
+
+function StoryBreak({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="grid gap-4 border-t border-white/8 pt-8 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-8">
+      <Paragraph size="sm" className="uppercase tracking-wide text-neutral-500">
+        {title}
+      </Paragraph>
+      <Paragraph size="lg" className="max-w-3xl text-neutral-200">
+        {children}
+      </Paragraph>
+    </div>
+  );
+}
 
 function SocialLink({
   className,
@@ -20,63 +36,92 @@ function SocialLink({
 }: {
   className?: string;
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
+  icon: ComponentType<{ className?: string }>;
+  children: ReactNode;
 }) {
   return (
     <Link
       href={href}
       className={clsx(
-        "flex items-center gap-3 text-primary hover:text-primary-light transition-colors p-4 rounded-lg hover:bg-primary/5",
+        "flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.02] p-4 text-neutral-200 transition-colors hover:border-primary/22 hover:text-white",
         className
       )}
       target="_blank"
     >
-      <Icon className="w-6 h-6" />
-      <span className="text-lg">{children}</span>
+      <Icon className="h-5 w-5 text-primary" />
+      <span className="text-base">{children}</span>
     </Link>
   );
 }
 
 export default function About() {
   return (
-    <div className="max-w-[1400px] mx-auto px-6">
-      {/* Story Section */}
-      <section className="py-16">
-        <Card variant="elevated" className="p-8">
-          <Heading Level={3} className="mb-8 text-center">My Story</Heading>
-          <div className="max-w-4xl mx-auto space-y-6">
-            <Paragraph size="lg">
-            I’ve spent more than twelve years building and refining software. At eleven, I wrote my first Perl script for a family friend in Reno who ran our valley’s ISP—a small tool that let them manage customer networking gear from a local server. That early taste of utility never left.
-            </Paragraph>
-            <Paragraph size="lg">
-            At nineteen, while recovering from corrective leg surgeries, a friend asked if I could deliver video to a community gathering. That spark became Acolyte, my longest and most devoted project. Since then I’ve chased the same feeling: making products that remove friction and make life better for the people around me.
-            </Paragraph>
-            <Paragraph size="lg">
-            I’m a gamer at heart and drawn to worlds with deep lore. Elder Scrolls sits near the center, with Pokémon, Final Fantasy, The Legend of Zelda, and the Soulsborne series close behind. Those worlds remind me that systems can be both elegant and vast.
-            </Paragraph>
-            <Paragraph size="lg">
-            Today I serve as a <span className="text-primary font-semibold">Senior Computer Specialist (Atlassian Platform Engineer)</span> at the University of Washington, focusing on platform reliability, identity, and migrations. Recent work includes restoring secure SSO for thousands of users, modernizing stacks across Java, Ubuntu, and Postgres, and making indexing dramatically faster. Evenings are for quiet joys with my house tiger, Leo—coding, reading, playing games—or wandering the city I now call home.
+    <div className="mx-auto max-w-[1400px] px-6">
+      <section className="py-14 sm:py-18">
+        <div className="space-y-6">
+          <SectionEyebrow>About Bailey</SectionEyebrow>
+          <div className="max-w-4xl space-y-5">
+            <Heading Level={2}>A builder drawn to useful systems and durable technical work</Heading>
+            <Paragraph size="lg" className="max-w-2xl text-neutral-300">
+              The throughline has always been utility: making systems calmer,
+              clearer, and more reliable for the people who depend on them.
             </Paragraph>
           </div>
-        </Card>
+        </div>
       </section>
 
-      {/* Connect Section */}
-      <section className="py-16">
-        <Card variant="elevated" className="p-8">
-          <Heading Level={3} className="mb-8 text-center">Let's Connect</Heading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <Heading Level={4} className="mb-6">Follow Me</Heading>
-              <div className="space-y-2">
+      <section className="grid gap-12 py-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+        <div className="max-w-4xl space-y-8">
+          <StoryBreak title="Origins">
+            I&apos;ve spent more than twelve years building and refining
+            software. At eleven, I wrote my first Perl script for a family
+            friend in Reno who ran our valley&apos;s ISP, a small tool that let
+            them manage customer networking gear from a local server. That
+            early taste of utility never left.
+          </StoryBreak>
+
+          <StoryBreak title="Becoming">
+            At nineteen, while recovering from corrective leg surgeries, a
+            friend asked if I could deliver video to a community gathering.
+            That spark became Acolyte, my longest and most devoted project.
+            Since then I&apos;ve chased the same feeling: making products that
+            remove friction and make life better for the people around me.
+          </StoryBreak>
+
+          <StoryBreak title="Taste">
+            I&apos;m a gamer at heart and drawn to worlds with deep lore. Elder
+            Scrolls sits near the center, with Pokemon, Final Fantasy, The
+            Legend of Zelda, and the Soulsborne series close behind. Those
+            worlds remind me that systems can be both elegant and vast.
+          </StoryBreak>
+
+          <StoryBreak title="Now">
+            Today I serve as a{" "}
+            <span className="font-semibold text-primary">
+              Senior Computer Specialist (Atlassian Platform Engineer)
+            </span>{" "}
+            at the University of Washington, focusing on platform reliability,
+            identity, and migrations. Recent work includes restoring secure SSO
+            for thousands of users, modernizing stacks across Java, Ubuntu, and
+            Postgres, and making indexing dramatically faster. Evenings are for
+            quiet joys with my house tiger, Leo, coding, reading, playing
+            games, or wandering the city I now call home.
+          </StoryBreak>
+        </div>
+
+        <div className="space-y-5 lg:sticky lg:top-28">
+          <Card variant="subtle" className="rounded-[26px]">
+            <div className="space-y-4">
+              <SectionEyebrow>Elsewhere</SectionEyebrow>
+              <Heading Level={5}>Find me where the work and music live</Heading>
+              <div className="space-y-3">
                 <SocialLink href="https://github.com/baileycarroll" icon={FaGithub}>
                   Follow on GitHub
                 </SocialLink>
-                <SocialLink href="https://open.spotify.com/user/21fwvqec332fp7apchtqe2z7y" icon={FaSpotify}>
-                  Follow on Spotify
-                </SocialLink>
-                <SocialLink href="https://www.linkedin.com/in/baileycarroll/" icon={FaLinkedin}>
+                <SocialLink
+                  href="https://www.linkedin.com/in/baileycarroll/"
+                  icon={FaLinkedin}
+                >
                   Connect on LinkedIn
                 </SocialLink>
                 <SocialLink href="mailto:baileyrcarroll@gmail.com" icon={EnvelopeIcon}>
@@ -84,19 +129,8 @@ export default function About() {
                 </SocialLink>
               </div>
             </div>
-            <div>
-              <Heading Level={4} className="mb-6">I Wrote A Book!</Heading>
-              <Paragraph size="base" className="mb-6">
-                <em className="font-bold text-primary">A Warrior's Journey:</em> A retelling of my life 
-                from the early years until the Spring of 2024, using freestyle poetry. Discussing the 
-                battles I faced and my hope for the future.
-              </Paragraph>
-              <Link href="/books">
-                <Button size="lg">Learn More</Button>
-              </Link>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </section>
     </div>
   );

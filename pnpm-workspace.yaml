@@ -1,0 +1,9 @@
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': false
+  '@tailwindcss/oxide': false
+  '@vercel/speed-insights': false
+  esbuild: false
+  prisma: false
+  sharp: false
+  unrs-resolver: false

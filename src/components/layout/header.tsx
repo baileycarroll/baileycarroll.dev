@@ -6,26 +6,74 @@ import { usePathname } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 
+const PRIMARY_NAV_ITEMS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
+  { href: "/projects", label: "Projects" },
+];
+
+function ActiveGlowPill({
+  layoutId,
+  variant = "mobile",
+}: {
+  layoutId: string;
+  variant?: "desktop" | "mobile";
+}) {
+  const isDesktop = variant === "desktop";
+
+  return (
+    <motion.span
+      layoutId={layoutId}
+      className={clsx(
+        "pointer-events-none absolute inset-x-2",
+        isDesktop ? "bottom-0 h-5" : "bottom-1 h-4"
+      )}
+      transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.65 }}
+    >
+      <span
+        className={clsx(
+          "absolute inset-x-0 rounded-full",
+          isDesktop
+            ? "bottom-0 h-[2px] bg-primary/75"
+            : "bottom-0 h-[3px] bg-primary/80"
+        )}
+      />
+      <span
+        className={clsx(
+          "absolute inset-x-0 rounded-full blur-md",
+          isDesktop
+            ? "bottom-0 h-5 bg-gradient-to-t from-primary/45 via-primary/16 to-transparent"
+            : "bottom-0 h-4 bg-gradient-to-t from-primary/35 via-primary/12 to-transparent"
+        )}
+      />
+    </motion.span>
+  );
+}
+
 function NavItem({
   href,
   children,
+  layoutId,
 }: {
   href: string;
   children: React.ReactNode;
+  layoutId: string;
 }) {
   const isActive = usePathname() === href;
   return (
     <Link
       href={href}
       className={clsx(
-        "relative px-4 py-2 transition-all duration-200 font-medium rounded-lg backdrop-blur-sm",
+        "relative inline-flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-full focus-visible:outline-none focus-visible:text-primary",
         isActive 
-          ? "text-primary bg-primary/20 shadow-lg shadow-primary/20" 
-          : "text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10"
+          ? "text-primary" 
+          : "text-neutral-300 hover:text-primary"
       )}
       aria-current={isActive ? "page" : undefined}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
+      {isActive && <ActiveGlowPill layoutId={layoutId} variant="desktop" />}
     </Link>
   );
 }
@@ -34,10 +82,12 @@ function MobileNavItem({
   href,
   children,
   onClick,
+  layoutId,
 }: {
   href: string;
   children: React.ReactNode;
   onClick?: () => void;
+  layoutId: string;
 }) {
   const isActive = usePathname() === href;
   return (
@@ -45,20 +95,26 @@ function MobileNavItem({
       href={href}
       onClick={onClick}
       className={clsx(
-        "block py-3 px-4 transition-all duration-200 font-medium rounded-lg backdrop-blur-sm",
+        "relative block py-3 px-4 text-base font-medium transition-colors duration-200 rounded-xl focus-visible:outline-none focus-visible:text-primary",
         isActive 
-          ? "text-primary bg-primary/20 shadow-lg shadow-primary/20" 
-          : "text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10"
+          ? "text-primary" 
+          : "text-neutral-300 hover:text-primary"
       )}
       aria-current={isActive ? "page" : undefined}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
+      {isActive && <ActiveGlowPill layoutId={layoutId} />}
     </Link>
   );
 }
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
   
   return (
     <>
@@ -71,7 +127,7 @@ export default function Header() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="h-16 grid grid-cols-3 items-center">
+          <div className="h-16 grid grid-cols-[auto_1fr_auto] items-center gap-4">
             {/* Logo/Brand */}
             <div className="flex items-center">
               <Link href="/" className="text-xl font-bold text-white hover:text-primary transition-colors">
@@ -79,23 +135,16 @@ export default function Header() {
               </Link>
             </div>
             
-            {/* Center Navigation */}
             <nav className="hidden lg:flex items-center justify-center space-x-2" role="navigation" aria-label="Main navigation">
-              <NavItem href="/">Home</NavItem>
-              <NavItem href="/about">About</NavItem>
-              <NavItem href="/resume">Resume</NavItem>
-              <NavItem href="/projects">Projects</NavItem>
-            </nav>
-            
-            {/* Right Navigation */}
-            <nav className="hidden lg:flex items-center justify-end space-x-2" role="navigation" aria-label="Secondary navigation">
-              <NavItem href="/articles">Articles</NavItem>
-              <NavItem href="/books">Books</NavItem>
-              <NavItem href="/poetry">Poetry</NavItem>
+              {PRIMARY_NAV_ITEMS.map((item) => (
+                <NavItem key={item.href} href={item.href} layoutId="desktop-nav-pill">
+                  {item.label}
+                </NavItem>
+              ))}
             </nav>
             
             {/* Mobile Menu Button */}
-            <div className="lg:hidden col-start-3 justify-self-end">
+            <div className="lg:hidden justify-self-end">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 rounded-lg text-neutral-300 hover:text-primary hover:bg-neutral-800/30 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 backdrop-blur-sm"
@@ -150,13 +199,16 @@ export default function Header() {
               </div>
               
               <nav className="space-y-2" role="navigation" aria-label="Mobile navigation">
-                <MobileNavItem href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</MobileNavItem>
-                <MobileNavItem href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavItem>
-                <MobileNavItem href="/resume" onClick={() => setIsMobileMenuOpen(false)}>Resume</MobileNavItem>
-                <MobileNavItem href="/projects" onClick={() => setIsMobileMenuOpen(false)}>Projects</MobileNavItem>
-                <MobileNavItem href="/articles" onClick={() => setIsMobileMenuOpen(false)}>Articles</MobileNavItem>
-                <MobileNavItem href="/books" onClick={() => setIsMobileMenuOpen(false)}>Books</MobileNavItem>
-                <MobileNavItem href="/poetry" onClick={() => setIsMobileMenuOpen(false)}>Poetry</MobileNavItem>
+                {PRIMARY_NAV_ITEMS.map((item) => (
+                  <MobileNavItem
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    layoutId="mobile-nav-pill"
+                  >
+                    {item.label}
+                  </MobileNavItem>
+                ))}
               </nav>
             </div>
           </motion.div>

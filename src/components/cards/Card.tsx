@@ -17,16 +17,20 @@ const Card: React.FC<CardProps> = ({
   variant = "default",
   interactive = false
 }) => {
-  const baseClasses = "rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50";
+  const baseClasses =
+    "rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/40";
   
   const variantClasses = {
-    default: "bg-neutral-900/60 backdrop-blur-2xl border border-primary/40 p-6 shadow-2xl shadow-primary/30",
-    elevated: "bg-neutral-900/70 backdrop-blur-3xl border border-primary/50 p-8 shadow-2xl shadow-primary/40",
-    subtle: "bg-neutral-900/40 backdrop-blur-xl border border-primary/30 p-6"
+    default:
+      "bg-neutral-950/34 backdrop-blur-md border border-white/8 p-6 shadow-[0_18px_54px_rgba(2,6,23,0.24)]",
+    elevated:
+      "bg-neutral-900/56 backdrop-blur-xl border border-primary/18 p-8 shadow-[0_30px_90px_rgba(2,6,23,0.42)]",
+    subtle:
+      "bg-white/[0.03] border border-white/6 p-6"
   };
   
   const interactiveClasses = interactive 
-    ? "hover:bg-neutral-900/80 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/50 cursor-pointer transform hover:scale-[1.02] hover:backdrop-blur-3xl transition-all duration-500" 
+    ? "hover:-translate-y-1 hover:border-primary/24 hover:bg-neutral-900/52 hover:shadow-[0_26px_72px_rgba(2,6,23,0.38)] cursor-pointer transition-all duration-500" 
     : "";
 
   return React.createElement(

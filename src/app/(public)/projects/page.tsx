@@ -1,222 +1,269 @@
-import Heading from "@/components/typography/Headings";
-import Card from "@/components/cards/Card";
-import Link from "next/link";
-import { FaDesktop, FaGithub, FaBook, FaMobile } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
+import { FaBook, FaDesktop, FaGithub, FaMobile } from "react-icons/fa";
+import Button from "@/components/buttons/Button";
+import Card from "@/components/cards/Card";
+import { PageIntro, SectionEyebrow } from "@/components/public/PageIntro";
+import Heading from "@/components/typography/Headings";
+import Paragraph from "@/components/typography/Paragraphs";
+import { projectService } from "@/services";
+import type { DatabaseProject } from "@/services";
 import Corpus from "@/assets/CV.png";
 import Acolyte from "@/assets/Acolyte Logo - Icon.png";
 import RoseShield from "@/assets/rose_shield.svg";
-import Paragraph from "@/components/typography/Paragraphs";
-import Button from "@/components/buttons/Button";
-import { projectService } from "@/services";
 
-// Icon mapping for project types
 const getProjectIcon = (type: string) => {
   switch (type.toLowerCase()) {
-    case 'web application':
+    case "web application":
       return FaDesktop;
-    case 'mobile application':
+    case "mobile application":
       return FaMobile;
-    case 'publication':
+    case "publication":
       return FaBook;
     default:
       return FaGithub;
   }
 };
 
-// Logo mapping for projects
 const getProjectLogo = (name: string) => {
-  if (name.toLowerCase().includes('acolyte')) {
+  if (name.toLowerCase().includes("acolyte")) {
     return Acolyte;
   }
-  if (name.toLowerCase().includes('corpus')) {
+  if (name.toLowerCase().includes("corpus")) {
     return Corpus;
   }
   return RoseShield;
 };
 
-// Force dynamic rendering to prevent caching
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
+
+function LeadProject({ project }: { project: DatabaseProject }) {
+  const ProjectIcon = getProjectIcon(project.type);
+
+  return (
+    <Card
+      variant="elevated"
+      interactive
+      className="flex h-full flex-col justify-between overflow-hidden rounded-[30px]"
+    >
+      <div className="space-y-6">
+        <div className="flex items-start gap-5">
+          <Image
+            src={getProjectLogo(project.name)}
+            alt={`${project.name} logo`}
+            className="h-16 w-16 rounded-2xl object-cover"
+          />
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-400">
+              <span>{project.type}</span>
+              <span className="h-1 w-1 rounded-full bg-primary/70" />
+              <span>{project.status}</span>
+            </div>
+            <Heading Level={3}>{project.name}</Heading>
+          </div>
+        </div>
+
+        <Paragraph size="lg" className="max-w-2xl text-neutral-300">
+          {project.description}
+        </Paragraph>
+
+        <div className="flex flex-wrap gap-2">
+          {project.skills.slice(0, 4).map((skillItem) => (
+            <span
+              key={skillItem.skill.id}
+              className="rounded-full border border-primary/18 bg-primary/8 px-3 py-1 text-sm text-primary"
+            >
+              {skillItem.skill.name}
+            </span>
+          ))}
+          {project.skills.length > 4 && (
+            <span className="px-2 py-1 text-sm text-neutral-400">
+              +{project.skills.length - 4} more
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-8 flex items-center justify-between gap-4">
+        <span className="text-sm font-medium text-neutral-400">
+          {project.categories[0]?.category || "Selected Work"}
+        </span>
+        {project.url && (
+          <Link href={project.url} target="_blank">
+            <Button className="gap-2">
+              <ProjectIcon className="h-4 w-4" />
+              {project.urlText || "Visit Project"}
+            </Button>
+          </Link>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+function SupportingProject({ project }: { project: DatabaseProject }) {
+  return (
+    <Card variant="default" interactive className="flex h-full flex-col rounded-[26px]">
+      <div className="space-y-3">
+        <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-neutral-400">
+          <span>{project.type}</span>
+          <span className="h-1 w-1 rounded-full bg-primary/70" />
+          <span>{project.status}</span>
+        </div>
+        <Heading Level={5}>{project.name}</Heading>
+        <Paragraph size="sm" className="text-neutral-300">
+          {project.description}
+        </Paragraph>
+      </div>
+
+      <div className="mt-6 flex items-center justify-between gap-4">
+        <span className="text-sm text-neutral-400">
+          {project.categories[0]?.category || "Project"}
+        </span>
+        {project.url && (
+          <Link
+            href={project.url}
+            target="_blank"
+            className="text-sm font-medium text-primary transition-colors hover:text-primary-light"
+          >
+            Visit
+          </Link>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+function CompactProject({ project }: { project: DatabaseProject }) {
+  const ProjectIcon = getProjectIcon(project.type);
+
+  return (
+    <Card variant="default" interactive className="flex h-full flex-col rounded-[24px]">
+      <div className="mb-4 flex items-start gap-4">
+        <Image
+          src={getProjectLogo(project.name)}
+          alt={`${project.name} logo`}
+          className="h-12 w-12 rounded-xl object-cover"
+        />
+        <div className="space-y-2">
+          <Heading Level={5} className="text-white">
+            {project.name}
+          </Heading>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
+            <span>{project.type}</span>
+            <span className="h-1 w-1 rounded-full bg-primary/70" />
+            <span>{project.status}</span>
+          </div>
+        </div>
+      </div>
+
+      <Paragraph size="sm" className="flex-1 text-neutral-300">
+        {project.description}
+      </Paragraph>
+
+      <div className="mt-5 flex items-center justify-between gap-4">
+        <span className="text-xs font-medium text-neutral-400">
+          {project.categories[0]?.category || "Project"}
+        </span>
+        {project.url && (
+          <Link href={project.url} target="_blank">
+            <Button size="sm" variant="outline" className="gap-2">
+              <ProjectIcon className="h-3.5 w-3.5" />
+              {project.urlText || "Visit"}
+            </Button>
+          </Link>
+        )}
+      </div>
+    </Card>
+  );
+}
 
 export default async function Projects() {
   const projectsResult = await projectService.getAllProjects();
-  
+
   if (!projectsResult.success) {
     return (
-      <div className="max-w-[1400px] mx-auto px-6">
-        <section className="py-16">
-        <Card variant="elevated" className="p-8 text-center">
-          <Heading Level={3} className="mb-6">My Projects</Heading>
-          <Paragraph className="text-neutral-300">
+      <div className="mx-auto max-w-[1400px] px-6">
+        <PageIntro
+          eyebrow="Projects"
+          title="Work that grew out of curiosity and kept getting more serious"
+        />
+        <Card variant="subtle" className="rounded-[28px] p-10 text-center">
+          <Paragraph className="text-neutral-400">
             Unable to load projects at the moment. Please try again later.
           </Paragraph>
         </Card>
-        </section>
       </div>
     );
   }
 
-  const featuredProjects = projectsResult.data.filter(project => project.featured);
-  const otherProjects = projectsResult.data.filter(project => !project.featured);
+  const featuredProjects = projectsResult.data.filter((project) => project.featured);
+  const otherProjects = projectsResult.data.filter((project) => !project.featured);
+  const leadProject = featuredProjects[0];
+  const supportingProjects = featuredProjects.slice(1);
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6">
-      {/* Hero Section */}
-      <section className="py-16">
-        <Card variant="elevated" className="p-8 text-center">
-          <Heading Level={3} className="mb-6">My Projects</Heading>
-          <Paragraph size="lg" className="mb-8 max-w-3xl mx-auto">
-            A collection of projects that showcase my growth as a developer, from early experiments 
-            to current work. Each project represents different challenges, technologies, and learning experiences.
-          </Paragraph>
-        </Card>
-      </section>
+    <div className="mx-auto max-w-[1400px] px-6">
+      <PageIntro
+        eyebrow="Projects"
+        title="A body of work shaped by systems thinking, product instincts, and stubborn curiosity"
+        description="Some projects were experiments, some became real tools, and some taught me the lessons I still use every day. Together they show the range of problems I like to solve."
+      />
 
-      {/* Featured Projects */}
-      {featuredProjects.length > 0 && (
-        <section className="py-16">
-          <Heading Level={3} className="mb-8 text-center">Featured Projects</Heading>
-          <div className={`grid grid-cols-1 md:grid-cols-${featuredProjects.length} gap-8`}>
-            {featuredProjects.map((project) => {
-              const ProjectIcon = getProjectIcon(project.type);
-              const projectLogo = getProjectLogo(project.name);
-              
-              return (
-                <Card key={project.id} variant="elevated" interactive className="p-6 flex flex-col h-full">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0">
-                      <Image 
-                        src={projectLogo} 
-                        alt={`${project.name} logo`} 
-                        className="w-16 h-16 rounded-lg object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <Heading Level={4} className="text-primary mb-1">{project.name}</Heading>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-neutral-400 text-sm">{project.type}</span>
-                        <span className="text-neutral-500">•</span>
-                        <span className="text-neutral-400 text-sm">{project.status}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <Paragraph className="mb-4 text-neutral-200 leading-relaxed flex-1">
-                    {project.description}
+      {leadProject && (
+        <section className="py-10 sm:py-14">
+          <div className="mb-8 space-y-3">
+            <SectionEyebrow>Featured work</SectionEyebrow>
+            <Heading Level={3} className="max-w-2xl">
+              The projects I want people to meet first
+            </Heading>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
+            <LeadProject project={leadProject} />
+            <div className="grid gap-6">
+              {supportingProjects.map((project) => (
+                <SupportingProject key={project.id} project={project} />
+              ))}
+              {supportingProjects.length === 0 && (
+                <Card
+                  variant="subtle"
+                  className="flex h-full items-center justify-center rounded-[24px] border-dashed"
+                >
+                  <Paragraph className="text-neutral-400">
+                    More featured work is on the way.
                   </Paragraph>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.skills.slice(0, 5).map((skillItem) => (
-                      <span 
-                        key={skillItem.skill.id}
-                        className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm border border-primary/20"
-                      >
-                        {skillItem.skill.name}
-                      </span>
-                    ))}
-                    {project.skills.length > 5 && (
-                      <span className="text-primary/60 text-sm px-3 py-1">
-                        +{project.skills.length - 5} more
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex justify-between items-center mt-auto">
-                    <span className="text-sm text-neutral-400 font-medium">
-                      {project.categories[0]?.category || 'Uncategorized'}
-                    </span>
-                    {project.url && (
-                      <Link href={project.url} target="_blank">
-                        <Button size="sm" variant="outline" className="flex items-center">
-                          <ProjectIcon className="w-4 h-4 mr-2" />
-                          {project.urlText}
-                        </Button>
-                      </Link>
-                    )}
-                  </div>
                 </Card>
-              );
-            })}
+              )}
+            </div>
           </div>
         </section>
       )}
 
-      {/* Other Projects */}
       {otherProjects.length > 0 && (
-        <section className="py-16">
-          <Heading Level={3} className="mb-8 text-center">Other Projects</Heading>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProjects.map((project) => {
-              const ProjectIcon = getProjectIcon(project.type);
-              const projectLogo = getProjectLogo(project.name);
-              
-              return (
-                <Card key={project.id} variant="default" interactive className="p-6 flex flex-col h-full">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Image 
-                      src={projectLogo} 
-                      alt={`${project.name} logo`} 
-                      className="w-12 h-12 rounded-lg object-cover"
-                    />
-                    <div className="flex-1">
-                      <Heading Level={5} className="text-primary mb-1">{project.name}</Heading>
-                      <div className="flex items-center gap-2">
-                        <span className="text-neutral-400 text-xs">{project.type}</span>
-                        <span className="text-neutral-500">•</span>
-                        <span className="text-neutral-400 text-xs">{project.status}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <Paragraph size="sm" className="mb-4 text-neutral-200 leading-relaxed flex-1">
-                    {project.description}
-                  </Paragraph>
-                  
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {project.skills.slice(0, 3).map((skillItem) => (
-                      <span 
-                        key={skillItem.skill.id}
-                        className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs border border-primary/20"
-                      >
-                        {skillItem.skill.name}
-                      </span>
-                    ))}
-                    {project.skills.length > 3 && (
-                      <span className="text-primary/60 text-xs px-2 py-1">
-                        +{project.skills.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex justify-between items-center mt-auto">
-                    <span className="text-xs text-neutral-400 font-medium">
-                      {project.categories[0]?.category || 'Uncategorized'}
-                    </span>
-                    {project.url && (
-                      <Link href={project.url} target="_blank">
-                        <Button size="sm" variant="outline" className="flex items-center">
-                          <ProjectIcon className="w-3 h-3 mr-1" />
-                          {project.urlText}
-                        </Button>
-                      </Link>
-                    )}
-                  </div>
-                </Card>
-              );
-            })}
+        <section className="py-10 sm:py-14">
+          <div className="mb-8 space-y-3">
+            <SectionEyebrow>Broader archive</SectionEyebrow>
+            <Heading Level={4}>Other projects and experiments</Heading>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {otherProjects.map((project) => (
+              <CompactProject key={project.id} project={project} />
+            ))}
           </div>
         </section>
       )}
 
-      {/* No Projects State */}
       {projectsResult.data.length === 0 && (
-        <section className="py-16">
-          <Card variant="elevated" className="p-12 text-center">
-            <div className="max-w-3xl mx-auto">
-              <Heading Level={4} className="mb-4 text-primary">No projects yet!</Heading>
+        <section className="py-10 sm:py-14">
+          <Card variant="subtle" className="rounded-[28px] p-12 text-center">
+            <div className="mx-auto max-w-3xl">
+              <Heading Level={4} className="mb-4 text-primary">
+                No projects yet
+              </Heading>
               <Paragraph className="mb-6 text-neutral-300">
-                I'm working on some projects that will be showcased here soon. Check back later for 
-                web applications, mobile apps, and other creative projects.
+                I&apos;m working on projects that will be showcased here soon.
+                Check back later for web applications, mobile work, and other
+                experiments.
               </Paragraph>
               <Link href="/">
                 <Button variant="outline">Back to Home</Button>

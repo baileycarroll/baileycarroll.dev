@@ -1,13 +1,9 @@
 export const SITE_CONFIG = {
     title: "Bailey Carroll",
-    description: "Making My Mark - One Line of Code at a Time",
+    description: "Platform and software engineer focused on identity, infrastructure, migrations, and developer experience.",
     url: "https://baileycarroll.com",
     analytics: {
         google: process.env.GOOGLE_ANALYTICS_ID,
         vercel: true
-    },
-    content: {
-        articlesDirectory: "src/content/articles",
-        poemsDirectory: "src/content/poems",
     }
 } as const;

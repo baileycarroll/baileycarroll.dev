@@ -6,8 +6,4 @@ export interface SiteConfig {
         google: string;
         vercel: boolean;
     };
-    content: {
-        articlesDirectory: string;
-        poemsDirectory: string;
-    };
 }
