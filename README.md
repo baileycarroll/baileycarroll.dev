@@ -7,7 +7,7 @@ A professional portfolio site built with Next.js 15 for presenting Bailey Carrol
 - Public-facing professional site only
 - Polished responsive UI with motion and editorial layout treatment
 - Dynamic professional content currently sourced from the local PostgreSQL/Prisma data layer
-- Prepared for a later migration to an external Admin App API
+- Self-contained Next.js app with local Prisma data layer and planned in-app admin
 
 ## Current Scope
 
@@ -50,6 +50,11 @@ The current dynamic data in this repo is limited to professional content used by
    ```env
    DATABASE_URL="postgresql://user:password@localhost:5432/portfolio"
    GOOGLE_ANALYTICS_ID=""
+   BETTER_AUTH_SECRET="generate-with-openssl-rand-base64-32"
+   BETTER_AUTH_URL="http://localhost:3000"
+   ADMIN_EMAIL="you@example.com"
+   ADMIN_BOOTSTRAP_PASSWORD="long-random-bootstrap-password"
+   AUTH_USER_INIT=false
    ```
 
 4. Prepare the database:
@@ -58,17 +63,27 @@ The current dynamic data in this repo is limited to professional content used by
    pnpm prisma migrate dev
    ```
 
-5. Start the app:
+5. Bootstrap the admin account (one time only):
+   ```bash
+   AUTH_USER_INIT=true pnpm auth:bootstrap
+   ```
+
+6. Start the app:
    ```bash
    pnpm dev
    ```
 
-## Near-Term Architecture
+7. Complete admin auth setup:
+   - Visit `/admin/login` and sign in with your bootstrap password
+   - Register your passkey at `/admin/setup-passkey`
+   - Remove `ADMIN_BOOTSTRAP_PASSWORD` and set `AUTH_USER_INIT=false` afterward
 
-This repository is in the middle of a staged split into three products:
+## Architecture
 
-- professional site: this repository
-- personal site: separate repository/app
-- admin/developer portal: separate repository/app
+This repository is a self-contained Next.js application:
 
-For now, the professional site still reads its project, skill, and experience data from the local Prisma-backed database layer. The next planned step is to replace that local data path with an external API client for the future Admin App.
+- **Public site** — Home, About, Resume, Projects
+- **Service layer** — Prisma-backed CRUD in `src/services/database`
+- **Planned admin** — Auth, protected routes, and Server Actions in this same app
+
+Public pages read from the service layer today. Admin mutations will call the same services via Server Actions in a later phase.

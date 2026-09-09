@@ -19,9 +19,12 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset",
-    "db:status": "prisma migrate status"
+    "db:status": "prisma migrate status",
+    "auth:bootstrap": "tsx scripts/bootstrap-admin.ts"
   },
   "dependencies": {
+    "@better-auth/passkey": "^1.7.3",
+    "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
     "@next/third-parties": "^15.4.6",
     "@prisma/client": "6.14.0",
@@ -29,14 +32,14 @@
     "@tailwindcss/typography": "^0.5.16",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "better-auth": "^1.7.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "next": "15.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-fast-marquee": "^1.6.5",
-    "react-icons": "^5.5.0",
-    "@headlessui/react": "^2.2.7"
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

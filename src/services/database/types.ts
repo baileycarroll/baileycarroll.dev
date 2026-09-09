@@ -66,6 +66,7 @@ export interface PrismaExperienceWithRelations {
     details: string;
     link?: string | null;
     order: number;
+    featured: boolean;
     skills: { id: string; experienceId: string; skillId: string; skill: { id: string; name: string; years: number; category: { id: string; name: string; description: string | null; display: boolean } } }[];
 }
 

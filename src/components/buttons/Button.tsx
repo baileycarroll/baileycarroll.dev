@@ -8,6 +8,9 @@ import clsx from "clsx";
 interface ButtonProps extends BaseProps {
   variant?: "default" | "outline";
   size?: "default" | "sm" | "lg";
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -15,7 +18,10 @@ const Button: React.FC<ButtonProps> = ({
   className, 
   style, 
   variant = "default",
-  size = "default"
+  size = "default",
+  type = "button",
+  disabled = false,
+  onClick,
 }) => {
   const baseClasses =
     "inline-flex items-center justify-center border rounded-full transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary/35";
@@ -36,8 +42,12 @@ const Button: React.FC<ButtonProps> = ({
   return React.createElement(
     "button",
     {
+      type,
+      disabled,
+      onClick,
       className: clsx(
         baseClasses,
+        disabled && "cursor-not-allowed opacity-60",
         variantClasses[variant],
         sizeClasses[size],
         className

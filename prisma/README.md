@@ -6,28 +6,15 @@ This directory contains the Prisma schema and seed file for the portfolio databa
 
 The database schema includes the following models:
 
-- **Article** - Blog articles with tags and categories
-- **Poem** - Poetry with tags and categories  
 - **Project** - Portfolio projects with skills and categories
 - **Skill** - Technical skills and competencies
+- **SkillCategory** - Groupings for skills displayed on the resume
+- **Experience** - Work history with associated skills
+- **User / Session / Account / Verification** - Auth models (used by the planned admin layer)
 
 ## Seeding
 
-The seed file (`seed.ts`) populates the database with:
-
-### Skills (18 total)
-- Laravel, Vue.js, TailwindCSS, MySQL, Redis
-- Flutter, SQLite, Dart, Mobile UI/UX
-- MDBootstrap, PHP
-- Creative Writing, Project Management, Self-Publishing
-- Next.js, React, TypeScript, Framer Motion
-
-### Projects (5 total)
-1. **Acolyte v5** - Featured Web Application (In Development)
-2. **Corpus Vitae** - Featured Mobile Application (In Development)
-3. **Acolyte v4** - Legacy Web Application (Completed)
-4. **A Warrior's Journey** - Creative Publication (Published)
-5. **Portfolio & Developer Portal** - Tools Web Application (Active)
+The seed file (`seed.ts`) populates the database with skill categories, skills, projects, and experience records used by the public site.
 
 ## Commands
 
@@ -53,22 +40,19 @@ pnpm prisma studio
 
 ## Adding New Data
 
-To add new projects or skills:
+During development you can use Prisma Studio or the service layer:
 
-1. **Skills**: Use the `skillService.createSkill()` method
-2. **Projects**: Use the `projectService.createProject()` method
-3. **Articles**: Use the `articleService.createArticle()` method
-4. **Poems**: Use the `poemService.createPoem()` method
+1. **Skills**: `skillService.createSkill()`
+2. **Projects**: `projectService.createProject()`
+3. **Experience**: `experienceService.createExperience()`
+
+Admin UI and Server Actions will wrap these services in a later phase.
 
 ## Seed File Structure
 
 The seed file creates data in the correct order:
-1. Skills (required for project relationships)
-2. Projects with their associated skills and categories
 
-Each project includes:
-- Basic info (name, description, type, status)
-- Featured flag for homepage display
-- Date ranges (start/end dates)
-- URLs and link text
-- Associated skills and categories
+1. Skill categories
+2. Skills
+3. Projects with associated skills and categories
+4. Experience with associated skills

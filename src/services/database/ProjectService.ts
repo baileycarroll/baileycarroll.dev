@@ -47,8 +47,6 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECTS_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -103,8 +101,6 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECT_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -187,8 +183,6 @@ export class ProjectService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('PROJECT_CREATION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -242,8 +236,6 @@ export class ProjectService extends DatabaseService {
                 500,
                 error instanceof Error ? error : undefined
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -297,15 +289,11 @@ export class ProjectService extends DatabaseService {
                 500,
                 error instanceof Error ? error : undefined
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
     async updateProject(id: string, projectData: Partial<DatabaseProject>, skillIds?: string[], categories?: string[]): Promise<ServiceResult<DatabaseProject>> {
         try {
-            console.log('Updating project with data:', { id, projectData, skillIds, categories });
-            
             const result = await this.prisma.$transaction(async (tx) => {
                 // Update the project
                 await tx.project.update({
@@ -408,53 +396,44 @@ export class ProjectService extends DatabaseService {
 
             return { success: true, data: databaseProject };
         } catch (err) {
-            console.error('Project update error:', err);
             return this.failure(
                 `Failed to update project: ${err instanceof Error ? err.message : 'Unknown error'}`,
                 'PROJECT_UPDATE_ERROR',
                 500,
                 err instanceof Error ? err : new Error('PROJECT_UPDATE_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
     async deleteProject(id: string): Promise<ServiceResult<boolean>> {
         try {
-            console.log('Deleting project:', id);
-            
-            // Delete all skills associated with this project
-            await this.prisma.projectSkills.deleteMany({
-                where: { projectId: id }
+            await this.prisma.$transaction(async (tx) => {
+                await tx.projectSkills.deleteMany({
+                    where: { projectId: id },
+                });
+
+                await tx.projectCategories.deleteMany({
+                    where: { projectId: id },
+                });
+
+                await tx.project.delete({
+                    where: { id },
+                });
             });
 
-            // Delete all categories associated with this project
-            await this.prisma.projectCategories.deleteMany({
-                where: { projectId: id }
-            });
-
-            // Delete the project   
-            await this.prisma.project.delete({
-                where: { id }
-            });
-
-            // Invalidate relevant caches
             this.invalidateCache('getAllProjects');
             this.invalidateCache('getProjectById');
+            this.invalidateCache('getProjectsByCategory');
+            this.invalidateCache('getProjectsBySkill');
 
-            await this.prisma.$disconnect()
             return { success: true, data: true };
         } catch (err) {
-            console.error('Project deletion error:', err);
             return this.failure(
                 `Failed to delete project: ${err instanceof Error ? err.message : 'Unknown error'}`,
                 'PROJECT_DELETION_ERROR',
                 500,
                 err instanceof Error ? err : new Error('PROJECT_DELETION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 }

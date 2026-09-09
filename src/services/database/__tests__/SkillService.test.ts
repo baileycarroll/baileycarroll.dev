@@ -13,7 +13,6 @@ describe('SkillService', () => {
     id: 'skill-1',
     name: 'React',
     years: 3,
-    categoryId: 'category-1',
     category: {
       id: 'category-1',
       name: 'Frontend',
@@ -54,6 +53,7 @@ describe('SkillService', () => {
       experienceSkill: {
         deleteMany: jest.fn(),
       },
+      $transaction: jest.fn(),
       $disconnect: jest.fn(),
     } as any
 
@@ -442,29 +442,27 @@ describe('SkillService', () => {
 
     describe('deleteSkillCategory', () => {
       it('should delete skill category successfully', async () => {
-        const mockSkills = [
-          { id: 'skill-1', categoryId: 'category-1' },
-          { id: 'skill-2', categoryId: 'category-1' },
-        ]
-        mockPrisma.skill.findMany.mockResolvedValueOnce(mockSkills)
-        mockPrisma.skill.update.mockResolvedValue(mockSkill)
-        mockPrisma.skillCategory.delete.mockResolvedValueOnce(mockSkillCategory)
+        mockPrisma.$transaction.mockImplementationOnce(async (callback) => {
+          const tx = {
+            skill: {
+              updateMany: jest.fn().mockResolvedValueOnce({ count: 2 }),
+            },
+            skillCategory: {
+              delete: jest.fn().mockResolvedValueOnce(mockSkillCategory),
+            },
+          }
+          return callback(tx)
+        })
 
         const result = await service.deleteSkillCategory('category-1')
 
         expect(result.success).toBe(true)
-        expect(mockPrisma.skill.findMany).toHaveBeenCalledWith({
-          where: { categoryId: 'category-1' },
-        })
-        expect(mockPrisma.skill.update).toHaveBeenCalledTimes(2)
-        expect(mockPrisma.skillCategory.delete).toHaveBeenCalledWith({
-          where: { id: 'category-1' },
-        })
+        expect(mockPrisma.$transaction).toHaveBeenCalledTimes(1)
       })
 
       it('should handle database errors', async () => {
         const error = new Error('Database error')
-        mockPrisma.skill.findMany.mockRejectedValueOnce(error)
+        mockPrisma.$transaction.mockRejectedValueOnce(error)
 
         const result = await service.deleteSkillCategory('category-1')
 

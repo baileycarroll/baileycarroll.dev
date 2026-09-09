@@ -28,8 +28,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILLS_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -65,8 +63,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -95,8 +91,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CREATION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -126,8 +120,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_UPDATE_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -159,8 +151,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_DELETION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -186,8 +176,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORIES_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -220,8 +208,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_FETCH_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -247,8 +233,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_CREATION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
@@ -275,36 +259,26 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_UPDATE_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 
     async deleteSkillCategory(id: string): Promise<ServiceResult<void>> {
         try {
-            let skills = await this.prisma.skill.findMany({
-                where: {categoryId: id}
-            })
-            
-            // Map through each skill in the list, and update the caetgory id to be null
-            skills.forEach(async (skill) => {
-                await this.prisma.skill.update({
-                    where: { id: skill.id },
-                    data: {
-                        categoryId: undefined
-                    }
-                })
-                await this.prisma.$disconnect()
-            })
+            await this.prisma.$transaction(async (tx) => {
+                await tx.skill.updateMany({
+                    where: { categoryId: id },
+                    data: { categoryId: null },
+                });
 
-
-            await this.prisma.skillCategory.delete({
-                where: { id }
+                await tx.skillCategory.delete({
+                    where: { id },
+                });
             });
 
-            // Invalidate relevant caches
             this.invalidateCache('getAllSkillCategories');
             this.invalidateCache('getSkillCategoryById');
+            this.invalidateCache('getAllSkills');
+            this.invalidateCache('getSkillById');
 
             return { success: true, data: undefined };
         } catch (err) {
@@ -314,8 +288,6 @@ export class SkillService extends DatabaseService {
                 500,
                 err instanceof Error ? err : new Error('SKILL_CATEGORY_DELETION_ERROR')
             );
-        } finally {
-            await this.disconnect();
         }
     }
 }
