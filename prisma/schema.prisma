@@ -1,16 +1,12 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -20,7 +16,7 @@ model Article {
   description String
   date        DateTime
   author      String
-  content     String              @db.Text
+  content     String
   slug        String              @unique
   tags        ArticleTags[]
   categories  ArticleCategories[]
@@ -46,7 +42,7 @@ model Poem {
   status     String
   excerpt    String
   summary    String
-  content    String           @db.Text
+  content    String
   slug       String           @unique
   tags       PoemTags[]
   categories PoemCategories[]
@@ -121,7 +117,7 @@ model Experience {
   employer  String
   startDate String
   endDate   String?
-  details   String            @db.Text
+  details   String
   link      String?
   order     Int               @default(0)
   featured  Boolean           @default(false)

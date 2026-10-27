@@ -1,6 +1,33 @@
 # Database Setup & Seeding
 
-This directory contains the Prisma schema and seed file for the portfolio database.
+This directory contains the SQLite Prisma schema, migrations, and seed data for
+the portfolio database, including Better Auth users, accounts, and sessions.
+
+## Fresh SQLite Setup
+
+Set `DATABASE_URL="file:./dev.db"` in the root `.env` file, then run:
+
+```bash
+pnpm db:generate
+pnpm db:migrate:deploy
+pnpm db:seed
+```
+
+This creates `prisma/dev.db` and loads the portfolio seed data. Run the seed once
+on a fresh database: categories and skills are upserted, but projects and
+experiences are created on each run. Admin accounts are created separately at
+`/setup` with `AUTH_USER_INIT=true`; disable it after setup.
+
+Relative file URLs resolve from this directory. Use an absolute file URL on a
+persistent writable disk for deployment. SQLite files and journal files are
+ignored by Git.
+
+## Migration History
+
+`migrations/` contains the active SQLite migration history. The former PostgreSQL
+history is preserved in `archive/postgresql-migrations/` for reference only and
+is not applied to SQLite. This is a fresh database; existing PostgreSQL records
+are not transferred.
 
 ## Schema
 

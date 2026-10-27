@@ -11,7 +11,7 @@ A modern, full-stack portfolio website built with Next.js 15, featuring a compre
 
 ### Public Portfolio
 - **Modern Design**: Responsive, animated UI with floating elements and smooth transitions
-- **Content Management**: Dynamic content pulled from PostgreSQL database
+- **Content Management**: Dynamic content pulled from a SQLite database
 - **Performance Optimized**: Server-side rendering, image optimization, and efficient caching
 - **SEO Ready**: Meta tags, structured data, and optimized for search engines
 - **Accessibility**: WCAG compliant with proper ARIA labels and keyboard navigation
@@ -26,10 +26,10 @@ A modern, full-stack portfolio website built with Next.js 15, featuring a compre
 
 ### Technical Stack
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion
-- **Backend**: Next.js API Routes, Prisma ORM, PostgreSQL
+- **Backend**: Next.js API Routes, Prisma ORM, SQLite
 - **Authentication**: Better Auth with email/password and session management
-- **Database**: PostgreSQL with connection pooling and migrations
-- **Deployment**: Vercel with optimized build configuration
+- **Database**: SQLite file with Prisma migrations
+- **Deployment**: Node.js server with persistent storage for SQLite
 - **Development**: pnpm, ESLint, TypeScript strict mode
 
 ## 🏗️ Architecture
@@ -68,8 +68,8 @@ src/
 
 ### Prerequisites
 - Node.js 18+ 
-- pnpm (recommended) or npm
-- PostgreSQL database
+- pnpm
+- SQLite runs through Prisma; no database server is required
 - Git
 
 ### Installation
@@ -93,10 +93,10 @@ src/
    Configure your environment variables:
    ```env
    # Database
-   DATABASE_URL="postgresql://user:password@localhost:5432/portfolio"
+   DATABASE_URL="file:./dev.db"
    
    # Better Auth
-   BETTER_AUTH_SECRET="your-secret-key"
+   BETTER_AUTH_SECRET="replace-with-a-random-secret-at-least-32-characters-long"
    BETTER_AUTH_URL="http://localhost:3000"
    AUTH_USER_INIT="true"
    
@@ -110,10 +110,10 @@ src/
    pnpm prisma generate
    
    # Run migrations
-   pnpm prisma migrate dev
+   pnpm db:migrate:deploy
    
-   # Seed database (optional)
-   pnpm prisma db seed
+   # Load the seed data once into the fresh database
+   pnpm db:seed
    ```
 
 5. **Start Development Server**
@@ -127,34 +127,58 @@ src/
    http://localhost:3000/setup
    ```
 
+   Enable `AUTH_USER_INIT=true` in `.env` for initial setup, then disable it
+   after creating the account. To create it from the command line, use
+   `pnpm auth:bootstrap <email> <password> [name]`.
+
+### Development Checks
+
+```bash
+pnpm typecheck
+pnpm lint
+pnpm test --runInBand
+pnpm build
+```
+
+The application type check excludes Jest test files; Jest runs those separately.
+Prisma Client is generated into its standard `@prisma/client` package location.
+
 ## 🚀 Deployment
 
-### Vercel Deployment
+### SQLite Deployment
 
-1. **Connect Repository**
-   - Link your GitHub repository to Vercel
-   - Configure build settings (already included in `vercel.json`)
+Run on a Node.js host with a writable, persistent disk. Set `DATABASE_URL` to an
+absolute SQLite file URL, such as `file:/data/portfolio.db` (Windows example:
+`file:D:/data/portfolio.db`). Create the parent directory first. The development
+URL `file:./dev.db` resolves to `prisma/dev.db`.
 
-2. **Environment Variables**
-   Set the following in Vercel dashboard:
-   ```env
-   DATABASE_URL=your_production_database_url
-   BETTER_AUTH_SECRET=your_production_secret
-   BETTER_AUTH_URL=https://your-domain.vercel.app
-   AUTH_USER_INIT=false
-   ```
+```env
+DATABASE_URL="file:/data/portfolio.db"
+BETTER_AUTH_SECRET=your_production_secret
+BETTER_AUTH_URL=https://your-domain.example
+AUTH_USER_INIT=false
+```
 
-3. **Database Migration**
-   ```bash
-   pnpm prisma migrate deploy
-   ```
+```bash
+pnpm install
+pnpm build
+# Run once on a fresh database:
+pnpm db:seed
+pnpm start
+```
+
+The build applies committed migrations before compiling the app. Use the same
+database path at build time and runtime. Run one application instance against
+the file and retain it across deployments. Local SQLite files are not persistent
+application storage on Vercel Functions; the existing `vercel.json` does not
+provide a suitable persistent SQLite deployment.
 
 ### Production Considerations
 
-- **Database**: Use connection pooling for production PostgreSQL
+- **Database**: Store the SQLite file on persistent disk with write access
 - **CDN**: Vercel Edge Network for global content delivery
 - **Monitoring**: Vercel Analytics and error tracking
-- **Backups**: Regular database backups and version control
+- **Backups**: Back up the SQLite file separately; database files are ignored by Git
 - **Security**: HTTPS enforcement and security headers
 
 ## 📊 Performance
@@ -164,7 +188,7 @@ src/
 - **Image Optimization**: Next.js Image component with WebP support
 - **Code Splitting**: Automatic route-based code splitting
 - **Caching**: Strategic caching for static and dynamic content
-- **Database**: Connection pooling and query optimization
+- **Database**: Prisma queries backed by local SQLite storage
 - **Bundle Size**: Tree shaking and minimal dependencies
 
 ### Lighthouse Scores

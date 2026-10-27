@@ -1,9 +1,9 @@
 import { SkillService } from '../SkillService'
-import { PrismaClient } from '../../../../generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 import { DatabaseSkill, DatabaseSkillCategory } from '../types'
 
 // Mock PrismaClient
-jest.mock('../../../../generated/prisma/client')
+jest.mock('@prisma/client')
 
 describe('SkillService', () => {
   let service: SkillService

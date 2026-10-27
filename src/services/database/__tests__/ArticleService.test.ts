@@ -1,8 +1,8 @@
 import { ArticleService } from '../ArticleService'
-import { PrismaClient } from '../../../../generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 // Mock PrismaClient
-jest.mock('../../../../generated/prisma/client')
+jest.mock('@prisma/client')
 
 describe('ArticleService', () => {
   let service: ArticleService

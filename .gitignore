@@ -43,6 +43,16 @@ next-env.d.ts
 # generated files
 /generated/prisma
 
+# SQLite databases and their journal files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
 # temporary files
 1
 *.tmp

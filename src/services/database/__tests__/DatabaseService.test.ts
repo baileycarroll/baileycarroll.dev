@@ -1,9 +1,9 @@
 import { DatabaseService } from '../DatabaseService'
-import { PrismaClient } from '../../../../generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 
 // Mock PrismaClient
-jest.mock('../../../../generated/prisma/client')
+jest.mock('@prisma/client')
 
 // Create a concrete implementation of DatabaseService for testing
 class TestDatabaseService extends DatabaseService {

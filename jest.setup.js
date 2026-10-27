@@ -22,7 +22,7 @@ jest.mock('next/navigation', () => ({
 
 // Mock environment variables
 process.env.NODE_ENV = 'test'
-process.env.DATABASE_URL = 'postgresql://test:test@localhost:5432/test_db'
+process.env.DATABASE_URL = 'file:./test.db'
 
 // Global test utilities
 global.ResizeObserver = jest.fn().mockImplementation(() => ({

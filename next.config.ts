@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  outputFileTracingRoot: process.cwd(),
   // Configuring page extensions to include MDX files
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   reactStrictMode: true,
